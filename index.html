@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Скорость подключения</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="no-js">
+    <main class="dashboard">
+      <div class="dial">
+        <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
+          <defs>
+            <linearGradient id="dial-accent-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff4166" />
+              <stop offset="46%" stop-color="#ff0032" />
+              <stop offset="100%" stop-color="#ff5c7a" />
+            </linearGradient>
+            <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255, 0, 50, 0.72)" />
+              <stop offset="100%" stop-color="rgba(255, 0, 50, 0.18)" />
+            </linearGradient>
+            <pattern id="dial-stripes" patternUnits="userSpaceOnUse" width="42" height="320">
+              <rect x="0" y="0" width="6" height="320" fill="rgba(255, 255, 255, 0.16)" />
+              <rect x="9" y="0" width="10" height="320" fill="rgba(255, 0, 50, 0.85)" />
+              <rect x="24" y="0" width="4" height="320" fill="rgba(255, 119, 137, 0.7)" />
+              <rect x="32" y="0" width="6" height="320" fill="rgba(255, 0, 50, 0.42)" />
+            </pattern>
+            <mask id="dial-stripe-mask" maskUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="900" height="360" fill="black" />
+              <rect x="42" y="48" width="816" height="264" rx="76" ry="76" fill="white" />
+              <rect x="78" y="84" width="744" height="200" rx="48" ry="48" fill="black" />
+            </mask>
+          </defs>
+          <g class="dial__accent">
+            <rect
+              class="dial__rim"
+              x="42"
+              y="48"
+              width="816"
+              height="264"
+              rx="76"
+              ry="76"
+            ></rect>
+            <rect
+              class="dial__inner"
+              x="66"
+              y="72"
+              width="768"
+              height="216"
+              rx="58"
+              ry="58"
+            ></rect>
+            <rect class="dial__stripes" x="0" y="0" width="900" height="360" mask="url(#dial-stripe-mask)"></rect>
+            <rect
+              class="dial__segments"
+              x="42"
+              y="48"
+              width="816"
+              height="264"
+              rx="76"
+              ry="76"
+              pathLength="100"
+            ></rect>
+          </g>
+          <rect
+            class="dial__speed-indicator"
+            x="24"
+            y="30"
+            width="852"
+            height="300"
+            rx="94"
+            ry="94"
+            pathLength="100"
+          ></rect>
+        </svg>
+        <div class="metrics">
+          <div class="metric" data-progress="0.34">
+            <div class="metric__stage" aria-hidden="true">I</div>
+            <div class="metric__title">
+              Входящая
+              <span class="metric__hint" aria-hidden="true">i</span>
+            </div>
+            <div class="metric__value" data-value="27.18" data-precision="2">27.18</div>
+            <div class="metric__unit">Мбит/с</div>
+          </div>
+          <div class="metric" data-progress="0.68">
+            <div class="metric__stage" aria-hidden="true">II</div>
+            <div class="metric__title">
+              Исходящая
+              <span class="metric__hint" aria-hidden="true">i</span>
+            </div>
+            <div class="metric__value" data-value="30.28" data-precision="2">30.28</div>
+            <div class="metric__unit">Мбит/с</div>
+          </div>
+          <div class="metric" data-progress="0.94">
+            <div class="metric__stage" aria-hidden="true">III</div>
+            <div class="metric__title">
+              Задержка
+              <span class="metric__hint" aria-hidden="true">i</span>
+            </div>
+            <div class="metric__value" data-value="32" data-precision="0">32</div>
+            <div class="metric__unit">мс</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
