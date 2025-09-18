@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Скорость подключения</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="no-js">
+    <main class="dashboard">
+      <div class="dial">
+        <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
+          <defs>
+            <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff4d6c" />
+              <stop offset="42%" stop-color="#ff0032" />
+              <stop offset="100%" stop-color="#ff4d6c" />
+            </linearGradient>
+            <linearGradient id="dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
+              <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
+              <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
+            </linearGradient>
+            <pattern id="dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
+              <rect class="dial__grid-bar dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
+              <rect class="dial__grid-bar dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
+              <rect class="dial__grid-bar dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
+              <rect class="dial__grid-bar dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
+            </pattern>
+            <mask id="dial-ring-mask" maskUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="900" height="360" fill="black"></rect>
+              <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
+              <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
+            </mask>
+          </defs>
+          <g class="dial__progress">
+            <rect
+              class="dial__progress-track"
+              x="24"
+              y="32"
+              width="852"
+              height="296"
+              rx="110"
+              ry="110"
+              pathLength="100"
+            ></rect>
+            <rect
+              class="dial__progress-fill"
+              x="24"
+              y="32"
+              width="852"
+              height="296"
+              rx="110"
+              ry="110"
+              pathLength="100"
+            ></rect>
+          </g>
+          <g class="dial__accent">
+            <rect class="dial__mesh" x="0" y="0" width="900" height="360" mask="url(#dial-ring-mask)"></rect>
+            <rect
+              class="dial__pulse"
+              x="48"
+              y="56"
+              width="804"
+              height="248"
+              rx="76"
+              ry="76"
+              pathLength="100"
+            ></rect>
+            <rect
+              class="dial__outline"
+              x="42"
+              y="50"
+              width="816"
+              height="260"
+              rx="88"
+              ry="88"
+              pathLength="100"
+            ></rect>
+            <rect
+              class="dial__inner"
+              x="66"
+              y="74"
+              width="768"
+              height="212"
+              rx="64"
+              ry="64"
+              pathLength="100"
+            ></rect>
+            <g class="dial__corner-sparks">
+              <path class="dial__corner" d="M96 104h74"></path>
+              <path class="dial__corner" d="M96 104v74"></path>
+              <path class="dial__corner" d="M804 104h-74"></path>
+              <path class="dial__corner" d="M804 104v74"></path>
+              <path class="dial__corner" d="M96 256h74"></path>
+              <path class="dial__corner" d="M96 256v-74"></path>
+              <path class="dial__corner" d="M804 256h-74"></path>
+              <path class="dial__corner" d="M804 256v-74"></path>
+            </g>
+          </g>
+        </svg>
+        <div class="dial__gear-indicator" aria-hidden="true">
+          <span class="dial__gear-label">Передача</span>
+          <span class="dial__gear-value">—</span>
+        </div>
+        <div class="metrics">
+          <div class="metric" data-gear="I" data-value="27.18" data-decimals="2" data-duration="1400">
+            <div class="metric__badge" aria-hidden="true">I</div>
+            <div class="metric__title">
+              Входящая
+              <span class="metric__hint" aria-hidden="true">i</span>
+            </div>
+            <div class="metric__value">
+              <span class="metric__value-number">0</span>
+            </div>
+            <div class="metric__unit">Мбит/с</div>
+          </div>
+          <div class="metric" data-gear="II" data-value="30.28" data-decimals="2" data-duration="1200">
+            <div class="metric__badge" aria-hidden="true">II</div>
+            <div class="metric__title">
+              Исходящая
+              <span class="metric__hint" aria-hidden="true">i</span>
+            </div>
+            <div class="metric__value">
+              <span class="metric__value-number">0</span>
+            </div>
+            <div class="metric__unit">Мбит/с</div>
+          </div>
+          <div class="metric" data-gear="III" data-value="32" data-decimals="0" data-duration="1500">
+            <div class="metric__badge" aria-hidden="true">III</div>
+            <div class="metric__title">
+              Задержка
+              <span class="metric__hint" aria-hidden="true">i</span>
+            </div>
+            <div class="metric__value">
+              <span class="metric__value-number">0</span>
+            </div>
+            <div class="metric__unit">мс</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const body = document.body;
+        body.classList.remove('no-js');
+        const metrics = Array.from(document.querySelectorAll('.metric'));
+        const gearValue = document.querySelector('.dial__gear-value');
+        if (gearValue) {
+          gearValue.textContent = '—';
+        }
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const bootDelay = reduceMotion ? 0 : 240;
+        const betweenShift = reduceMotion ? 0 : 260;
+        const coolDown = reduceMotion ? 0 : 320;
+        if (!metrics.length) {
+          body.classList.add('is-ready');
+          return;
+        }
+
+        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+        const animateValue = (element, target, decimals, duration) => {
+          return new Promise((resolve) => {
+            const effectiveDuration = reduceMotion ? 0 : duration;
+            const start = performance.now();
+            const startValue = 0;
+
+            const format = (value) => {
+              if (decimals > 0) {
+                return value.toFixed(decimals);
+              }
+              return Math.round(value).toString();
+            };
+
+            if (effectiveDuration === 0) {
+              element.textContent = format(target);
+              resolve();
+              return;
+            }
+
+            const update = (now) => {
+              const progress = Math.min((now - start) / effectiveDuration, 1);
+              const eased = easeOutCubic(progress);
+              const current = startValue + (target - startValue) * eased;
+              element.textContent = format(current);
+
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                element.textContent = format(target);
+                resolve();
+              }
+            };
+
+            requestAnimationFrame(update);
+          });
+        };
+
+        const startSequence = async () => {
+          body.classList.add('is-ready');
+          await wait(bootDelay);
+
+          for (const metric of metrics) {
+            const valueEl = metric.querySelector('.metric__value-number');
+            const target = Number(metric.dataset.value);
+            const decimals = Number(metric.dataset.decimals || 0);
+            const duration = Number(metric.dataset.duration || 1200);
+            const gear = metric.dataset.gear || '';
+
+            body.dataset.gear = gear;
+            if (gearValue) {
+              gearValue.textContent = gear || '—';
+            }
+            metric.classList.add('metric--active');
+            await animateValue(valueEl, target, decimals, duration);
+            metric.classList.remove('metric--active');
+            metric.classList.add('metric--complete');
+            await wait(betweenShift);
+          }
+
+          await wait(coolDown);
+          body.dataset.gear = '';
+          if (gearValue) {
+            gearValue.textContent = '—';
+          }
+          body.classList.add('is-finished');
+        };
+
+        startSequence();
+      });
+    </script>
+  </body>
+</html>
