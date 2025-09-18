@@ -99,11 +99,17 @@ button {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  gap: clamp(36px, 5vw, 64px);
+  grid-template-areas:
+    "intro instrument"
+    "list list";
+  column-gap: clamp(36px, 5vw, 64px);
+  row-gap: clamp(42px, 6vw, 72px);
+  align-items: center;
   z-index: 1;
 }
 
 .benefits__intro {
+  grid-area: intro;
   display: grid;
   gap: clamp(18px, 2.4vw, 28px);
   align-content: start;
@@ -183,17 +189,13 @@ button {
   text-transform: uppercase;
 }
 
-.benefits__content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: clamp(24px, 4vw, 42px);
-  align-items: center;
-}
-
 .benefits__instrument {
+  grid-area: instrument;
   position: relative;
   display: grid;
   place-items: center;
+  justify-self: end;
+  align-self: center;
 }
 
 .speedometer {
@@ -405,6 +407,7 @@ button {
 .benefits__list {
   position: relative;
   display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(16px, 2vw, 22px);
   list-style: none;
   z-index: 2;
@@ -498,14 +501,10 @@ button {
 
   .benefits__grid {
     grid-template-columns: 1fr;
-  }
-
-  .benefits__content {
-    grid-template-columns: 1fr;
-  }
-
-  .benefits__instrument {
-    order: -1;
+    grid-template-areas:
+      "intro"
+      "instrument"
+      "list";
   }
 
   .benefits__description {
@@ -514,6 +513,14 @@ button {
 
   .benefits__cta {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .benefits__list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .benefits__instrument {
+    justify-self: center;
   }
 }
 
