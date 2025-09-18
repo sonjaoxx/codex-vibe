@@ -1,15 +1,17 @@
 :root {
   color-scheme: dark;
   font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --bg: #101214;
-  --panel: #15181d;
+  --bg: #0f1115;
+  --panel-bg: #161a21;
+  --panel-highlight: #1d212a;
   --panel-border: rgba(255, 255, 255, 0.06);
   --panel-soft: rgba(255, 255, 255, 0.04);
   --accent: #ff0032;
-  --accent-fade: rgba(255, 0, 50, 0.35);
+  --accent-soft: rgba(255, 0, 50, 0.35);
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.82);
-  --text-muted: rgba(255, 255, 255, 0.55);
+  --text-secondary: rgba(255, 255, 255, 0.84);
+  --text-tertiary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.45);
 }
 
 * {
@@ -23,107 +25,235 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(24px, 5vw, 48px);
-  background: radial-gradient(circle at 20% 20%, #171a1f 0%, #0a0b0d 55%, #040506 100%);
+  padding: clamp(24px, 6vw, 60px);
+  background: radial-gradient(circle at 18% 18%, #1a1e25 0%, #090b0f 62%, #05070a 100%);
   color: var(--text-primary);
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
 .dashboard {
-  width: min(620px, 94vw);
+  width: min(940px, 94vw);
 }
 
 .dial {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(28px, 6vw, 40px);
-  padding: clamp(36px, 6vw, 56px);
-  border-radius: clamp(32px, 10vw, 52px);
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  box-shadow: 0 26px 68px rgba(0, 0, 0, 0.48);
+  background: linear-gradient(160deg, var(--panel-bg), #10131a 72%);
+  border-radius: clamp(46px, 12vw, 160px);
+  padding: clamp(36px, 5vw, 60px) clamp(34px, 6.4vw, 78px);
+  box-shadow: 0 42px 110px rgba(0, 0, 0, 0.58), inset 0 0 0 1px var(--panel-border);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.dial::before {
+  content: "";
+  position: absolute;
+  inset: clamp(18px, 2.8vw, 36px);
+  border-radius: clamp(36px, 10vw, 120px);
+  background: radial-gradient(ellipse at 70% 18%, rgba(255, 0, 50, 0.18), transparent 68%),
+    radial-gradient(ellipse at 30% 82%, rgba(255, 0, 50, 0.12), transparent 72%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.35));
+  opacity: 0.85;
+  z-index: 0;
 }
 
 .dial__frame {
-  display: block;
-  width: min(320px, 72vw);
-  height: auto;
-}
-
-.dial__ring-track,
-.dial__ring-fill {
+  position: absolute;
+  inset: clamp(12px, 2.3vw, 28px);
+  width: calc(100% - 2 * clamp(12px, 2.3vw, 28px));
+  height: calc(100% - 2 * clamp(12px, 2.3vw, 28px));
+  z-index: 1;
   fill: none;
-  stroke-width: 12;
+  pointer-events: none;
+}
+
+.dial__progress-track,
+.dial__progress-fill,
+.dial__outline,
+.dial__inner {
+  fill: none;
   stroke-linecap: round;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-  transform-box: fill-box;
+  stroke-linejoin: round;
 }
 
-.dial__ring-track {
-  stroke: rgba(255, 255, 255, 0.08);
+.dial__progress-track {
+  stroke: url(#dial-track-gradient);
+  stroke-width: 6;
 }
 
-.dial__ring-fill {
+.dial__progress-fill {
   stroke: url(#dial-progress-gradient);
+  stroke-width: 6;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   opacity: 0;
-  filter: drop-shadow(0 10px 24px var(--accent-fade));
+  filter: drop-shadow(0 0 18px var(--accent-soft));
 }
 
-.dial__ring-center {
-  fill: rgba(255, 255, 255, 0.03);
+.dial__face {
+  fill: rgba(12, 15, 21, 0.85);
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 1;
+  filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.45));
 }
 
-body.is-ready .dial__ring-fill {
+.dial__outline {
+  stroke: url(#dial-outline-gradient);
+  stroke-width: 3;
+  opacity: 0.9;
+}
+
+.dial__inner {
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 2;
+  stroke-dasharray: 16 14;
+  opacity: 0.6;
+}
+
+body.is-ready .dial__progress-fill {
   opacity: 1;
-  animation: dial-progress 3.1s cubic-bezier(0.22, 0.87, 0.36, 1) forwards;
+  animation: dial-progress 3.2s cubic-bezier(0.22, 0.87, 0.36, 1) forwards;
 }
 
-body.is-finished .dial__ring-fill {
+body.is-finished .dial__progress-fill {
   stroke: var(--accent);
 }
 
+.dial__gear-indicator {
+  position: absolute;
+  top: clamp(32px, 6vw, 80px);
+  left: 50%;
+  transform: translate(-50%, -8px);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: rgba(14, 16, 22, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 0.87, 0.36, 1),
+    background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.dial__gear-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.dial__gear-value {
+  font-size: 1.1rem;
+  min-width: 2ch;
+  text-align: center;
+}
+
+body.is-ready .dial__gear-indicator {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+body[data-gear]:not([data-gear=""]) .dial__gear-indicator {
+  background: rgba(255, 0, 50, 0.2);
+  border-color: rgba(255, 0, 50, 0.42);
+  color: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 20px 44px rgba(255, 0, 50, 0.25);
+}
+
+body[data-gear]:not([data-gear=""]) .dial__gear-value {
+  color: #ffffff;
+}
+
+body.is-finished .dial__gear-indicator {
+  opacity: 0;
+  transform: translate(-50%, -12px);
+}
+
 .metrics {
-  width: 100%;
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: clamp(18px, 5vw, 28px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 4.5vw, 50px);
+  padding: clamp(46px, 6.4vw, 70px) clamp(28px, 6vw, 64px) clamp(34px, 6vw, 60px);
+}
+
+.metrics::before {
+  content: "";
+  position: absolute;
+  inset: clamp(22px, 4.2vw, 40px) clamp(14px, 3.4vw, 32px);
+  border-radius: clamp(26px, 6vw, 60px);
+  background: linear-gradient(150deg, rgba(255, 0, 50, 0.14), rgba(12, 14, 18, 0.82));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0.55;
+  z-index: -1;
 }
 
 .metric {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: clamp(20px, 4vw, 28px);
-  border-radius: clamp(20px, 6vw, 28px);
-  background: var(--panel-soft);
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: clamp(10px, 2vw, 20px);
+  padding: clamp(22px, 3.4vw, 32px) clamp(18px, 3vw, 26px) clamp(28px, 4vw, 36px);
+  border-radius: clamp(24px, 5vw, 42px);
+  background: linear-gradient(165deg, rgba(25, 29, 36, 0.86), rgba(10, 12, 16, 0.72));
   border: 1px solid rgba(255, 255, 255, 0.05);
-  opacity: 0.35;
-  transform: translateY(12px);
-  transition: opacity 0.45s ease, transform 0.5s cubic-bezier(0.22, 0.87, 0.36, 1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  opacity: 0.28;
+  transform: translateY(26px) scale(0.96);
+  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 0.87, 0.36, 1),
+    filter 0.6s ease, color 0.4s ease;
   font-variant-numeric: tabular-nums;
 }
 
+.metric::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 0, 50, 0.16), transparent 66%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.metric__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  background: rgba(255, 0, 50, 0.18);
+  border: 1px solid rgba(255, 0, 50, 0.36);
+  color: rgba(255, 255, 255, 0.78);
+  transition: transform 0.5s ease, background 0.4s ease, border-color 0.4s ease;
+}
+
 .metric__title {
-  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
-  font-weight: 600;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: var(--text-tertiary);
   letter-spacing: 0.03em;
-  color: var(--text-muted);
 }
 
 .metric__value {
+  font-size: clamp(2.6rem, 6vw, 3.7rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  text-shadow: 0 0 18px rgba(255, 0, 50, 0.32);
   display: flex;
   align-items: baseline;
   gap: 10px;
-  font-size: clamp(2.4rem, 6vw, 3.2rem);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
 }
 
 .metric__value-number {
@@ -132,7 +262,7 @@ body.is-finished .dial__ring-fill {
 }
 
 .metric__unit {
-  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -140,12 +270,33 @@ body.is-finished .dial__ring-fill {
 
 .metric--active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1.02);
+  filter: drop-shadow(0 20px 40px rgba(255, 0, 50, 0.35));
+}
+
+.metric--active::before {
+  opacity: 1;
+}
+
+.metric--active .metric__badge {
+  transform: translateY(-4px) scale(1.06);
+  background: rgba(255, 0, 50, 0.28);
+  border-color: rgba(255, 0, 50, 0.6);
+}
+
+.metric--active .metric__title {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .metric--complete {
-  opacity: 0.85;
-  transform: translateY(0);
+  opacity: 0.9;
+  transform: translateY(0) scale(1);
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.35));
+}
+
+.metric--complete .metric__badge {
+  background: rgba(255, 0, 50, 0.22);
+  border-color: rgba(255, 0, 50, 0.45);
 }
 
 .metric--complete .metric__title,
@@ -153,34 +304,67 @@ body.is-finished .dial__ring-fill {
   color: var(--text-secondary);
 }
 
+body.no-js .metric,
+body.no-js .metric::before,
+body.no-js .metric__badge,
+body.no-js .dial__progress-fill,
+body.no-js .dial__gear-indicator {
+  animation: none;
+  transition: none;
+}
+
 body.no-js .metric {
   opacity: 1;
   transform: none;
 }
 
-body.no-js .dial__ring-fill {
+body.no-js .dial__progress-fill {
   opacity: 1;
   stroke-dashoffset: 0;
-  animation: none;
+}
+
+body.no-js .dial__gear-indicator {
+  display: none;
 }
 
 @keyframes dial-progress {
-  from {
+  0% {
     stroke-dashoffset: 100;
+    opacity: 0;
   }
-  to {
+  15% {
+    opacity: 1;
+  }
+  100% {
     stroke-dashoffset: 0;
+    opacity: 1;
   }
 }
 
-@media (max-width: 600px) {
-  .dial {
-    padding: clamp(28px, 8vw, 44px);
-    border-radius: clamp(28px, 12vw, 42px);
+@media (max-width: 840px) {
+  .metrics {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: clamp(40px, 6vw, 64px) clamp(20px, 5vw, 44px) clamp(30px, 6vw, 54px);
   }
 
-  .metric__value-number {
-    min-width: 4ch;
+  .metrics::before {
+    inset: clamp(18px, 4vw, 34px) clamp(12px, 3vw, 28px);
+  }
+}
+
+@media (max-width: 580px) {
+  .dial {
+    border-radius: clamp(36px, 14vw, 80px);
+    padding: clamp(28px, 9vw, 44px) clamp(22px, 8vw, 38px);
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .metric {
+    padding: clamp(24px, 6vw, 34px);
   }
 }
 
@@ -194,7 +378,7 @@ body.no-js .dial__ring-fill {
     scroll-behavior: auto !important;
   }
 
-  body.is-ready .dial__ring-fill {
+  body.is-ready .dial__progress-fill {
     stroke-dashoffset: 0;
     opacity: 1;
   }
