@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Скорость подключения</title>
+    <title>Преимущества оптовых поставок из Японии</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,8 +13,18 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="no-js">
-    <main class="dashboard">
+    <main class="advantages">
+      <header class="advantages__header">
+        <span class="advantages__eyebrow">Преимущества партнёрам</span>
+        <h1 class="advantages__title">Скорость оптовых поставок из Японии</h1>
+        <p class="advantages__subtitle">
+          Комбинируем японскую точность и российскую логистику: груз проходит контроль
+          без задержек, а клиенты получают оригинальные узлы и агрегаты с гарантией.
+        </p>
+      </header>
       <div class="dial">
+        <div class="dial__halo" aria-hidden="true"></div>
+        <div class="dial__kanji" aria-hidden="true">迅速</div>
         <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
           <defs>
             <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -105,43 +115,111 @@
             </g>
           </g>
         </svg>
+        <div class="dial__crest" aria-hidden="true">
+          <span class="dial__crest-label">JP</span>
+          <span class="dial__crest-arrow">➜</span>
+          <span class="dial__crest-label">RU</span>
+        </div>
+        <div class="dial__needle" data-home-angle="-128" aria-hidden="true"></div>
         <div class="dial__gear-indicator" aria-hidden="true">
           <span class="dial__gear-label">Передача</span>
           <span class="dial__gear-value">—</span>
+          <span class="dial__gear-mode"></span>
         </div>
         <div class="metrics">
-          <div class="metric" data-gear="I" data-value="27.18" data-decimals="2" data-duration="1400">
+          <div
+            class="metric"
+            data-gear="I"
+            data-mode="Tokyo Express"
+            data-angle="-112"
+            data-value="24"
+            data-prefix="≤ "
+            data-suffix=" ч"
+            data-duration="1600"
+          >
             <div class="metric__badge" aria-hidden="true">I</div>
             <div class="metric__title">
-              Входящая
+              Отгрузка со склада
               <span class="metric__hint" aria-hidden="true">i</span>
             </div>
             <div class="metric__value">
-              <span class="metric__value-number">0</span>
+              <span class="metric__value-number">≤ 24 ч</span>
             </div>
-            <div class="metric__unit">Мбит/с</div>
+            <div class="metric__unit">с момента оплаты</div>
+            <p class="metric__description">
+              Собственный московский хаб выпускает подтверждённые заказы в день оплаты и берёт на
+              себя упаковку.
+            </p>
           </div>
-          <div class="metric" data-gear="II" data-value="30.28" data-decimals="2" data-duration="1200">
+          <div
+            class="metric"
+            data-gear="II"
+            data-mode="Osaka Stock"
+            data-angle="-36"
+            data-value="12500"
+            data-suffix="+"
+            data-duration="1500"
+          >
             <div class="metric__badge" aria-hidden="true">II</div>
             <div class="metric__title">
-              Исходящая
+              Оригинальные артикула
               <span class="metric__hint" aria-hidden="true">i</span>
             </div>
             <div class="metric__value">
-              <span class="metric__value-number">0</span>
+              <span class="metric__value-number">12&nbsp;500+</span>
             </div>
-            <div class="metric__unit">Мбит/с</div>
+            <div class="metric__unit">в наличии и под заказ</div>
+            <p class="metric__description">
+              Прямая закупка у японских производителей и аукционов: редкие позиции держим в резерве и
+              поставляем под VIN.
+            </p>
           </div>
-          <div class="metric" data-gear="III" data-value="32" data-decimals="0" data-duration="1500">
+          <div
+            class="metric"
+            data-gear="III"
+            data-mode="Nagoya QC"
+            data-angle="42"
+            data-value="99.6"
+            data-decimals="1"
+            data-suffix=" %"
+            data-duration="1700"
+          >
             <div class="metric__badge" aria-hidden="true">III</div>
             <div class="metric__title">
-              Задержка
+              Успешное оформление
               <span class="metric__hint" aria-hidden="true">i</span>
             </div>
             <div class="metric__value">
-              <span class="metric__value-number">0</span>
+              <span class="metric__value-number">99,6 %</span>
             </div>
-            <div class="metric__unit">мс</div>
+            <div class="metric__unit">таможенное сопровождение</div>
+            <p class="metric__description">
+              Команда в Нагое проверяет партии и готовит документы, сокращая возвраты практически до
+              нуля.
+            </p>
+          </div>
+          <div
+            class="metric"
+            data-gear="IV"
+            data-mode="Sapporo Warranty"
+            data-angle="118"
+            data-value="12"
+            data-suffix=" мес"
+            data-duration="1500"
+          >
+            <div class="metric__badge" aria-hidden="true">IV</div>
+            <div class="metric__title">
+              Расширенная гарантия
+              <span class="metric__hint" aria-hidden="true">i</span>
+            </div>
+            <div class="metric__value">
+              <span class="metric__value-number">12 мес</span>
+            </div>
+            <div class="metric__unit">на агрегаты и ДВС</div>
+            <p class="metric__description">
+              Инженеры в Саппоро тестируют узлы на стендах, а мы закрепляем поставку договорной
+              гарантией.
+            </p>
           </div>
         </div>
       </div>
@@ -152,13 +230,25 @@
         body.classList.remove('no-js');
         const metrics = Array.from(document.querySelectorAll('.metric'));
         const gearValue = document.querySelector('.dial__gear-value');
+        const gearMode = document.querySelector('.dial__gear-mode');
+        const needle = document.querySelector('.dial__needle');
+        const homeAngle = needle ? Number(needle.dataset.homeAngle || -128) : -128;
+
         if (gearValue) {
           gearValue.textContent = '—';
         }
+        if (gearMode) {
+          gearMode.textContent = '';
+        }
+        if (needle) {
+          needle.style.setProperty('--needle-angle', `${homeAngle}deg`);
+        }
+
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const bootDelay = reduceMotion ? 0 : 240;
         const betweenShift = reduceMotion ? 0 : 260;
         const coolDown = reduceMotion ? 0 : 320;
+
         if (!metrics.length) {
           body.classList.add('is-ready');
           return;
@@ -167,21 +257,32 @@
         const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
-        const animateValue = (element, target, decimals, duration) => {
+        const animateValue = (element, target, decimals, duration, prefix = '', suffix = '') => {
           return new Promise((resolve) => {
+            if (!element) {
+              resolve();
+              return;
+            }
             const effectiveDuration = reduceMotion ? 0 : duration;
             const start = performance.now();
             const startValue = 0;
 
-            const format = (value) => {
+            const formatNumber = (value) => {
               if (decimals > 0) {
-                return value.toFixed(decimals);
+                return Number(value).toLocaleString('ru-RU', {
+                  minimumFractionDigits: decimals,
+                  maximumFractionDigits: decimals,
+                });
               }
-              return Math.round(value).toString();
+              return Math.round(value).toLocaleString('ru-RU');
+            };
+
+            const setValue = (value) => {
+              element.textContent = `${prefix}${value}${suffix}`;
             };
 
             if (effectiveDuration === 0) {
-              element.textContent = format(target);
+              setValue(formatNumber(target));
               resolve();
               return;
             }
@@ -190,12 +291,12 @@
               const progress = Math.min((now - start) / effectiveDuration, 1);
               const eased = easeOutCubic(progress);
               const current = startValue + (target - startValue) * eased;
-              element.textContent = format(current);
+              setValue(formatNumber(current));
 
               if (progress < 1) {
                 requestAnimationFrame(update);
               } else {
-                element.textContent = format(target);
+                setValue(formatNumber(target));
                 resolve();
               }
             };
@@ -214,13 +315,33 @@
             const decimals = Number(metric.dataset.decimals || 0);
             const duration = Number(metric.dataset.duration || 1200);
             const gear = metric.dataset.gear || '';
+            const mode = metric.dataset.mode || '';
+            const prefix = metric.dataset.prefix || '';
+            const suffix = metric.dataset.suffix || '';
+            const angle =
+              typeof metric.dataset.angle !== 'undefined'
+                ? Number(metric.dataset.angle)
+                : homeAngle;
+
+            if (valueEl) {
+              valueEl.textContent = '0';
+            }
 
             body.dataset.gear = gear;
+            body.dataset.mode = mode;
+
             if (gearValue) {
               gearValue.textContent = gear || '—';
             }
+            if (gearMode) {
+              gearMode.textContent = mode;
+            }
+            if (needle) {
+              needle.style.setProperty('--needle-angle', `${angle}deg`);
+            }
+
             metric.classList.add('metric--active');
-            await animateValue(valueEl, target, decimals, duration);
+            await animateValue(valueEl, target, decimals, duration, prefix, suffix);
             metric.classList.remove('metric--active');
             metric.classList.add('metric--complete');
             await wait(betweenShift);
@@ -228,8 +349,15 @@
 
           await wait(coolDown);
           body.dataset.gear = '';
+          body.dataset.mode = '';
           if (gearValue) {
             gearValue.textContent = '—';
+          }
+          if (gearMode) {
+            gearMode.textContent = '';
+          }
+          if (needle) {
+            needle.style.setProperty('--needle-angle', `${homeAngle}deg`);
           }
           body.classList.add('is-finished');
         };
