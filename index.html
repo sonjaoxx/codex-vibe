@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Скорость подключения</title>
+    <title>Преимущества поставок из Японии</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="no-js">
     <main class="dashboard">
-      <div class="dial">
+      <section class="dial" aria-labelledby="benefits-title">
+        <div class="dial__atmosphere" aria-hidden="true"></div>
         <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
           <defs>
             <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -27,6 +28,11 @@
               <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
               <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
             </linearGradient>
+            <radialGradient id="dial-glow" cx="50%" cy="50%" r="60%">
+              <stop offset="12%" stop-color="rgba(255, 45, 78, 0.55)" />
+              <stop offset="36%" stop-color="rgba(255, 0, 50, 0.42)" />
+              <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
+            </radialGradient>
             <pattern id="dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
               <rect class="dial__grid-bar dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
               <rect class="dial__grid-bar dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
@@ -52,6 +58,16 @@
             ></rect>
             <rect
               class="dial__progress-fill"
+              x="24"
+              y="32"
+              width="852"
+              height="296"
+              rx="110"
+              ry="110"
+              pathLength="100"
+            ></rect>
+            <rect
+              class="dial__progress-glow"
               x="24"
               y="32"
               width="852"
@@ -105,102 +121,160 @@
             </g>
           </g>
         </svg>
-        <div class="dial__gear-indicator" aria-hidden="true">
-          <span class="dial__gear-label">Передача</span>
-          <span class="dial__gear-value">—</span>
+        <div class="dial__needle" aria-hidden="true">
+          <div class="dial__needle-rotate">
+            <span class="dial__needle-ray"></span>
+            <span class="dial__needle-core"></span>
+            <span class="dial__needle-tip"></span>
+          </div>
+          <span class="dial__needle-hub"></span>
         </div>
-        <div class="metrics">
-          <div class="metric" data-gear="I" data-value="27.18" data-decimals="2" data-duration="1400">
-            <div class="metric__badge" aria-hidden="true">I</div>
-            <div class="metric__title">
-              Входящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
+        <div class="dial__content">
+          <header class="dial__header">
+            <p class="dial__eyebrow">Преимущества для оптовиков</p>
+            <h1 class="dial__headline" id="benefits-title">
+              Разгоняем поставки оригинальных автозапчастей из Японии
+            </h1>
+            <p class="dial__description">
+              Скорость нашего сервиса ощущается как переключение передач: с каждой ступенью вы получаете
+              новую выгоду для своего бизнеса.
+            </p>
+          </header>
+          <div class="dial__gear-indicator" aria-hidden="true">
+            <span class="dial__gear-label">Режим</span>
+            <span class="dial__gear-value">—</span>
           </div>
-          <div class="metric" data-gear="II" data-value="30.28" data-decimals="2" data-duration="1200">
-            <div class="metric__badge" aria-hidden="true">II</div>
-            <div class="metric__title">
-              Исходящая
-              <span class="metric__hint" aria-hidden="true">i</span>
+          <section class="benefits" aria-label="Ключевые преимущества">
+            <div class="benefits__list">
+              <article
+                class="advantage"
+                data-gear="JDM Direct"
+                data-angle="-118"
+                data-progress="24"
+                data-duration="1200"
+                data-hold="1300"
+              >
+                <span class="advantage__badge">I</span>
+                <h2 class="advantage__title">Прямые закупки в Японии</h2>
+                <p class="advantage__description">
+                  Собственные байеры в Нагое и Осаке отбирают партии на заводских складах и аукционах.
+                  Без перекупов и переплат.
+                </p>
+                <ul class="advantage__facts">
+                  <li>OEM-линейки Aisin, Denso, Akebono</li>
+                  <li>Снижение закупочной цены до 28%</li>
+                </ul>
+              </article>
+              <article
+                class="advantage"
+                data-gear="Fast Pack"
+                data-angle="-38"
+                data-progress="48"
+                data-duration="1000"
+                data-hold="1300"
+              >
+                <span class="advantage__badge">II</span>
+                <h2 class="advantage__title">Сборка заказа за 24 часа</h2>
+                <p class="advantage__description">
+                  Консолидируем партии на собственном японском кросс-доке и отправляем еженедельные рейсы
+                  в РФ.
+                </p>
+                <ul class="advantage__facts">
+                  <li>Фотоотчёт и контроль упаковки</li>
+                  <li>Фиксированная ставка по килограмму</li>
+                </ul>
+              </article>
+              <article
+                class="advantage"
+                data-gear="QC Check"
+                data-angle="36"
+                data-progress="72"
+                data-duration="1100"
+                data-hold="1300"
+              >
+                <span class="advantage__badge">III</span>
+                <h2 class="advantage__title">Гарантия оригинальности</h2>
+                <p class="advantage__description">
+                  Проверяем коды по VIN, сканируем маркировки, прикладываем сертификаты производителей в
+                  поставку.
+                </p>
+                <ul class="advantage__facts">
+                  <li>Бесплатная проверка по каталогу</li>
+                  <li>Страхование на полную стоимость</li>
+                </ul>
+              </article>
+              <article
+                class="advantage"
+                data-gear="Logistics+"
+                data-angle="112"
+                data-progress="94"
+                data-duration="1200"
+                data-hold="1500"
+              >
+                <span class="advantage__badge">IV</span>
+                <h2 class="advantage__title">Логистика под ключ</h2>
+                <p class="advantage__description">
+                  Своя логистическая цепочка Владивосток — Москва. Выбирайте авиа или море, а мы занимаемся
+                  растаможкой и доставкой.
+                </p>
+                <ul class="advantage__facts">
+                  <li>Оформление и сертификация «под ключ»</li>
+                  <li>Доставка по РФ за 3–7 дней</li>
+                </ul>
+              </article>
             </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="III" data-value="32" data-decimals="0" data-duration="1500">
-            <div class="metric__badge" aria-hidden="true">III</div>
-            <div class="metric__title">
-              Задержка
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">мс</div>
-          </div>
+          </section>
         </div>
-      </div>
+      </section>
     </main>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;
         body.classList.remove('no-js');
-        const metrics = Array.from(document.querySelectorAll('.metric'));
+        const advantages = Array.from(document.querySelectorAll('.advantage'));
         const gearValue = document.querySelector('.dial__gear-value');
-        if (gearValue) {
-          gearValue.textContent = '—';
-        }
+        const needle = document.querySelector('.dial__needle-rotate');
+        const progressFill = document.querySelector('.dial__progress-fill');
+        const progressGlow = document.querySelector('.dial__progress-glow');
+        let currentAngle = -140;
+        let currentProgress = 0;
+
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const bootDelay = reduceMotion ? 0 : 240;
         const betweenShift = reduceMotion ? 0 : 260;
         const coolDown = reduceMotion ? 0 : 320;
-        if (!metrics.length) {
-          body.classList.add('is-ready');
-          return;
+
+        if (gearValue) {
+          gearValue.textContent = '—';
         }
 
         const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
-        const animateValue = (element, target, decimals, duration) => {
+        const animateRange = (from, to, duration, callback) => {
           return new Promise((resolve) => {
             const effectiveDuration = reduceMotion ? 0 : duration;
-            const start = performance.now();
-            const startValue = 0;
-
-            const format = (value) => {
-              if (decimals > 0) {
-                return value.toFixed(decimals);
-              }
-              return Math.round(value).toString();
-            };
-
             if (effectiveDuration === 0) {
-              element.textContent = format(target);
+              callback(to);
               resolve();
               return;
             }
 
-            const update = (now) => {
+            const start = performance.now();
+            const tick = (now) => {
               const progress = Math.min((now - start) / effectiveDuration, 1);
               const eased = easeOutCubic(progress);
-              const current = startValue + (target - startValue) * eased;
-              element.textContent = format(current);
-
+              const value = from + (to - from) * eased;
+              callback(value);
               if (progress < 1) {
-                requestAnimationFrame(update);
+                requestAnimationFrame(tick);
               } else {
-                element.textContent = format(target);
+                callback(to);
                 resolve();
               }
             };
 
-            requestAnimationFrame(update);
+            requestAnimationFrame(tick);
           });
         };
 
@@ -208,21 +282,42 @@
           body.classList.add('is-ready');
           await wait(bootDelay);
 
-          for (const metric of metrics) {
-            const valueEl = metric.querySelector('.metric__value-number');
-            const target = Number(metric.dataset.value);
-            const decimals = Number(metric.dataset.decimals || 0);
-            const duration = Number(metric.dataset.duration || 1200);
-            const gear = metric.dataset.gear || '';
+          for (const advantage of advantages) {
+            const targetAngle = Number(advantage.dataset.angle || currentAngle);
+            const targetProgress = Number(advantage.dataset.progress || currentProgress);
+            const duration = Number(advantage.dataset.duration || 1100);
+            const hold = Number(advantage.dataset.hold || 1200);
+            const gear = advantage.dataset.gear || '';
 
             body.dataset.gear = gear;
             if (gearValue) {
               gearValue.textContent = gear || '—';
             }
-            metric.classList.add('metric--active');
-            await animateValue(valueEl, target, decimals, duration);
-            metric.classList.remove('metric--active');
-            metric.classList.add('metric--complete');
+
+            advantage.classList.add('advantage--active');
+
+            await Promise.all([
+              animateRange(currentAngle, targetAngle, duration, (value) => {
+                currentAngle = value;
+                if (needle) {
+                  needle.style.setProperty('--needle-angle', `${value}deg`);
+                }
+              }),
+              animateRange(currentProgress, targetProgress, duration + 200, (value) => {
+                currentProgress = value;
+                const dash = 100 - value;
+                if (progressFill) {
+                  progressFill.style.strokeDashoffset = dash;
+                }
+                if (progressGlow) {
+                  progressGlow.style.strokeDashoffset = dash;
+                }
+              }),
+            ]);
+
+            await wait(hold);
+            advantage.classList.remove('advantage--active');
+            advantage.classList.add('advantage--complete');
             await wait(betweenShift);
           }
 
