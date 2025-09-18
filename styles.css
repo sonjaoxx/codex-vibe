@@ -1,0 +1,186 @@
+:root {
+  color-scheme: dark;
+  --bg: #101214;
+  --panel-bg: #15171a;
+  --panel-inner: #0f1012;
+  --accent: #ff0032;
+  --text-primary: #ffffff;
+  --text-secondary: #c5c8ce;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at 50% 50%, #17181b 0%, #0a0b0c 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.dashboard {
+  width: min(920px, 92vw);
+}
+
+.dial {
+  position: relative;
+  background: linear-gradient(145deg, var(--panel-bg), #0c0d0f 75%);
+  padding: clamp(32px, 5vw, 60px) clamp(24px, 4vw, 48px);
+  border-radius: clamp(48px, 12vw, 160px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45), inset 0 0 0 2px rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.dial::before {
+  content: "";
+  position: absolute;
+  inset: clamp(18px, 2.4vw, 32px);
+  border-radius: clamp(36px, 10vw, 120px);
+  background: radial-gradient(ellipse at center, rgba(255, 0, 50, 0.08), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.4));
+  z-index: 0;
+}
+
+.dial__frame {
+  position: absolute;
+  --frame-inset: clamp(10px, 1.6vw, 22px);
+  inset: var(--frame-inset);
+  width: calc(100% - 2 * var(--frame-inset));
+  height: calc(100% - 2 * var(--frame-inset));
+  z-index: 1;
+  fill: none;
+  filter: drop-shadow(0 0 12px rgba(255, 0, 50, 0.45))
+    drop-shadow(0 0 28px rgba(255, 0, 50, 0.4));
+}
+
+.dial__frame-outline {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.9;
+  shape-rendering: geometricPrecision;
+}
+
+.dial__ticks {
+  pointer-events: none;
+}
+
+.dial__tick-track {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 18;
+  stroke-linejoin: round;
+  stroke-linecap: butt;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.6;
+  shape-rendering: geometricPrecision;
+}
+
+.dial__label {
+  position: absolute;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 2;
+  padding: 0.25em 0.55em;
+  border-radius: 999px;
+  background: rgba(15, 17, 19, 0.88);
+  backdrop-filter: blur(6px);
+}
+
+.dial__label--start {
+  bottom: clamp(70px, 9vw, 112px);
+  left: clamp(74px, 10vw, 138px);
+}
+
+.dial__label--middle {
+  top: clamp(52px, 6.2vw, 96px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dial__label--end {
+  bottom: clamp(70px, 9vw, 112px);
+  right: clamp(74px, 10vw, 138px);
+}
+
+.metrics {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: clamp(16px, 4vw, 40px);
+  padding: clamp(40px, 6vw, 64px) clamp(24px, 5vw, 60px);
+}
+
+.metric {
+  flex: 1;
+  text-align: center;
+  display: grid;
+  gap: clamp(8px, 1.5vw, 14px);
+  justify-items: center;
+}
+
+.metric__title {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
+
+.metric__hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.metric__value {
+  font-size: clamp(2.8rem, 6vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.metric__unit {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .metrics {
+    flex-direction: column;
+    gap: 32px;
+    padding: clamp(40px, 6vw, 64px) clamp(16px, 5vw, 40px);
+  }
+
+  .metric__value {
+    font-size: clamp(2.4rem, 10vw, 3rem);
+  }
+
+  .dial__label--start,
+  .dial__label--end {
+    bottom: clamp(36px, 12vw, 80px);
+  }
+}
