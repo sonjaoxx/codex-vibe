@@ -3,238 +3,342 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Скорость подключения</title>
+    <title>Мониторинг подключения</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="no-js">
-    <main class="dashboard">
-      <div class="dial">
-        <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
-          <defs>
-            <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff4d6c" />
-              <stop offset="42%" stop-color="#ff0032" />
-              <stop offset="100%" stop-color="#ff4d6c" />
-            </linearGradient>
-            <linearGradient id="dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
-              <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
-              <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
-            </linearGradient>
-            <pattern id="dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
-              <rect class="dial__grid-bar dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
-            </pattern>
-            <mask id="dial-ring-mask" maskUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="900" height="360" fill="black"></rect>
-              <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
-              <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
-            </mask>
-          </defs>
-          <g class="dial__progress">
-            <rect
-              class="dial__progress-track"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__progress-fill"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-          </g>
-          <g class="dial__accent">
-            <rect class="dial__mesh" x="0" y="0" width="900" height="360" mask="url(#dial-ring-mask)"></rect>
-            <rect
-              class="dial__pulse"
-              x="48"
-              y="56"
-              width="804"
-              height="248"
-              rx="76"
-              ry="76"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__outline"
-              x="42"
-              y="50"
-              width="816"
-              height="260"
-              rx="88"
-              ry="88"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__inner"
-              x="66"
-              y="74"
-              width="768"
-              height="212"
-              rx="64"
-              ry="64"
-              pathLength="100"
-            ></rect>
-            <g class="dial__corner-sparks">
-              <path class="dial__corner" d="M96 104h74"></path>
-              <path class="dial__corner" d="M96 104v74"></path>
-              <path class="dial__corner" d="M804 104h-74"></path>
-              <path class="dial__corner" d="M804 104v74"></path>
-              <path class="dial__corner" d="M96 256h74"></path>
-              <path class="dial__corner" d="M96 256v-74"></path>
-              <path class="dial__corner" d="M804 256h-74"></path>
-              <path class="dial__corner" d="M804 256v-74"></path>
-            </g>
-          </g>
-        </svg>
-        <div class="dial__gear-indicator" aria-hidden="true">
-          <span class="dial__gear-label">Передача</span>
-          <span class="dial__gear-value">—</span>
+    <main class="dashboard" aria-live="polite">
+      <header class="dashboard__header">
+        <div class="dashboard__heading">
+          <p class="dashboard__eyebrow">Статус сети</p>
+          <h1 class="dashboard__title">Мониторинг подключения</h1>
+          <p class="dashboard__subtitle">
+            Интерактивный отчёт о текущем состоянии соединения, скорости и стабильности сети.
+          </p>
         </div>
-        <div class="metrics">
-          <div class="metric" data-gear="I" data-value="27.18" data-decimals="2" data-duration="1400">
-            <div class="metric__badge" aria-hidden="true">I</div>
-            <div class="metric__title">
-              Входящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
+        <button class="dashboard__action" type="button" data-action="restart">
+          Перезапустить тест
+        </button>
+      </header>
+
+      <section class="panel">
+        <div
+          class="dial"
+          data-gauge
+          data-value="326.4"
+          data-max="500"
+          data-duration="2000"
+          data-decimals="1"
+        >
+          <svg class="dial__svg" viewBox="0 0 240 240" aria-hidden="true">
+            <defs>
+              <linearGradient id="dial-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7f1bff" />
+                <stop offset="45%" stop-color="#ff2975" />
+                <stop offset="100%" stop-color="#ffb800" />
+              </linearGradient>
+            </defs>
+            <circle class="dial__track" cx="120" cy="120" r="94"></circle>
+            <circle class="dial__progress" cx="120" cy="120" r="94"></circle>
+          </svg>
+          <div class="dial__value">
+            <span class="dial__label">Средняя скорость</span>
+            <span class="dial__number" data-number>0</span>
+            <span class="dial__unit">Мбит/с</span>
           </div>
-          <div class="metric" data-gear="II" data-value="30.28" data-decimals="2" data-duration="1200">
-            <div class="metric__badge" aria-hidden="true">II</div>
-            <div class="metric__title">
-              Исходящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="III" data-value="32" data-decimals="0" data-duration="1500">
-            <div class="metric__badge" aria-hidden="true">III</div>
-            <div class="metric__title">
-              Задержка
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">мс</div>
-          </div>
+          <div class="dial__status" data-status>Запуск теста...</div>
         </div>
-      </div>
+
+        <ul class="stats" aria-label="Основные показатели">
+          <li
+            class="stat"
+            data-target="14"
+            data-duration="1200"
+            data-decimals="0"
+          >
+            <span class="stat__label">Пинг</span>
+            <span class="stat__value"><span class="stat__number">0</span> мс</span>
+            <span class="stat__hint">Минимальное время до сервера</span>
+          </li>
+          <li
+            class="stat"
+            data-target="311.8"
+            data-duration="1600"
+            data-decimals="1"
+          >
+            <span class="stat__label">Загрузка</span>
+            <span class="stat__value"><span class="stat__number">0</span> Мбит/с</span>
+            <span class="stat__hint">Стабильность входящего трафика</span>
+          </li>
+          <li
+            class="stat"
+            data-target="276.4"
+            data-duration="1600"
+            data-decimals="1"
+          >
+            <span class="stat__label">Отдача</span>
+            <span class="stat__value"><span class="stat__number">0</span> Мбит/с</span>
+            <span class="stat__hint">Средняя скорость отправки</span>
+          </li>
+          <li
+            class="stat"
+            data-target="99.4"
+            data-duration="1400"
+            data-decimals="1"
+          >
+            <span class="stat__label">Надёжность</span>
+            <span class="stat__value"><span class="stat__number">0</span>%</span>
+            <span class="stat__hint">Процент успешных пакетов</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="timeline" aria-label="Этапы измерения">
+        <h2 class="timeline__title">Ход тестирования</h2>
+        <ol class="timeline__list">
+          <li class="timeline__item">Инициализация соединения и проверка DNS</li>
+          <li class="timeline__item">Измерение пинга с трёх контрольных узлов</li>
+          <li class="timeline__item">Тестирование скорости загрузки и отдачи</li>
+          <li class="timeline__item">Анализ стабильности соединения и потерь пакетов</li>
+        </ol>
+      </section>
+
+      <section class="history" aria-label="История последних проверок">
+        <h2 class="history__title">Последние результаты</h2>
+        <div class="history__grid">
+          <article class="history__card">
+            <header class="history__header">
+              <span class="history__label">Сеанс</span>
+              <span class="history__value">12:24</span>
+            </header>
+            <dl class="history__metrics">
+              <div>
+                <dt>Загрузка</dt>
+                <dd>318 Мбит/с</dd>
+              </div>
+              <div>
+                <dt>Отдача</dt>
+                <dd>284 Мбит/с</dd>
+              </div>
+              <div>
+                <dt>Пинг</dt>
+                <dd>12 мс</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="history__card">
+            <header class="history__header">
+              <span class="history__label">Сеанс</span>
+              <span class="history__value">09:15</span>
+            </header>
+            <dl class="history__metrics">
+              <div>
+                <dt>Загрузка</dt>
+                <dd>305 Мбит/с</dd>
+              </div>
+              <div>
+                <dt>Отдача</dt>
+                <dd>270 Мбит/с</dd>
+              </div>
+              <div>
+                <dt>Пинг</dt>
+                <dd>16 мс</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="history__card">
+            <header class="history__header">
+              <span class="history__label">Сеанс</span>
+              <span class="history__value">Вчера</span>
+            </header>
+            <dl class="history__metrics">
+              <div>
+                <dt>Загрузка</dt>
+                <dd>294 Мбит/с</dd>
+              </div>
+              <div>
+                <dt>Отдача</dt>
+                <dd>249 Мбит/с</dd>
+              </div>
+              <div>
+                <dt>Пинг</dt>
+                <dd>18 мс</dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+      </section>
     </main>
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;
         body.classList.remove('no-js');
-        const metrics = Array.from(document.querySelectorAll('.metric'));
-        const gearValue = document.querySelector('.dial__gear-value');
-        if (gearValue) {
-          gearValue.textContent = '—';
-        }
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const bootDelay = reduceMotion ? 0 : 240;
-        const betweenShift = reduceMotion ? 0 : 260;
-        const coolDown = reduceMotion ? 0 : 320;
-        if (!metrics.length) {
-          body.classList.add('is-ready');
-          return;
-        }
 
-        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+        const formatNumber = (value, decimals) => {
+          return decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString();
+        };
 
-        const animateValue = (element, target, decimals, duration) => {
+        const animateValue = (options) => {
+          const {
+            element,
+            target,
+            duration,
+            decimals = 0,
+            onUpdate,
+          } = options;
+
           return new Promise((resolve) => {
-            const effectiveDuration = reduceMotion ? 0 : duration;
-            const start = performance.now();
-            const startValue = 0;
-
-            const format = (value) => {
-              if (decimals > 0) {
-                return value.toFixed(decimals);
-              }
-              return Math.round(value).toString();
-            };
-
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const effectiveDuration = reducedMotion ? 0 : duration;
             if (effectiveDuration === 0) {
-              element.textContent = format(target);
+              const formatted = formatNumber(target, decimals);
+              element.textContent = formatted;
+              if (onUpdate) {
+                onUpdate(target);
+              }
               resolve();
               return;
             }
 
-            const update = (now) => {
+            const start = performance.now();
+
+            const tick = (now) => {
               const progress = Math.min((now - start) / effectiveDuration, 1);
-              const eased = easeOutCubic(progress);
-              const current = startValue + (target - startValue) * eased;
-              element.textContent = format(current);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const value = target * eased;
+              const formatted = formatNumber(value, decimals);
+              element.textContent = formatted;
+              if (onUpdate) {
+                onUpdate(value);
+              }
 
               if (progress < 1) {
-                requestAnimationFrame(update);
+                requestAnimationFrame(tick);
               } else {
-                element.textContent = format(target);
+                if (onUpdate) {
+                  onUpdate(target);
+                }
+                element.textContent = formatNumber(target, decimals);
                 resolve();
               }
             };
 
-            requestAnimationFrame(update);
+            requestAnimationFrame(tick);
           });
         };
 
-        const startSequence = async () => {
-          body.classList.add('is-ready');
-          await wait(bootDelay);
+        const statusMessages = [
+          'Анализ задержки...',
+          'Измерение загрузки...',
+          'Измерение отдачи...',
+          'Обработка результатов...'
+        ];
 
-          for (const metric of metrics) {
-            const valueEl = metric.querySelector('.metric__value-number');
-            const target = Number(metric.dataset.value);
-            const decimals = Number(metric.dataset.decimals || 0);
-            const duration = Number(metric.dataset.duration || 1200);
-            const gear = metric.dataset.gear || '';
+        const dial = document.querySelector('[data-gauge]');
+        const dialNumber = dial?.querySelector('[data-number]');
+        const dialStatus = dial?.querySelector('[data-status]');
+        const dialProgress = dial?.querySelector('.dial__progress');
 
-            body.dataset.gear = gear;
-            if (gearValue) {
-              gearValue.textContent = gear || '—';
-            }
-            metric.classList.add('metric--active');
-            await animateValue(valueEl, target, decimals, duration);
-            metric.classList.remove('metric--active');
-            metric.classList.add('metric--complete');
-            await wait(betweenShift);
+        const animateDial = async () => {
+          if (!dial || !dialNumber || !dialProgress) {
+            return;
           }
 
-          await wait(coolDown);
-          body.dataset.gear = '';
-          if (gearValue) {
-            gearValue.textContent = '—';
+          const target = Number(dial.dataset.value || 0);
+          const duration = Number(dial.dataset.duration || 1800);
+          const decimals = Number(dial.dataset.decimals || 0);
+          const max = Number(dial.dataset.max || target);
+          const radius = dialProgress.r.baseVal.value;
+          const circumference = 2 * Math.PI * radius;
+
+          dialProgress.style.strokeDasharray = `${circumference}`;
+          dialProgress.style.strokeDashoffset = `${circumference}`;
+
+          let statusIndex = -1;
+          if (dialStatus) {
+            dialStatus.textContent = 'Запуск теста...';
           }
+
+          body.classList.add('is-running');
+
+          await animateValue({
+            element: dialNumber,
+            target,
+            duration,
+            decimals,
+            onUpdate: (value) => {
+              const safeMax = max > 0 ? max : target > 0 ? target : 1;
+              const clamped = Math.max(0, Math.min(value, safeMax));
+              const fillRatio = Math.min(Math.max(clamped / safeMax, 0), 1);
+              const offset = circumference - fillRatio * circumference;
+              dialProgress.style.strokeDashoffset = `${offset}`;
+              if (dialStatus && statusIndex < statusMessages.length) {
+                const progressRatio = target > 0 ? Math.min(Math.max(value / target, 0), 1) : 1;
+                const step = Math.floor(progressRatio * statusMessages.length);
+                const clampedStep = Math.min(step, statusMessages.length - 1);
+                if (clampedStep !== statusIndex && statusMessages[clampedStep]) {
+                  statusIndex = clampedStep;
+                  dialStatus.textContent = statusMessages[clampedStep];
+                }
+              }
+            },
+          });
+
+          if (dialStatus) {
+            dialStatus.textContent = 'Тест завершён';
+          }
+
+          body.classList.remove('is-running');
           body.classList.add('is-finished');
         };
 
-        startSequence();
+        const stats = Array.from(document.querySelectorAll('.stat'));
+
+        const animateStats = async () => {
+          for (const stat of stats) {
+            const numberEl = stat.querySelector('.stat__number');
+            if (!numberEl) continue;
+            const target = Number(stat.dataset.target || 0);
+            const duration = Number(stat.dataset.duration || 1200);
+            const decimals = Number(stat.dataset.decimals || 0);
+            stat.classList.add('stat--active');
+            await animateValue({
+              element: numberEl,
+              target,
+              duration,
+              decimals,
+            });
+            stat.classList.add('stat--complete');
+          }
+        };
+
+        const startTest = async () => {
+          body.classList.remove('is-finished');
+          stats.forEach((stat) => stat.classList.remove('stat--active', 'stat--complete'));
+          if (dialNumber) {
+            dialNumber.textContent = '0';
+          }
+          if (dialStatus) {
+            dialStatus.textContent = 'Запуск теста...';
+          }
+          await Promise.all([animateDial(), animateStats()]);
+        };
+
+        const restartButton = document.querySelector('[data-action="restart"]');
+        restartButton?.addEventListener('click', () => {
+          startTest();
+        });
+
+        startTest();
       });
     </script>
   </body>
