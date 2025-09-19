@@ -195,7 +195,7 @@
               <article
                 class="advantage"
                 data-gear="Logistics+"
-                data-progress="94"
+                data-progress="100"
                 data-duration="1200"
                 data-hold="1500"
               >
@@ -282,8 +282,9 @@
             advantage.classList.add('advantage--active');
 
             await animateRange(currentProgress, targetProgress, duration + 200, (value) => {
-              currentProgress = value;
-              const dash = 100 - value;
+              const normalized = Math.min(Math.max(value, 0), 100);
+              currentProgress = normalized;
+              const dash = 100 - normalized;
               if (progressFill) {
                 progressFill.style.strokeDashoffset = dash;
               }
