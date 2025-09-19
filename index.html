@@ -3,238 +3,218 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Скорость подключения</title>
+    <title>Преимущества поставщика автозапчастей из Японии</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Orbitron:wght@500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="no-js">
-    <main class="dashboard">
-      <div class="dial">
-        <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
-          <defs>
-            <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff4d6c" />
-              <stop offset="42%" stop-color="#ff0032" />
-              <stop offset="100%" stop-color="#ff4d6c" />
-            </linearGradient>
-            <linearGradient id="dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
-              <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
-              <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
-            </linearGradient>
-            <pattern id="dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
-              <rect class="dial__grid-bar dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
-            </pattern>
-            <mask id="dial-ring-mask" maskUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="900" height="360" fill="black"></rect>
-              <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
-              <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
-            </mask>
-          </defs>
-          <g class="dial__progress">
-            <rect
-              class="dial__progress-track"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__progress-fill"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-          </g>
-          <g class="dial__accent">
-            <rect class="dial__mesh" x="0" y="0" width="900" height="360" mask="url(#dial-ring-mask)"></rect>
-            <rect
-              class="dial__pulse"
-              x="48"
-              y="56"
-              width="804"
-              height="248"
-              rx="76"
-              ry="76"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__outline"
-              x="42"
-              y="50"
-              width="816"
-              height="260"
-              rx="88"
-              ry="88"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__inner"
-              x="66"
-              y="74"
-              width="768"
-              height="212"
-              rx="64"
-              ry="64"
-              pathLength="100"
-            ></rect>
-            <g class="dial__corner-sparks">
-              <path class="dial__corner" d="M96 104h74"></path>
-              <path class="dial__corner" d="M96 104v74"></path>
-              <path class="dial__corner" d="M804 104h-74"></path>
-              <path class="dial__corner" d="M804 104v74"></path>
-              <path class="dial__corner" d="M96 256h74"></path>
-              <path class="dial__corner" d="M96 256v-74"></path>
-              <path class="dial__corner" d="M804 256h-74"></path>
-              <path class="dial__corner" d="M804 256v-74"></path>
-            </g>
-          </g>
-        </svg>
-        <div class="dial__gear-indicator" aria-hidden="true">
-          <span class="dial__gear-label">Передача</span>
-          <span class="dial__gear-value">—</span>
+  <body>
+    <main class="scene">
+      <section class="benefits" aria-labelledby="benefits-title">
+        <div class="benefits__halo" aria-hidden="true"></div>
+        <div class="benefits__grid">
+          <header class="benefits__intro">
+            <p class="benefits__eyebrow">Оптовые поставки из Японии</p>
+            <h1 class="benefits__title" id="benefits-title">
+              Скорость поставки, достойная трека «Судзука»
+            </h1>
+            <p class="benefits__description">
+              Мы объединили прямые каналы с японскими аукционами, собственную логистику
+              и цифровой контроль качества. Переключайте передачи на спидометре и смотрите,
+              что получаете с командой «Дан Авто».
+            </p>
+            <div class="benefits__cta">
+              <button class="benefits__button" type="button">Получить прайс-лист</button>
+              <span class="benefits__note">Бесплатный подбор по VIN за 15 минут</span>
+            </div>
+          </header>
+          <div class="benefits__instrument" data-active-index="0">
+            <div class="speedometer" aria-hidden="true">
+              <div class="speedometer__ambient" aria-hidden="true"></div>
+              <div class="speedometer__dial" aria-hidden="true">
+                <div class="speedometer__ticks speedometer__ticks--minor"></div>
+                <div class="speedometer__ticks speedometer__ticks--major"></div>
+                <div class="speedometer__arc"></div>
+                <div class="speedometer__needle"></div>
+                <div class="speedometer__hub"></div>
+              </div>
+              <div class="speedometer__shadow" aria-hidden="true"></div>
+            </div>
+            <div class="speedometer__value" aria-live="polite">
+              <span class="speedometer__badge">Режим передачи</span>
+              <span class="speedometer__label">Готовность отгрузки</span>
+              <span class="speedometer__metric">
+                <span class="speedometer__number">24</span>
+                <span class="speedometer__unit">часа</span>
+              </span>
+            </div>
+          </div>
+          <ul class="benefits__list" role="list">
+              <li
+                class="benefit-card is-active"
+                tabindex="0"
+                data-angle="26"
+                data-speed="24"
+                data-decimals="0"
+                data-label="Готовность отгрузки"
+                data-unit="часа"
+              >
+                <span class="benefit-card__id">01</span>
+                <h3 class="benefit-card__title">Отгрузка за 24 часа из Владивостока</h3>
+                <p class="benefit-card__text">
+                  Собственный склад, слингование крупных узлов и упаковка без очереди —
+                  груз уходит в рейс в день оплаты.
+                </p>
+                <span class="benefit-card__badge">24/7 логистика</span>
+              </li>
+              <li
+                class="benefit-card"
+                tabindex="0"
+                data-angle="92"
+                data-speed="312"
+                data-decimals="0"
+                data-label="Проверенных поставщиков"
+                data-unit="партнёров"
+              >
+                <span class="benefit-card__id">02</span>
+                <h3 class="benefit-card__title">Закупка напрямую с японских аукционов</h3>
+                <p class="benefit-card__text">
+                  Лицензии на Torakku, USS, IAA и другие торги. Фиксируем ставки и курс, чтобы
+                  вы выигрывали детали без переплат посредникам.
+                </p>
+                <span class="benefit-card__badge">Токио → Владивосток</span>
+              </li>
+              <li
+                class="benefit-card"
+                tabindex="0"
+                data-angle="156"
+                data-speed="99.4"
+                data-decimals="1"
+                data-label="Точность VIN-подбора"
+                data-unit="%"
+              >
+                <span class="benefit-card__id">03</span>
+                <h3 class="benefit-card__title">VIN-подбор и техэкспертиза перед отправкой</h3>
+                <p class="benefit-card__text">
+                  Проверяем каталоги производителей, подбираем аналоги и подтверждаем совместимость
+                  на стенде, чтобы заказчик получал только подходящие узлы.
+                </p>
+                <span class="benefit-card__badge">Инженеры на связи</span>
+              </li>
+              <li
+                class="benefit-card"
+                tabindex="0"
+                data-angle="214"
+                data-speed="18"
+                data-decimals="0"
+                data-label="Месяцев расширенной гарантии"
+                data-unit="гарантии"
+              >
+                <span class="benefit-card__id">04</span>
+                <h3 class="benefit-card__title">Расширенная гарантия на оригинальные детали</h3>
+                <p class="benefit-card__text">
+                  Сертифицированные поставки, прозрачная история детали и замена без споров, если
+                  обнаружен заводской брак.
+                </p>
+                <span class="benefit-card__badge">Оригинал 100%</span>
+              </li>
+            </ul>
         </div>
-        <div class="metrics">
-          <div class="metric" data-gear="I" data-value="27.18" data-decimals="2" data-duration="1400">
-            <div class="metric__badge" aria-hidden="true">I</div>
-            <div class="metric__title">
-              Входящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="II" data-value="30.28" data-decimals="2" data-duration="1200">
-            <div class="metric__badge" aria-hidden="true">II</div>
-            <div class="metric__title">
-              Исходящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="III" data-value="32" data-decimals="0" data-duration="1500">
-            <div class="metric__badge" aria-hidden="true">III</div>
-            <div class="metric__title">
-              Задержка
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">мс</div>
-          </div>
-        </div>
-      </div>
+      </section>
     </main>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const body = document.body;
-        body.classList.remove('no-js');
-        const metrics = Array.from(document.querySelectorAll('.metric'));
-        const gearValue = document.querySelector('.dial__gear-value');
-        if (gearValue) {
-          gearValue.textContent = '—';
-        }
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const bootDelay = reduceMotion ? 0 : 240;
-        const betweenShift = reduceMotion ? 0 : 260;
-        const coolDown = reduceMotion ? 0 : 320;
-        if (!metrics.length) {
-          body.classList.add('is-ready');
+        const instrument = document.querySelector('.benefits__instrument');
+        const cards = Array.from(document.querySelectorAll('.benefit-card'));
+        const meter = document.querySelector('.speedometer');
+        const numberEl = document.querySelector('.speedometer__number');
+        const labelEl = document.querySelector('.speedometer__label');
+        const unitEl = document.querySelector('.speedometer__unit');
+        let activeIndex = 0;
+        let autoTimer = null;
+        let resumeTimer = null;
+
+        if (!instrument || !cards.length || !meter || !numberEl || !labelEl || !unitEl) {
           return;
         }
 
-        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+        const setActiveCard = (nextCard, index, options = { animate: true }) => {
+          if (!nextCard) return;
+          const { animate = true } = options;
 
-        const animateValue = (element, target, decimals, duration) => {
-          return new Promise((resolve) => {
-            const effectiveDuration = reduceMotion ? 0 : duration;
-            const start = performance.now();
-            const startValue = 0;
+          cards.forEach((card) => card.classList.toggle('is-active', card === nextCard));
+          instrument.dataset.activeIndex = index.toString();
 
-            const format = (value) => {
-              if (decimals > 0) {
-                return value.toFixed(decimals);
-              }
-              return Math.round(value).toString();
-            };
+          const angle = Number(nextCard.dataset.angle || '0');
+          meter.style.setProperty('--angle', angle);
 
-            if (effectiveDuration === 0) {
-              element.textContent = format(target);
-              resolve();
-              return;
-            }
+          if (animate) {
+            meter.classList.remove('is-energized');
+            void meter.offsetWidth;
+            meter.classList.add('is-energized');
+          }
 
-            const update = (now) => {
-              const progress = Math.min((now - start) / effectiveDuration, 1);
-              const eased = easeOutCubic(progress);
-              const current = startValue + (target - startValue) * eased;
-              element.textContent = format(current);
+          const decimals = Number(nextCard.dataset.decimals || '0');
+          const rawValue = Number(nextCard.dataset.speed || '0');
+          const formatted = Number.isFinite(rawValue)
+            ? rawValue.toLocaleString('ru-RU', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals,
+              })
+            : nextCard.dataset.speed || '';
+          numberEl.textContent = formatted;
+          labelEl.textContent = nextCard.dataset.label || '';
+          unitEl.textContent = nextCard.dataset.unit || '';
+          activeIndex = index;
+        };
 
-              if (progress < 1) {
-                requestAnimationFrame(update);
-              } else {
-                element.textContent = format(target);
-                resolve();
-              }
-            };
+        const stopAuto = () => {
+          if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+          }
+          if (resumeTimer) {
+            clearTimeout(resumeTimer);
+            resumeTimer = null;
+          }
+        };
 
-            requestAnimationFrame(update);
+        const scheduleAuto = () => {
+          stopAuto();
+          resumeTimer = setTimeout(() => {
+            autoTimer = setInterval(() => {
+              const nextIndex = (activeIndex + 1) % cards.length;
+              setActiveCard(cards[nextIndex], nextIndex);
+            }, 4200);
+          }, 3200);
+        };
+
+        cards.forEach((card, index) => {
+          card.addEventListener('pointerenter', () => {
+            stopAuto();
+            setActiveCard(card, index);
           });
-        };
 
-        const startSequence = async () => {
-          body.classList.add('is-ready');
-          await wait(bootDelay);
+          card.addEventListener('focus', () => {
+            stopAuto();
+            setActiveCard(card, index);
+          });
 
-          for (const metric of metrics) {
-            const valueEl = metric.querySelector('.metric__value-number');
-            const target = Number(metric.dataset.value);
-            const decimals = Number(metric.dataset.decimals || 0);
-            const duration = Number(metric.dataset.duration || 1200);
-            const gear = metric.dataset.gear || '';
+          card.addEventListener('pointerleave', () => {
+            scheduleAuto();
+          });
 
-            body.dataset.gear = gear;
-            if (gearValue) {
-              gearValue.textContent = gear || '—';
-            }
-            metric.classList.add('metric--active');
-            await animateValue(valueEl, target, decimals, duration);
-            metric.classList.remove('metric--active');
-            metric.classList.add('metric--complete');
-            await wait(betweenShift);
-          }
+          card.addEventListener('blur', () => {
+            scheduleAuto();
+          });
+        });
 
-          await wait(coolDown);
-          body.dataset.gear = '';
-          if (gearValue) {
-            gearValue.textContent = '—';
-          }
-          body.classList.add('is-finished');
-        };
-
-        startSequence();
+        setActiveCard(cards[0], 0, { animate: false });
+        scheduleAuto();
       });
     </script>
   </body>
