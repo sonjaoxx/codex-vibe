@@ -63,9 +63,15 @@ body {
 
 .dial__frame {
   position: absolute;
-  inset: clamp(18px, 3vw, 32px);
-  width: calc(100% - 2 * clamp(18px, 3vw, 32px));
-  height: calc(100% - 2 * clamp(18px, 3vw, 32px));
+  --dial-frame-padding-inline: clamp(18px, 3vw, 32px);
+  --dial-frame-padding-top: clamp(42px, 7vw, 84px);
+  --dial-frame-padding-bottom: clamp(18px, 3vw, 32px);
+  top: var(--dial-frame-padding-top);
+  right: var(--dial-frame-padding-inline);
+  bottom: var(--dial-frame-padding-bottom);
+  left: var(--dial-frame-padding-inline);
+  width: calc(100% - (var(--dial-frame-padding-inline) * 2));
+  height: calc(100% - (var(--dial-frame-padding-top) + var(--dial-frame-padding-bottom)));
   z-index: 1;
   fill: none;
   pointer-events: none;
@@ -265,8 +271,7 @@ body.no-js .advantage__badge,
 body.no-js .dial__progress-fill,
 body.no-js .dial__progress-glow,
 body.no-js .dial__corner,
-body.no-js .dial__pulse,
-body.no-js .dial__needle-rotate {
+body.no-js .dial__pulse {
   animation: none !important;
   transition: none !important;
 }
@@ -389,74 +394,6 @@ body.is-ready .dial__progress-glow {
 
 body.is-finished .dial__progress-fill {
   stroke: var(--accent);
-}
-
-.dial__needle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(820px, 92%);
-  aspect-ratio: 2.45 / 1;
-  transform: translate(-50%, -52%);
-  pointer-events: none;
-  z-index: 4;
-}
-
-.dial__needle-rotate {
-  position: absolute;
-  inset: 0;
-  transform-origin: 50% 78%;
-  --needle-angle: -140deg;
-  transform: rotate(var(--needle-angle));
-}
-
-.dial__needle-ray {
-  position: absolute;
-  bottom: 17%;
-  left: 50%;
-  width: 4px;
-  height: 50%;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 0, 50, 0.82));
-  box-shadow: 0 0 16px rgba(255, 0, 50, 0.45), 0 0 28px rgba(255, 0, 50, 0.2);
-}
-
-.dial__needle-core {
-  position: absolute;
-  bottom: 21%;
-  left: 50%;
-  width: 14px;
-  height: 44%;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 0, 50, 0), rgba(255, 0, 50, 0.85));
-  filter: blur(0.4px);
-}
-
-.dial__needle-tip {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  width: 22px;
-  height: 22px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, #ffffff 0%, rgba(255, 0, 50, 0.28) 45%, rgba(255, 0, 50, 0) 70%);
-  box-shadow: 0 0 14px rgba(255, 255, 255, 0.45), 0 0 36px rgba(255, 0, 50, 0.4);
-}
-
-.dial__needle-hub {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: clamp(54px, 8vw, 72px);
-  height: clamp(54px, 8vw, 72px);
-  transform: translate(-50%, 35%);
-  border-radius: 50%;
-  background: linear-gradient(145deg, rgba(8, 9, 13, 0.95), rgba(32, 34, 42, 0.7));
-  border: 3px solid rgba(255, 0, 50, 0.4);
-  box-shadow: 0 0 28px rgba(255, 0, 50, 0.35);
 }
 
 @keyframes dial-pulse {
