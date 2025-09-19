@@ -3,239 +3,495 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Скорость подключения</title>
+    <title>Дан Авто — оптовые поставки автозапчастей из Японии</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="no-js">
-    <main class="dashboard">
-      <div class="dial">
-        <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
-          <defs>
-            <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff4d6c" />
-              <stop offset="42%" stop-color="#ff0032" />
-              <stop offset="100%" stop-color="#ff4d6c" />
-            </linearGradient>
-            <linearGradient id="dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
-              <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
-              <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
-            </linearGradient>
-            <pattern id="dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
-              <rect class="dial__grid-bar dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
-            </pattern>
-            <mask id="dial-ring-mask" maskUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="900" height="360" fill="black"></rect>
-              <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
-              <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
-            </mask>
-          </defs>
-          <g class="dial__progress">
-            <rect
-              class="dial__progress-track"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__progress-fill"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-          </g>
-          <g class="dial__accent">
-            <rect class="dial__mesh" x="0" y="0" width="900" height="360" mask="url(#dial-ring-mask)"></rect>
-            <rect
-              class="dial__pulse"
-              x="48"
-              y="56"
-              width="804"
-              height="248"
-              rx="76"
-              ry="76"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__outline"
-              x="42"
-              y="50"
-              width="816"
-              height="260"
-              rx="88"
-              ry="88"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__inner"
-              x="66"
-              y="74"
-              width="768"
-              height="212"
-              rx="64"
-              ry="64"
-              pathLength="100"
-            ></rect>
-            <g class="dial__corner-sparks">
-              <path class="dial__corner" d="M96 104h74"></path>
-              <path class="dial__corner" d="M96 104v74"></path>
-              <path class="dial__corner" d="M804 104h-74"></path>
-              <path class="dial__corner" d="M804 104v74"></path>
-              <path class="dial__corner" d="M96 256h74"></path>
-              <path class="dial__corner" d="M96 256v-74"></path>
-              <path class="dial__corner" d="M804 256h-74"></path>
-              <path class="dial__corner" d="M804 256v-74"></path>
-            </g>
-          </g>
-        </svg>
-        <div class="dial__gear-indicator" aria-hidden="true">
-          <span class="dial__gear-label">Передача</span>
-          <span class="dial__gear-value">—</span>
-        </div>
-        <div class="metrics">
-          <div class="metric" data-gear="I" data-value="27.18" data-decimals="2" data-duration="1400">
-            <div class="metric__badge" aria-hidden="true">I</div>
-            <div class="metric__title">
-              Входящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="II" data-value="30.28" data-decimals="2" data-duration="1200">
-            <div class="metric__badge" aria-hidden="true">II</div>
-            <div class="metric__title">
-              Исходящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="III" data-value="32" data-decimals="0" data-duration="1500">
-            <div class="metric__badge" aria-hidden="true">III</div>
-            <div class="metric__title">
-              Задержка
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">мс</div>
-          </div>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__bar">
+        <a href="#" class="site-header__logo" aria-label="Дан Авто">
+          <span class="site-header__logo-mark">Дан</span>
+          <span class="site-header__logo-text">Авто</span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a class="site-nav__link" href="#catalog">Каталог</a>
+          <a class="site-nav__link" href="#solutions">Преимущества</a>
+          <a class="site-nav__link" href="#popular">Хиты</a>
+          <a class="site-nav__link" href="#process">Схема</a>
+          <a class="site-nav__link" href="#delivery">Логистика</a>
+        </nav>
+        <div class="site-header__actions">
+          <a class="site-header__contact" href="tel:+74951234567">+7 (495) 123-45-67</a>
+          <a class="button button--primary" href="#contact">Оставить заявку</a>
         </div>
       </div>
+    </header>
+
+    <main>
+      <section class="hero" id="request">
+        <div class="container hero__inner">
+          <div class="hero__content">
+            <p class="hero__eyebrow">Оригинал напрямую из Японии</p>
+            <h1 class="hero__title">Комплексные поставки автозапчастей для оптовых сетей и сервисов</h1>
+            <p class="hero__description">
+              Консолидируем партии под ваши бренды, держим складские остатки и фиксируем цену до выхода груза. Сильная
+              команда в Токио и Москве обеспечивает контроль качества и сроки.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#catalog">Перейти в каталог</a>
+              <a class="button button--ghost" href="#contact">Получить расчёт</a>
+            </div>
+            <ul class="hero__tags" aria-label="Основные направления">
+              <li>Оригинальные узлы</li>
+              <li>VIN-подбор</li>
+              <li>Контейнерные поставки</li>
+            </ul>
+            <div class="hero__brands" aria-label="Работаем с марками">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg" alt="Toyota" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Nissan_2020_logo.svg" alt="Nissan" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Honda_logo.svg" alt="Honda" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Subaru_logo.svg" alt="Subaru" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Mitsubishi_logo.svg" alt="Mitsubishi" />
+            </div>
+          </div>
+          <div class="hero__visual" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1523983302122-73e7026315c4?auto=format&fit=crop&w=1300&q=80"
+              alt="Склад автозапчастей"
+            />
+            <div class="hero__badge">
+              <p>12 400 позиций в каталоге</p>
+              <span>Ежедневное обновление остатков</span>
+            </div>
+            <div class="hero__inventory">
+              <article>
+                <h3>Двигатели и трансмиссии</h3>
+                <p>В наличии 180 агрегатов</p>
+              </article>
+              <article>
+                <h3>Подвеска и тормозные системы</h3>
+                <p>700+ комплектов на складе</p>
+              </article>
+              <article>
+                <h3>Оптика и электроника</h3>
+                <p>Выгрузка до 24 часов</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-strip" aria-label="Ключевые преимущества">
+        <div class="container service-strip__inner">
+          <article class="service-strip__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4 7h16M7 7l1-3h8l1 3m-3 4v6m-6-6v6m-4 0h16v3H4z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <h3>Поставка под склад</h3>
+            <p>Формируем страховой запас на нашем складе в Токио и резервируем под ваш бренд.</p>
+          </article>
+          <article class="service-strip__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M20 7H8l-4 5h8l-4 5h8l-4 5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <h3>Честные условия</h3>
+            <p>Фиксируем цены на этапе оплаты, прозрачная маржа и полный комплект документов.</p>
+          </article>
+          <article class="service-strip__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4.5 12.5l4 4 11-11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <h3>Контроль качества</h3>
+            <p>Фото и видеоотчёты с японского склада, проверка по VIN и сертификация перед отправкой.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="catalog-focus" id="catalog">
+        <div class="container catalog-focus__inner">
+          <div class="section-heading">
+            <span class="section-heading__eyebrow">Каталог</span>
+            <h2 class="section-heading__title">Сильные направления поставок</h2>
+            <p class="section-heading__description">
+              Создали полноценную витрину для закупщиков: подробные карточки, наличие, кроссы и прайс по запросу.
+              Управляйте ассортиментом и отгрузками в одном окне.
+            </p>
+          </div>
+          <div class="catalog-focus__controls">
+            <ul class="catalog-focus__filters" aria-label="Фильтры каталога">
+              <li class="is-active">Оригинал OEM</li>
+              <li>Аналоги премиум</li>
+              <li>Расходники</li>
+              <li>Тюнинг</li>
+            </ul>
+            <a class="button button--ghost" href="#contact">Запросить полный прайс</a>
+          </div>
+          <div class="catalog-focus__grid">
+            <article class="catalog-card">
+              <img
+                src="https://images.unsplash.com/photo-1517167685280-0d41e1617bb4?auto=format&fit=crop&w=780&q=80"
+                alt="Двигатель"
+              />
+              <div class="catalog-card__body">
+                <span class="catalog-card__tag">01</span>
+                <h3>Двигатели и трансмиссии</h3>
+                <p>Комплекты с навесным, контрактные моторы, АКПП и вариаторы с гарантией запуска.</p>
+                <ul>
+                  <li>Проверка на стенде</li>
+                  <li>Документы JDM</li>
+                  <li>Отгрузка 7–14 дней</li>
+                </ul>
+              </div>
+            </article>
+            <article class="catalog-card">
+              <img
+                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=780&q=80"
+                alt="Подвеска"
+              />
+              <div class="catalog-card__body">
+                <span class="catalog-card__tag">02</span>
+                <h3>Подвеска и рулевое</h3>
+                <p>Стойки, рычаги, тормозные системы и комплектующие для ТО крупных автопарков.</p>
+                <ul>
+                  <li>Усиленная упаковка</li>
+                  <li>VIN-сопоставление</li>
+                  <li>Скидки на партии</li>
+                </ul>
+              </div>
+            </article>
+            <article class="catalog-card">
+              <img
+                src="https://images.unsplash.com/photo-1583598809596-d4a95c0ae9ea?auto=format&fit=crop&w=780&q=80"
+                alt="Электроника"
+              />
+              <div class="catalog-card__body">
+                <span class="catalog-card__tag">03</span>
+                <h3>Электрика и электроника</h3>
+                <p>Генераторы, блоки управления, жгуты, оптика и датчики для новых и редких моделей.</p>
+                <ul>
+                  <li>Диагностика перед отправкой</li>
+                  <li>Фотокаталог</li>
+                  <li>Доступ к истории</li>
+                </ul>
+              </div>
+            </article>
+            <article class="catalog-card">
+              <img
+                src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=780&q=80"
+                alt="Кузов"
+              />
+              <div class="catalog-card__body">
+                <span class="catalog-card__tag">04</span>
+                <h3>Кузов и оптика</h3>
+                <p>Двери, капоты, бампера, стёкла, фары и элементы салона без пробега по РФ.</p>
+                <ul>
+                  <li>Индивидуальная защита</li>
+                  <li>Безупречное ЛКП</li>
+                  <li>Фотоотчёт упаковки</li>
+                </ul>
+              </div>
+            </article>
+            <article class="catalog-card">
+              <img
+                src="https://images.unsplash.com/photo-1533478700848-afd120797aa2?auto=format&fit=crop&w=780&q=80"
+                alt="Расходники"
+              />
+              <div class="catalog-card__body">
+                <span class="catalog-card__tag">05</span>
+                <h3>Расходники и ТО</h3>
+                <p>Фильтры, ремкомплекты, жидкости, свечи и аксессуары с регулярной отгрузкой.</p>
+                <ul>
+                  <li>Контракты по подписке</li>
+                  <li>Автоматизация заказов</li>
+                  <li>Маркировка по SKU</li>
+                </ul>
+              </div>
+            </article>
+            <article class="catalog-card">
+              <img
+                src="https://images.unsplash.com/photo-1520583457224-aee11bad5112?auto=format&fit=crop&w=780&q=80"
+                alt="Тюнинг"
+              />
+              <div class="catalog-card__body">
+                <span class="catalog-card__tag">06</span>
+                <h3>Спорт и тюнинг</h3>
+                <p>TRD, STI, Nismo, Cusco, Bride и другие топовые позиции для клубов и тюнинг-ателье.</p>
+                <ul>
+                  <li>Эксклюзивные квоты</li>
+                  <li>Отслеживание релизов</li>
+                  <li>Доставка авиа</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="brands" aria-label="Производители">
+        <div class="container brands__inner">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Denso_logo.svg" alt="Denso" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Aisin_logo.svg" alt="Aisin" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/NGK_logo.svg" alt="NGK" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Exedy_logo.svg" alt="Exedy" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Hitachi_logo.svg" alt="Hitachi" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/NipponDenso-Logo.svg" alt="Nippon Denso" />
+        </div>
+      </section>
+
+      <section class="featured-products" id="popular">
+        <div class="container featured-products__inner">
+          <div class="section-heading">
+            <span class="section-heading__eyebrow">Хиты оптовых отгрузок</span>
+            <h2 class="section-heading__title">Популярные позиции на текущей неделе</h2>
+            <p class="section-heading__description">
+              Обновляем витрину ежедневно. Позиции можно зарезервировать на 48 часов, а также настроить автопополнение.
+            </p>
+          </div>
+          <div class="featured-products__grid">
+            <article class="product-card">
+              <img
+                src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=640&q=80"
+                alt="Тормозные диски Brembo"
+              />
+              <div class="product-card__body">
+                <div class="product-card__top">
+                  <span class="product-card__sku">SKU: 43512-6030</span>
+                  <span class="product-card__status product-card__status--in">В наличии</span>
+                </div>
+                <h3>Комплект тормозных дисков Brembo</h3>
+                <p>Toyota Land Cruiser 300 · авиа-доставка · партия 24 шт.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">58 400 ₽</span>
+                  <button class="button button--ghost" type="button">Забронировать</button>
+                </div>
+              </div>
+            </article>
+            <article class="product-card">
+              <img
+                src="https://images.unsplash.com/photo-1607860108855-5471380715f5?auto=format&fit=crop&w=640&q=80"
+                alt="Вариатор"
+              />
+              <div class="product-card__body">
+                <div class="product-card__top">
+                  <span class="product-card__sku">SKU: JF016E</span>
+                  <span class="product-card__status product-card__status--transit">В пути</span>
+                </div>
+                <h3>Вариатор Jatco JF016E</h3>
+                <p>Nissan X-Trail, Qashqai · консолидация · прибытие 22 мая</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">198 000 ₽</span>
+                  <button class="button button--ghost" type="button">Запросить</button>
+                </div>
+              </div>
+            </article>
+            <article class="product-card">
+              <img
+                src="https://images.unsplash.com/photo-1621520468894-ef2303883673?auto=format&fit=crop&w=640&q=80"
+                alt="Фары"
+              />
+              <div class="product-card__body">
+                <div class="product-card__top">
+                  <span class="product-card__sku">SKU: 33150-TLA-H51</span>
+                  <span class="product-card__status product-card__status--in">На складе</span>
+                </div>
+                <h3>LED-фары Honda CR-V (пара)</h3>
+                <p>Премиум-комплектация, 14 комплектов, гарантия 6 месяцев.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">76 900 ₽</span>
+                  <button class="button button--ghost" type="button">Отправить запрос</button>
+                </div>
+              </div>
+            </article>
+            <article class="product-card">
+              <img
+                src="https://images.unsplash.com/photo-1617791160588-241658c0f566?auto=format&fit=crop&w=640&q=80"
+                alt="Комплект сцепления"
+              />
+              <div class="product-card__body">
+                <div class="product-card__top">
+                  <span class="product-card__sku">SKU: TYK-742</span>
+                  <span class="product-card__status product-card__status--order">Под заказ</span>
+                </div>
+                <h3>Комплект сцепления EXEDY</h3>
+                <p>Mitsubishi L200, Pajero Sport · производство Япония · срок 12 дней.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">54 300 ₽</span>
+                  <button class="button button--ghost" type="button">Оставить заявку</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="solutions" id="solutions">
+        <div class="container solutions__inner">
+          <div class="solutions__visual" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=1080&q=80"
+              alt="Команда логистики"
+            />
+          </div>
+          <div class="solutions__content">
+            <span class="section-heading__eyebrow">Почему мы</span>
+            <h2>Сервис под закупщика, логиста и финдиректора</h2>
+            <p>
+              Объединяем опыт оптовых закупок и логистики: персональные менеджеры, внутренний бухгалтерский блок и
+              страхование каждой поставки. Вам остаётся только выбрать позиции.
+            </p>
+            <ul class="solutions__list">
+              <li>
+                <strong>Персональный кабинет</strong>
+                <span>Отслеживание статусов, документы, сверка взаиморасчётов и аналитику поставок держим в одном месте.</span>
+              </li>
+              <li>
+                <strong>Маркетинговая поддержка</strong>
+                <span>Готовим каталоги для ваших менеджеров, настраиваем выгрузки на маркетплейсы и CRM.</span>
+              </li>
+              <li>
+                <strong>Финансовая гибкость</strong>
+                <span>Предоплата, частичная оплата, факторинг, страхование сделки и льготные тарифы на доставку.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="process" id="process">
+        <div class="container process__inner">
+          <div class="section-heading">
+            <span class="section-heading__eyebrow">Как мы работаем</span>
+            <h2 class="section-heading__title">Пошаговый путь партии</h2>
+          </div>
+          <ol class="process__timeline">
+            <li class="process-step">
+              <span class="process-step__index">01</span>
+              <h3>Бриф и подбор</h3>
+              <p>Получаем спецификацию, делаем VIN-подбор и предлагаем альтернативы по срокам и цене.</p>
+            </li>
+            <li class="process-step">
+              <span class="process-step__index">02</span>
+              <h3>Контракт и оплата</h3>
+              <p>Закрепляем цену, согласуем график поставок, оформляем гарантию и страхование.</p>
+            </li>
+            <li class="process-step">
+              <span class="process-step__index">03</span>
+              <h3>Контроль и упаковка</h3>
+              <p>Проверяем по чек-листу, готовим фото и видео, формируем индивидуальную упаковку.</p>
+            </li>
+            <li class="process-step">
+              <span class="process-step__index">04</span>
+              <h3>Доставка и отчёт</h3>
+              <p>Отгружаем авиа или морем, ведём отслеживание, закрываем документы и помогаем с растаможкой.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="logistics" id="delivery">
+        <div class="container logistics__inner">
+          <div class="logistics__content">
+            <span class="section-heading__eyebrow">Логистика</span>
+            <h2 class="logistics__title">Прозрачная доставка из Японии в РФ</h2>
+            <p>
+              Собственная команда в Токио формирует партии на нашем складе консолидации. В Москве и Владивостоке мы
+              принимаем и перераспределяем груз по вашему графику.
+            </p>
+            <ul class="logistics__list">
+              <li>Еженедельные авиа-рейсы и морские контейнеры</li>
+              <li>Онлайн-трекинг и уведомления по этапам</li>
+              <li>Таможенное оформление, сертификация, маркировка</li>
+            </ul>
+            <div class="logistics__cta">
+              <a class="button button--primary" href="#contact">Запросить логистическую схему</a>
+            </div>
+          </div>
+          <div class="logistics__visual" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1505731132164-cca90383e1af?auto=format&fit=crop&w=1080&q=80"
+              alt="Логистический терминал"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div class="container cta__inner">
+          <div class="cta__content">
+            <h2 class="cta__title">Получите подбор и смету в течение 24 часов</h2>
+            <p class="cta__text">
+              Оставьте контакт и укажите список позиций. Подготовим коммерческое предложение, подберём транспорт и
+              согласуем условия оплаты.
+            </p>
+            <ul class="cta__points">
+              <li>Персональный менеджер</li>
+              <li>Гарантия оригинала</li>
+              <li>Доставка под ключ</li>
+            </ul>
+          </div>
+          <form class="cta-form">
+            <label class="cta-form__field">
+              <span>Компания</span>
+              <input type="text" name="company" placeholder="ООО «Автосеть»" required />
+            </label>
+            <label class="cta-form__field">
+              <span>Телефон</span>
+              <input type="tel" name="phone" placeholder="+7 (999) 123-45-67" required />
+            </label>
+            <label class="cta-form__field">
+              <span>Email</span>
+              <input type="email" name="email" placeholder="sales@company.ru" required />
+            </label>
+            <label class="cta-form__field cta-form__field--full">
+              <span>Комментарий</span>
+              <textarea name="comment" rows="3" placeholder="Какие запчасти и объёмы интересуют"></textarea>
+            </label>
+            <button class="button button--primary" type="submit">Отправить заявку</button>
+          </form>
+        </div>
+      </section>
     </main>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const body = document.body;
-        body.classList.remove('no-js');
-        const metrics = Array.from(document.querySelectorAll('.metric'));
-        const gearValue = document.querySelector('.dial__gear-value');
-        if (gearValue) {
-          gearValue.textContent = '—';
-        }
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const bootDelay = reduceMotion ? 0 : 240;
-        const betweenShift = reduceMotion ? 0 : 260;
-        const coolDown = reduceMotion ? 0 : 320;
-        if (!metrics.length) {
-          body.classList.add('is-ready');
-          return;
-        }
 
-        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-        const animateValue = (element, target, decimals, duration) => {
-          return new Promise((resolve) => {
-            const effectiveDuration = reduceMotion ? 0 : duration;
-            const start = performance.now();
-            const startValue = 0;
-
-            const format = (value) => {
-              if (decimals > 0) {
-                return value.toFixed(decimals);
-              }
-              return Math.round(value).toString();
-            };
-
-            if (effectiveDuration === 0) {
-              element.textContent = format(target);
-              resolve();
-              return;
-            }
-
-            const update = (now) => {
-              const progress = Math.min((now - start) / effectiveDuration, 1);
-              const eased = easeOutCubic(progress);
-              const current = startValue + (target - startValue) * eased;
-              element.textContent = format(current);
-
-              if (progress < 1) {
-                requestAnimationFrame(update);
-              } else {
-                element.textContent = format(target);
-                resolve();
-              }
-            };
-
-            requestAnimationFrame(update);
-          });
-        };
-
-        const startSequence = async () => {
-          body.classList.add('is-ready');
-          await wait(bootDelay);
-
-          for (const metric of metrics) {
-            const valueEl = metric.querySelector('.metric__value-number');
-            const target = Number(metric.dataset.value);
-            const decimals = Number(metric.dataset.decimals || 0);
-            const duration = Number(metric.dataset.duration || 1200);
-            const gear = metric.dataset.gear || '';
-
-            body.dataset.gear = gear;
-            if (gearValue) {
-              gearValue.textContent = gear || '—';
-            }
-            metric.classList.add('metric--active');
-            await animateValue(valueEl, target, decimals, duration);
-            metric.classList.remove('metric--active');
-            metric.classList.add('metric--complete');
-            await wait(betweenShift);
-          }
-
-          await wait(coolDown);
-          body.dataset.gear = '';
-          if (gearValue) {
-            gearValue.textContent = '—';
-          }
-          body.classList.add('is-finished');
-        };
-
-        startSequence();
-      });
-    </script>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <span class="site-footer__mark">Дан Авто</span>
+          <p>Оптовые поставки японских автозапчастей. Москва · Токио.</p>
+        </div>
+        <div class="site-footer__links">
+          <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+          <a href="mailto:info@dan-avto.ru">info@dan-avto.ru</a>
+          <a href="#catalog">Каталог</a>
+        </div>
+        <p class="site-footer__legal">© 2024 Дан Авто. Все права защищены.</p>
+      </div>
+    </footer>
   </body>
 </html>
