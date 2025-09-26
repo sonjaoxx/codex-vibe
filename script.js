@@ -232,11 +232,10 @@
     if (prefersReduced) {
       return gsap.timeline();
     }
-    if (introTimeline) {
-      introTimeline.restart();
-      return introTimeline;
+    if (!introTimeline) {
+      introTimeline = intro();
     }
-    introTimeline = intro();
+    introTimeline.restart();
     return introTimeline;
   };
 
@@ -254,9 +253,18 @@
     return;
   }
 
-  if (document.readyState === 'complete') {
-    playIntro();
+  const triggerIntro = () => {
+    if (prefersReduced) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      playIntro();
+    });
+  };
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    triggerIntro();
   } else {
-    window.addEventListener('load', playIntro, { once: true });
+    window.addEventListener('DOMContentLoaded', triggerIntro, { once: true });
   }
 })();
