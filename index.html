@@ -224,16 +224,26 @@
       <script>
         (() => {
           const init = (root) => {
-            if (!root || root.dataset.tadvInitialized === 'true') {
+            const initialized = root && root.getAttribute('data-tadv-initialized') === 'true';
+            if (!root || initialized) {
               return;
             }
 
-            const advantages = Array.from(root.querySelectorAll('.tadv-advantage'));
+            if (typeof Promise === 'undefined') {
+              root.classList.remove('no-js');
+              root.setAttribute('data-tadv-initialized', 'true');
+              return;
+            }
+
+            const nodeList = root.querySelectorAll('.tadv-advantage');
+            const advantages = Array.from ? Array.from(nodeList) : Array.prototype.slice.call(nodeList);
             if (advantages.length === 0) {
+              root.classList.remove('no-js');
+              root.setAttribute('data-tadv-initialized', 'true');
               return;
             }
 
-            root.dataset.tadvInitialized = 'true';
+            root.setAttribute('data-tadv-initialized', 'true');
             root.classList.remove('no-js');
 
             const gearValue = root.querySelector('.tadv-dial__gear-value');
@@ -241,10 +251,12 @@
             const progressGlow = root.querySelector('.tadv-dial__progress-glow');
             let currentProgress = 0;
 
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const bootDelay = reduceMotion ? 0 : 240;
-            const betweenShift = reduceMotion ? 0 : 260;
-            const coolDown = reduceMotion ? 0 : 320;
+            const prefersReduce =
+              typeof window.matchMedia === 'function' &&
+              window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const bootDelay = prefersReduce ? 0 : 240;
+            const betweenShift = prefersReduce ? 0 : 260;
+            const coolDown = prefersReduce ? 0 : 320;
 
             if (gearValue) {
               gearValue.textContent = '—';
@@ -255,28 +267,31 @@
 
             const animateRange = (from, to, duration, callback) => {
               return new Promise((resolve) => {
-                const effectiveDuration = reduceMotion ? 0 : duration;
-                if (effectiveDuration === 0) {
+                const effectiveDuration = prefersReduce ? 0 : duration;
+                if (effectiveDuration === 0 || typeof window.requestAnimationFrame !== 'function') {
                   callback(to);
                   resolve();
                   return;
                 }
 
-                const start = performance.now();
-                const tick = (now) => {
-                  const progress = Math.min((now - start) / effectiveDuration, 1);
+                let startTime = null;
+                const tick = (time) => {
+                  if (startTime === null) {
+                    startTime = time;
+                  }
+                  const progress = Math.min((time - startTime) / effectiveDuration, 1);
                   const eased = easeOutCubic(progress);
                   const value = from + (to - from) * eased;
                   callback(value);
                   if (progress < 1) {
-                    requestAnimationFrame(tick);
+                    window.requestAnimationFrame(tick);
                   } else {
                     callback(to);
                     resolve();
                   }
                 };
 
-                requestAnimationFrame(tick);
+                window.requestAnimationFrame(tick);
               });
             };
 
@@ -284,13 +299,18 @@
               root.classList.add('is-ready');
               await wait(bootDelay);
 
-              for (const advantage of advantages) {
-                const targetProgress = Number(advantage.dataset.progress || currentProgress);
-                const duration = Number(advantage.dataset.duration || 1100);
-                const hold = Number(advantage.dataset.hold || 1200);
-                const gear = advantage.dataset.gear || '';
+              for (let index = 0; index < advantages.length; index += 1) {
+                const advantage = advantages[index];
+                const progressAttr = advantage.getAttribute('data-progress');
+                const durationAttr = advantage.getAttribute('data-duration');
+                const holdAttr = advantage.getAttribute('data-hold');
+                const gearAttr = advantage.getAttribute('data-gear');
+                const targetProgress = progressAttr === null ? currentProgress : Number(progressAttr);
+                const duration = durationAttr === null ? 1100 : Number(durationAttr);
+                const hold = holdAttr === null ? 1200 : Number(holdAttr);
+                const gear = gearAttr === null ? '' : gearAttr;
 
-                root.dataset.gear = gear;
+                root.setAttribute('data-gear', gear);
                 if (gearValue) {
                   gearValue.textContent = gear || '—';
                 }
@@ -316,7 +336,7 @@
               }
 
               await wait(coolDown);
-              root.dataset.gear = '';
+              root.setAttribute('data-gear', '');
               if (gearValue) {
                 gearValue.textContent = '—';
               }
@@ -326,19 +346,67 @@
             startSequence();
           };
 
-          const script = document.currentScript;
-          const root = script ? script.closest('.t-adv-speedometer') : null;
-
-          const launch = () => {
-            if (root) {
-              init(root);
+          const runInit = () => {
+            const roots = document.querySelectorAll('.t-adv-speedometer');
+            for (let i = 0; i < roots.length; i += 1) {
+              init(roots[i]);
             }
           };
 
+          const scheduleInit = () => {
+            if (typeof window.requestAnimationFrame === 'function') {
+              window.requestAnimationFrame(runInit);
+            } else {
+              setTimeout(runInit, 0);
+            }
+          };
+
+          scheduleInit();
+
           if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', launch, { once: true });
-          } else {
-            launch();
+            document.addEventListener('DOMContentLoaded', scheduleInit, { once: true });
+          }
+
+          const tildaEvents = ['tilda:blocks:loaded', 'tilda:blocks:changed'];
+          for (let i = 0; i < tildaEvents.length; i += 1) {
+            document.addEventListener(tildaEvents[i], scheduleInit);
+          }
+
+          if ('MutationObserver' in window) {
+            const observer = new MutationObserver((mutations) => {
+              for (let i = 0; i < mutations.length; i += 1) {
+                const mutation = mutations[i];
+                if (mutation.type !== 'childList') {
+                  continue;
+                }
+                for (let j = 0; j < mutation.addedNodes.length; j += 1) {
+                  const node = mutation.addedNodes[j];
+                  if (node.nodeType !== 1) {
+                    continue;
+                  }
+                  const element = node;
+                  const hasRoot =
+                    (element.classList && element.classList.contains('t-adv-speedometer')) ||
+                    (typeof element.querySelector === 'function' && element.querySelector('.t-adv-speedometer'));
+                  if (hasRoot) {
+                    scheduleInit();
+                    return;
+                  }
+                }
+              }
+            });
+
+            const startObserving = () => {
+              if (document.body) {
+                observer.observe(document.body, { childList: true, subtree: true });
+              }
+            };
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', startObserving, { once: true });
+            } else {
+              startObserving();
+            }
           }
         })();
       </script>
