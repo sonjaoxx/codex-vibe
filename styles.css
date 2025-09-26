@@ -27,66 +27,13 @@ body {
   border: 0;
 }
 
-.layout {
-  width: min(100%, 920px);
-  padding: clamp(24px, 4vw, 48px);
-}
-
-.gauge {
-  display: grid;
-  justify-items: center;
-  gap: clamp(24px, 3vw, 40px);
-}
-
-.gauge__visual {
+.speedometer {
   width: min(100%, 680px);
+  padding: clamp(24px, 4vw, 48px);
 }
 
 #speedometer {
   width: 100%;
   height: auto;
   display: block;
-}
-
-.gauge__readout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-  background: #ffffff;
-  border-radius: 28px;
-  padding: 20px 28px;
-  box-shadow: 0 28px 60px rgba(27, 28, 31, 0.16);
-}
-
-.gauge__value {
-  font-size: clamp(2.8rem, 6vw, 4.4rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.gauge__unit {
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-  color: rgba(17, 17, 17, 0.65);
-  text-transform: uppercase;
-  letter-spacing: 0.32em;
-}
-
-.gauge__meta {
-  display: flex;
-  gap: 8px;
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-  color: rgba(17, 17, 17, 0.6);
-}
-
-.gauge__label {
-  font-weight: 600;
-  color: rgba(17, 17, 17, 0.75);
-}
-
-@media (max-width: 540px) {
-  .gauge__readout {
-    width: 100%;
-  }
 }

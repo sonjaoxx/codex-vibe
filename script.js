@@ -12,14 +12,7 @@
   const glow = svg.querySelector('#glow');
   const ticks = svg.querySelectorAll('[data-tick]');
 
-  const valueEl = document.querySelector('[data-readout="value"]');
-  const maxEl = document.querySelector('[data-readout="max"]');
-
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-  const formatNumber = (value) =>
-    Number(value).toLocaleString('ru-RU', {
-      maximumFractionDigits: 0,
-    });
 
   const arcLength = arc ? arc.getTotalLength() : 0;
   const glowLength = glow ? glow.getTotalLength() : 0;
@@ -61,8 +54,6 @@
       opacity: 0,
     });
   }
-
-  let maxValue = 0;
 
   const controls = {
     setNeedle(angle, options = {}) {
@@ -141,58 +132,51 @@
       });
       return tl;
     },
-    setValue(value, options = {}) {
-      if (!valueEl) return gsap.timeline();
-      const { ease = 'power2.out', duration: d = 0.8, updateMax = true } = options;
-      const start = Number(valueEl.dataset.rawValue || valueEl.textContent.replace(/\s/g, '').replace(',', '.')) || 0;
-      const target = Number(value) || 0;
-      const proxy = { v: start };
-      const tween = gsap.to(proxy, {
-        v: target,
-        ease,
-        duration: duration(d),
-        onUpdate: () => {
-          valueEl.textContent = formatNumber(proxy.v);
-          valueEl.dataset.rawValue = proxy.v;
-          if (updateMax && proxy.v > maxValue) {
-            maxValue = proxy.v;
-            if (maxEl) {
-              maxEl.textContent = formatNumber(maxValue);
-              maxEl.dataset.rawValue = maxValue;
-            }
-          }
-        },
-        onComplete: () => {
-          valueEl.textContent = formatNumber(target);
-          valueEl.dataset.rawValue = target;
-        },
-      });
-      return tween;
-    },
-    setMax(value, options = {}) {
-      if (!maxEl) return gsap.timeline();
-      const { ease = 'power2.out', duration: d = 0.6 } = options;
-      const start = Number(maxEl.dataset.rawValue || maxEl.textContent.replace(/\s/g, '').replace(',', '.')) || 0;
-      const target = Number(value) || 0;
-      maxValue = Math.max(maxValue, target);
-      const proxy = { v: start };
-      return gsap.to(proxy, {
-        v: maxValue,
-        ease,
-        duration: duration(d),
-        onUpdate: () => {
-          maxEl.textContent = formatNumber(proxy.v);
-          maxEl.dataset.rawValue = proxy.v;
-        },
-        onComplete: () => {
-          maxEl.textContent = formatNumber(maxValue);
-          maxEl.dataset.rawValue = maxValue;
-        },
-      });
-    },
   };
 
-  window.speedometerControls = controls;
+  const intro = () => {
+    const master = gsap.timeline({ defaults: { ease: 'power2.out' }, delay: 0.2 });
+    master.add(controls.setNeedle(-120, { immediate: true }));
+    master.add(controls.setArcProgress(0, { immediate: true }), 0);
+    master.add(controls.setGlowProgress(0, { immediate: true, opacity: 0.25, width: 20 }), 0);
+    master.add(controls.revealTicks(), 0.1);
+    master.add(controls.setNeedle(-40, { duration: 1.4 }), 0.35);
+    master.add(controls.setArcProgress(0.42, { duration: 1.4, color: '#3F4140', width: 2.4 }), 0.35);
+    master.add(
+      controls.setGlowProgress(0.42, { duration: 1.4, color: '#ff0032', width: 26, opacity: 0.48 }),
+      0.35
+    );
+    master.add(controls.setNeedle(32, { duration: 1.6 }), 1.8);
+    master.add(
+      controls.setArcProgress(0.72, { duration: 1.6, color: '#ff0032', width: 3.4, opacity: 1 }),
+      1.8
+    );
+    master.add(
+      controls.setGlowProgress(0.72, { duration: 1.6, color: '#ff4d6c', width: 32, opacity: 0.68 }),
+      1.8
+    );
+    master.add(controls.setNeedle(4, { duration: 1.3 }), 3.6);
+    master.add(controls.setArcProgress(0.55, { duration: 1.3, color: '#3F4140', width: 2.6 }), 3.6);
+    master.add(
+      controls.setGlowProgress(0.55, { duration: 1.3, color: '#ff2247', width: 28, opacity: 0.52 }),
+      3.6
+    );
+    return master;
+  };
+
+  let introTimeline;
+
+  const playIntro = () => {
+    if (prefersReduced) {
+      return gsap.timeline();
+    }
+    if (introTimeline) {
+      introTimeline.restart();
+      return introTimeline;
+    }
+    introTimeline = intro();
+    return introTimeline;
+  };
 
   if (prefersReduced) {
     if (ticks.length) {
@@ -201,43 +185,19 @@
     controls.setArcProgress(0.65, { immediate: true, color: '#ff0032', width: 3, opacity: 1 });
     controls.setGlowProgress(0.65, { immediate: true, color: '#ff0032', width: 28, opacity: 0.55 });
     controls.setNeedle(30, { immediate: true });
-    controls.setValue(96, { updateMax: true });
     return;
   }
 
-  const intro = () => {
-    const master = gsap.timeline({ defaults: { ease: 'power2.out' }, delay: 0.2 });
-    master.add(controls.setNeedle(-120, { immediate: true }));
-    master.add(controls.setArcProgress(0, { immediate: true }), 0);
-    master.add(controls.setGlowProgress(0, { immediate: true, opacity: 0.25, width: 20 }), 0);
-    master.add(controls.revealTicks(), 0.1);
-    master.add(controls.setNeedle(-30, { duration: 1.4 }), 0.4);
-    master.add(controls.setArcProgress(0.45, { duration: 1.4, color: '#3F4140', width: 2.5 }), 0.4);
-    master.add(
-      controls.setGlowProgress(0.45, { duration: 1.4, color: '#ff0032', width: 26, opacity: 0.48 }),
-      0.4
-    );
-    master.add(controls.setValue(54, { duration: 1.2 }), 0.4);
-    master.add(controls.setNeedle(48, { duration: 1.6 }), 2);
-    master.add(
-      controls.setArcProgress(0.76, { duration: 1.6, color: '#ff0032', width: 3.4, opacity: 1 }),
-      2
-    );
-    master.add(
-      controls.setGlowProgress(0.76, { duration: 1.6, color: '#ff4d6c', width: 32, opacity: 0.68 }),
-      2
-    );
-    master.add(controls.setValue(118, { duration: 1.6 }), 2);
-    master.add(controls.setNeedle(14, { duration: 1.3 }), 4);
-    master.add(controls.setArcProgress(0.52, { duration: 1.3, color: '#3F4140', width: 2.6 }), 4);
-    master.add(
-      controls.setGlowProgress(0.52, { duration: 1.3, color: '#ff2247', width: 28, opacity: 0.52 }),
-      4
-    );
-    master.add(controls.setValue(82, { duration: 1.1 }), 4);
-    master.add(controls.setMax(118, { duration: 0.8 }), 2);
-    return master;
+  const startIntro = () => {
+    requestAnimationFrame(() => {
+      playIntro();
+    });
   };
 
-  intro();
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    startIntro();
+  } else {
+    document.addEventListener('DOMContentLoaded', startIntro, { once: true });
+    window.addEventListener('load', startIntro, { once: true });
+  }
 })();

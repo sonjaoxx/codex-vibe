@@ -13,20 +13,18 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="layout">
-      <section class="gauge" aria-labelledby="gauge-title">
-        <h1 id="gauge-title" class="visually-hidden">Спидометр GSAP</h1>
-        <figure class="gauge__visual">
-          <svg
-            id="speedometer"
-            width="622"
-            height="514"
-            viewBox="0 0 622 514"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            role="presentation"
-            aria-hidden="true"
-          >
+    <main class="speedometer" aria-labelledby="gauge-title">
+      <h1 id="gauge-title" class="visually-hidden">Спидометр GSAP</h1>
+      <svg
+        id="speedometer"
+        width="622"
+        height="514"
+        viewBox="0 0 622 514"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        role="presentation"
+        aria-hidden="true"
+      >
             <path
               id="arc"
               d="M513.132 513.132C555.088 471.176 583.66 417.721 595.236 359.527C606.811 301.333 600.87 241.013 578.164 186.195C555.458 131.377 517.006 84.5235 467.671 51.5591C418.336 18.5947 360.335 1 301 1C241.666 0.999997 183.664 18.5947 134.329 51.5591C84.9943 84.5235 46.5426 131.377 23.8363 186.195C1.12999 241.013 -4.81102 301.333 6.76455 359.527C18.3401 417.721 46.9123 471.176 88.8681 513.132"
@@ -282,19 +280,9 @@
                 <feBlend mode="normal" in2="shape" result="effect1_innerShadow_119_114" />
               </filter>
             </defs>
-          </svg>
-        </figure>
-        <div class="gauge__readout">
-          <div class="gauge__value" data-readout="value">0</div>
-          <div class="gauge__unit">км/ч</div>
-          <div class="gauge__meta">
-            <span class="gauge__label">Максимум:</span>
-            <span class="gauge__max" data-readout="max">0</span>
-          </div>
-        </div>
-      </section>
+      </svg>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-t0Ax7Anxr1j7rwhhtjfiPgk41IrT9jp+1hhZCvGSqtEtFPi0P5xGX2YeliYg+6TS//N/xGaxzwoMPmxjSPfawg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
   </body>
 </html>
