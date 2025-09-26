@@ -12,303 +12,336 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="no-js">
-    <main class="dashboard">
-      <section class="dial" aria-labelledby="benefits-title">
-        <div class="dial__atmosphere" aria-hidden="true"></div>
-        <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
-          <defs>
-            <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff4d6c" />
-              <stop offset="42%" stop-color="#ff0032" />
-              <stop offset="100%" stop-color="#ff4d6c" />
-            </linearGradient>
-            <linearGradient id="dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
-              <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
-              <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
-            </linearGradient>
-            <radialGradient id="dial-glow" cx="50%" cy="50%" r="60%">
-              <stop offset="12%" stop-color="rgba(255, 45, 78, 0.55)" />
-              <stop offset="36%" stop-color="rgba(255, 0, 50, 0.42)" />
-              <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
-            </radialGradient>
-            <pattern id="dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
-              <rect class="dial__grid-bar dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
-            </pattern>
-            <mask id="dial-ring-mask" maskUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="900" height="360" fill="black"></rect>
-              <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
-              <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
-            </mask>
-          </defs>
-          <g class="dial__progress">
-            <rect
-              class="dial__progress-track"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__progress-fill"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__progress-glow"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-          </g>
-          <g class="dial__accent">
-            <rect class="dial__mesh" x="0" y="0" width="900" height="360" mask="url(#dial-ring-mask)"></rect>
-            <rect
-              class="dial__pulse"
-              x="48"
-              y="56"
-              width="804"
-              height="248"
-              rx="76"
-              ry="76"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__outline"
-              x="42"
-              y="50"
-              width="816"
-              height="260"
-              rx="88"
-              ry="88"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__inner"
-              x="66"
-              y="74"
-              width="768"
-              height="212"
-              rx="64"
-              ry="64"
-              pathLength="100"
-            ></rect>
-            <g class="dial__corner-sparks">
-              <path class="dial__corner" d="M96 104h74"></path>
-              <path class="dial__corner" d="M96 104v74"></path>
-              <path class="dial__corner" d="M804 104h-74"></path>
-              <path class="dial__corner" d="M804 104v74"></path>
-              <path class="dial__corner" d="M96 256h74"></path>
-              <path class="dial__corner" d="M96 256v-74"></path>
-              <path class="dial__corner" d="M804 256h-74"></path>
-              <path class="dial__corner" d="M804 256v-74"></path>
+  <body>
+    <div class="t-adv-speedometer no-js">
+      <main class="tadv-dashboard">
+        <section class="tadv-dial" aria-labelledby="benefits-title">
+          <div class="tadv-dial__atmosphere" aria-hidden="true"></div>
+          <svg class="tadv-dial__frame" viewBox="0 0 900 360" aria-hidden="true">
+            <defs>
+              <linearGradient
+                id="tadv-dial-outline-gradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#ff4d6c" />
+                <stop offset="42%" stop-color="#ff0032" />
+                <stop offset="100%" stop-color="#ff4d6c" />
+              </linearGradient>
+              <linearGradient id="tadv-dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
+                <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
+                <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
+              </linearGradient>
+              <radialGradient id="tadv-dial-glow" cx="50%" cy="50%" r="60%">
+                <stop offset="12%" stop-color="rgba(255, 45, 78, 0.55)" />
+                <stop offset="36%" stop-color="rgba(255, 0, 50, 0.42)" />
+                <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
+              </radialGradient>
+              <pattern id="tadv-dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
+                <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
+                <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
+                <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
+                <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
+              </pattern>
+              <mask id="tadv-dial-ring-mask" maskUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="900" height="360" fill="black"></rect>
+                <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
+                <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
+              </mask>
+            </defs>
+            <g class="tadv-dial__progress">
+              <rect
+                class="tadv-dial__progress-track"
+                x="24"
+                y="32"
+                width="852"
+                height="296"
+                rx="110"
+                ry="110"
+                pathLength="100"
+              ></rect>
+              <rect
+                class="tadv-dial__progress-fill"
+                x="24"
+                y="32"
+                width="852"
+                height="296"
+                rx="110"
+                ry="110"
+                pathLength="100"
+              ></rect>
+              <rect
+                class="tadv-dial__progress-glow"
+                x="24"
+                y="32"
+                width="852"
+                height="296"
+                rx="110"
+                ry="110"
+                pathLength="100"
+              ></rect>
             </g>
-          </g>
-        </svg>
-        <div class="dial__content">
-          <header class="dial__header">
-            <p class="dial__eyebrow">Преимущества для оптовиков</p>
-            <h1 class="dial__headline" id="benefits-title">
-              Разгоняем поставки оригинальных автозапчастей из Японии
-            </h1>
-            <p class="dial__description">
-              Скорость нашего сервиса ощущается как переключение передач: с каждой ступенью вы получаете
-              новую выгоду для своего бизнеса.
-            </p>
-          </header>
-          <div class="dial__gear-indicator" aria-hidden="true">
-            <span class="dial__gear-label">Режим</span>
-            <span class="dial__gear-value">—</span>
-          </div>
-          <section class="benefits" aria-label="Ключевые преимущества">
-            <div class="benefits__list">
-              <article
-                class="advantage"
-                data-gear="JDM Direct"
-                data-progress="24"
-                data-duration="1200"
-                data-hold="1300"
-              >
-                <span class="advantage__badge">I</span>
-                <h2 class="advantage__title">Прямые закупки в Японии</h2>
-                <p class="advantage__description">
-                  Собственные байеры в Нагое и Осаке отбирают партии на заводских складах и аукционах.
-                  Без перекупов и переплат.
-                </p>
-                <ul class="advantage__facts">
-                  <li>OEM-линейки Aisin, Denso, Akebono</li>
-                  <li>Снижение закупочной цены до 28%</li>
-                </ul>
-              </article>
-              <article
-                class="advantage"
-                data-gear="Fast Pack"
-                data-progress="48"
-                data-duration="1000"
-                data-hold="1300"
-              >
-                <span class="advantage__badge">II</span>
-                <h2 class="advantage__title">Сборка заказа за 24 часа</h2>
-                <p class="advantage__description">
-                  Консолидируем партии на собственном японском кросс-доке и отправляем еженедельные рейсы
-                  в РФ.
-                </p>
-                <ul class="advantage__facts">
-                  <li>Фотоотчёт и контроль упаковки</li>
-                  <li>Фиксированная ставка по килограмму</li>
-                </ul>
-              </article>
-              <article
-                class="advantage"
-                data-gear="QC Check"
-                data-progress="72"
-                data-duration="1100"
-                data-hold="1300"
-              >
-                <span class="advantage__badge">III</span>
-                <h2 class="advantage__title">Гарантия оригинальности</h2>
-                <p class="advantage__description">
-                  Проверяем коды по VIN, сканируем маркировки, прикладываем сертификаты производителей в
-                  поставку.
-                </p>
-                <ul class="advantage__facts">
-                  <li>Бесплатная проверка по каталогу</li>
-                  <li>Страхование на полную стоимость</li>
-                </ul>
-              </article>
-              <article
-                class="advantage"
-                data-gear="Logistics+"
-                data-progress="100"
-                data-duration="1200"
-                data-hold="1500"
-              >
-                <span class="advantage__badge">IV</span>
-                <h2 class="advantage__title">Логистика под ключ</h2>
-                <p class="advantage__description">
-                  Своя логистическая цепочка Владивосток — Москва. Выбирайте авиа или море, а мы занимаемся
-                  растаможкой и доставкой.
-                </p>
-                <ul class="advantage__facts">
-                  <li>Оформление и сертификация «под ключ»</li>
-                  <li>Доставка по РФ за 3–7 дней</li>
-                </ul>
-              </article>
+            <g class="tadv-dial__accent">
+              <rect class="tadv-dial__mesh" x="0" y="0" width="900" height="360" mask="url(#tadv-dial-ring-mask)"></rect>
+              <rect
+                class="tadv-dial__pulse"
+                x="48"
+                y="56"
+                width="804"
+                height="248"
+                rx="76"
+                ry="76"
+                pathLength="100"
+              ></rect>
+              <rect
+                class="tadv-dial__outline"
+                x="42"
+                y="50"
+                width="816"
+                height="260"
+                rx="88"
+                ry="88"
+                pathLength="100"
+              ></rect>
+              <rect
+                class="tadv-dial__inner"
+                x="66"
+                y="74"
+                width="768"
+                height="212"
+                rx="64"
+                ry="64"
+                pathLength="100"
+              ></rect>
+              <g class="tadv-dial__corner-sparks">
+                <path class="tadv-dial__corner" d="M96 104h74"></path>
+                <path class="tadv-dial__corner" d="M96 104v74"></path>
+                <path class="tadv-dial__corner" d="M804 104h-74"></path>
+                <path class="tadv-dial__corner" d="M804 104v74"></path>
+                <path class="tadv-dial__corner" d="M96 256h74"></path>
+                <path class="tadv-dial__corner" d="M96 256v-74"></path>
+                <path class="tadv-dial__corner" d="M804 256h-74"></path>
+                <path class="tadv-dial__corner" d="M804 256v-74"></path>
+              </g>
+            </g>
+          </svg>
+          <div class="tadv-dial__content">
+            <header class="tadv-dial__header">
+              <p class="tadv-dial__eyebrow">Преимущества для оптовиков</p>
+              <h1 class="tadv-dial__headline" id="benefits-title">
+                Разгоняем поставки оригинальных автозапчастей из Японии
+              </h1>
+              <p class="tadv-dial__description">
+                Скорость нашего сервиса ощущается как переключение передач: с каждой ступенью вы получаете
+                новую выгоду для своего бизнеса.
+              </p>
+            </header>
+            <div class="tadv-dial__gear-indicator" aria-hidden="true">
+              <span class="tadv-dial__gear-label">Режим</span>
+              <span class="tadv-dial__gear-value">—</span>
             </div>
-          </section>
-        </div>
-      </section>
-    </main>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const body = document.body;
-        body.classList.remove('no-js');
-        const advantages = Array.from(document.querySelectorAll('.advantage'));
-        const gearValue = document.querySelector('.dial__gear-value');
-        const progressFill = document.querySelector('.dial__progress-fill');
-        const progressGlow = document.querySelector('.dial__progress-glow');
-        let currentProgress = 0;
-
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const bootDelay = reduceMotion ? 0 : 240;
-        const betweenShift = reduceMotion ? 0 : 260;
-        const coolDown = reduceMotion ? 0 : 320;
-
-        if (gearValue) {
-          gearValue.textContent = '—';
-        }
-
-        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-        const animateRange = (from, to, duration, callback) => {
-          return new Promise((resolve) => {
-            const effectiveDuration = reduceMotion ? 0 : duration;
-            if (effectiveDuration === 0) {
-              callback(to);
-              resolve();
+            <section class="tadv-benefits" aria-label="Ключевые преимущества">
+              <div class="tadv-benefits__list">
+                <article
+                  class="tadv-advantage"
+                  data-gear="JDM Direct"
+                  data-progress="24"
+                  data-duration="1200"
+                  data-hold="1300"
+                >
+                  <span class="tadv-advantage__badge">I</span>
+                  <h2 class="tadv-advantage__title">Прямые закупки в Японии</h2>
+                  <p class="tadv-advantage__description">
+                    Собственные байеры в Нагое и Осаке отбирают партии на заводских складах и аукционах. Без
+                    перекупов и переплат.
+                  </p>
+                  <ul class="tadv-advantage__facts">
+                    <li>OEM-линейки Aisin, Denso, Akebono</li>
+                    <li>Снижение закупочной цены до 28%</li>
+                  </ul>
+                </article>
+                <article
+                  class="tadv-advantage"
+                  data-gear="Fast Pack"
+                  data-progress="48"
+                  data-duration="1000"
+                  data-hold="1300"
+                >
+                  <span class="tadv-advantage__badge">II</span>
+                  <h2 class="tadv-advantage__title">Сборка заказа за 24 часа</h2>
+                  <p class="tadv-advantage__description">
+                    Консолидируем партии на собственном японском кросс-доке и отправляем еженедельные рейсы в РФ.
+                  </p>
+                  <ul class="tadv-advantage__facts">
+                    <li>Фотоотчёт и контроль упаковки</li>
+                    <li>Фиксированная ставка по килограмму</li>
+                  </ul>
+                </article>
+                <article
+                  class="tadv-advantage"
+                  data-gear="QC Check"
+                  data-progress="72"
+                  data-duration="1100"
+                  data-hold="1300"
+                >
+                  <span class="tadv-advantage__badge">III</span>
+                  <h2 class="tadv-advantage__title">Гарантия оригинальности</h2>
+                  <p class="tadv-advantage__description">
+                    Проверяем коды по VIN, сканируем маркировки, прикладываем сертификаты производителей в
+                    поставку.
+                  </p>
+                  <ul class="tadv-advantage__facts">
+                    <li>Бесплатная проверка по каталогу</li>
+                    <li>Страхование на полную стоимость</li>
+                  </ul>
+                </article>
+                <article
+                  class="tadv-advantage"
+                  data-gear="Logistics+"
+                  data-progress="100"
+                  data-duration="1200"
+                  data-hold="1500"
+                >
+                  <span class="tadv-advantage__badge">IV</span>
+                  <h2 class="tadv-advantage__title">Логистика под ключ</h2>
+                  <p class="tadv-advantage__description">
+                    Своя логистическая цепочка Владивосток — Москва. Выбирайте авиа или море, а мы занимаемся
+                    растаможкой и доставкой.
+                  </p>
+                  <ul class="tadv-advantage__facts">
+                    <li>Оформление и сертификация «под ключ»</li>
+                    <li>Доставка по РФ за 3–7 дней</li>
+                  </ul>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+      <script>
+        (() => {
+          const init = (root) => {
+            if (!root || root.dataset.tadvInitialized === 'true') {
               return;
             }
 
-            const start = performance.now();
-            const tick = (now) => {
-              const progress = Math.min((now - start) / effectiveDuration, 1);
-              const eased = easeOutCubic(progress);
-              const value = from + (to - from) * eased;
-              callback(value);
-              if (progress < 1) {
-                requestAnimationFrame(tick);
-              } else {
-                callback(to);
-                resolve();
-              }
-            };
-
-            requestAnimationFrame(tick);
-          });
-        };
-
-        const startSequence = async () => {
-          body.classList.add('is-ready');
-          await wait(bootDelay);
-
-          for (const advantage of advantages) {
-            const targetProgress = Number(advantage.dataset.progress || currentProgress);
-            const duration = Number(advantage.dataset.duration || 1100);
-            const hold = Number(advantage.dataset.hold || 1200);
-            const gear = advantage.dataset.gear || '';
-
-            body.dataset.gear = gear;
-            if (gearValue) {
-              gearValue.textContent = gear || '—';
+            const advantages = Array.from(root.querySelectorAll('.tadv-advantage'));
+            if (advantages.length === 0) {
+              return;
             }
 
-            advantage.classList.add('advantage--active');
+            root.dataset.tadvInitialized = 'true';
+            root.classList.remove('no-js');
 
-            await animateRange(currentProgress, targetProgress, duration + 200, (value) => {
-              const normalized = Math.min(Math.max(value, 0), 100);
-              currentProgress = normalized;
-              const dash = 100 - normalized;
-              if (progressFill) {
-                progressFill.style.strokeDashoffset = dash;
+            const gearValue = root.querySelector('.tadv-dial__gear-value');
+            const progressFill = root.querySelector('.tadv-dial__progress-fill');
+            const progressGlow = root.querySelector('.tadv-dial__progress-glow');
+            let currentProgress = 0;
+
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const bootDelay = reduceMotion ? 0 : 240;
+            const betweenShift = reduceMotion ? 0 : 260;
+            const coolDown = reduceMotion ? 0 : 320;
+
+            if (gearValue) {
+              gearValue.textContent = '—';
+            }
+
+            const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+            const animateRange = (from, to, duration, callback) => {
+              return new Promise((resolve) => {
+                const effectiveDuration = reduceMotion ? 0 : duration;
+                if (effectiveDuration === 0) {
+                  callback(to);
+                  resolve();
+                  return;
+                }
+
+                const start = performance.now();
+                const tick = (now) => {
+                  const progress = Math.min((now - start) / effectiveDuration, 1);
+                  const eased = easeOutCubic(progress);
+                  const value = from + (to - from) * eased;
+                  callback(value);
+                  if (progress < 1) {
+                    requestAnimationFrame(tick);
+                  } else {
+                    callback(to);
+                    resolve();
+                  }
+                };
+
+                requestAnimationFrame(tick);
+              });
+            };
+
+            const startSequence = async () => {
+              root.classList.add('is-ready');
+              await wait(bootDelay);
+
+              for (const advantage of advantages) {
+                const targetProgress = Number(advantage.dataset.progress || currentProgress);
+                const duration = Number(advantage.dataset.duration || 1100);
+                const hold = Number(advantage.dataset.hold || 1200);
+                const gear = advantage.dataset.gear || '';
+
+                root.dataset.gear = gear;
+                if (gearValue) {
+                  gearValue.textContent = gear || '—';
+                }
+
+                advantage.classList.add('tadv-advantage--active');
+
+                await animateRange(currentProgress, targetProgress, duration + 200, (value) => {
+                  const normalized = Math.min(Math.max(value, 0), 100);
+                  currentProgress = normalized;
+                  const dash = 100 - normalized;
+                  if (progressFill) {
+                    progressFill.style.strokeDashoffset = dash;
+                  }
+                  if (progressGlow) {
+                    progressGlow.style.strokeDashoffset = dash;
+                  }
+                });
+
+                await wait(hold);
+                advantage.classList.remove('tadv-advantage--active');
+                advantage.classList.add('tadv-advantage--complete');
+                await wait(betweenShift);
               }
-              if (progressGlow) {
-                progressGlow.style.strokeDashoffset = dash;
+
+              await wait(coolDown);
+              root.dataset.gear = '';
+              if (gearValue) {
+                gearValue.textContent = '—';
               }
-            });
+              root.classList.add('is-finished');
+            };
 
-            await wait(hold);
-            advantage.classList.remove('advantage--active');
-            advantage.classList.add('advantage--complete');
-            await wait(betweenShift);
+            startSequence();
+          };
+
+          const script = document.currentScript;
+          const root = script ? script.closest('.t-adv-speedometer') : null;
+
+          const launch = () => {
+            if (root) {
+              init(root);
+            }
+          };
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', launch, { once: true });
+          } else {
+            launch();
           }
-
-          await wait(coolDown);
-          body.dataset.gear = '';
-          if (gearValue) {
-            gearValue.textContent = '—';
-          }
-          body.classList.add('is-finished');
-        };
-
-        startSequence();
-      });
-    </script>
+        })();
+      </script>
+    </div>
   </body>
 </html>

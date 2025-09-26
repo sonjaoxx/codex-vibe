@@ -1,0 +1,807 @@
+<!-- Вставьте всё содержимое этого файла в блок T123 на Тильде -->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+  .t-adv-speedometer {
+    color-scheme: dark;
+    font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --tadv-bg: #050608;
+    --tadv-panel-bg: #11141b;
+    --tadv-panel-inner: rgba(8, 10, 14, 0.82);
+    --tadv-panel-shadow: rgba(0, 0, 0, 0.58);
+    --tadv-accent: #ff0032;
+    --tadv-accent-strong: #ff294a;
+    --tadv-accent-soft: rgba(255, 0, 50, 0.55);
+    --tadv-accent-glow: rgba(255, 0, 50, 0.26);
+    --tadv-text-primary: #ffffff;
+    --tadv-text-secondary: rgba(255, 255, 255, 0.76);
+    --tadv-text-tertiary: rgba(255, 255, 255, 0.52);
+    --tadv-muted: rgba(255, 255, 255, 0.18);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: clamp(28px, 6vw, 54px) 0;
+    background: radial-gradient(circle at 18% 28%, rgba(255, 0, 50, 0.2), transparent 54%),
+      radial-gradient(circle at 82% 8%, rgba(255, 0, 50, 0.16), transparent 58%),
+      linear-gradient(145deg, #07080c 0%, #020304 48%, #010203 100%);
+    color: var(--tadv-text-primary);
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .t-adv-speedometer *,
+  .t-adv-speedometer *::before,
+  .t-adv-speedometer *::after {
+    box-sizing: border-box;
+  }
+
+  .t-adv-speedometer * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .tadv-dashboard {
+    width: min(1180px, 95vw);
+  }
+
+  .tadv-dial {
+    position: relative;
+    padding: clamp(46px, 6.4vw, 82px) clamp(42px, 7vw, 96px);
+    border-radius: clamp(52px, 12vw, 160px);
+    background: linear-gradient(160deg, rgba(19, 22, 28, 0.92), rgba(4, 5, 7, 0.94));
+    box-shadow: 0 52px 120px var(--tadv-panel-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .tadv-dial__atmosphere {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 18% 52%, rgba(255, 0, 50, 0.32), transparent 62%),
+      radial-gradient(circle at 82% 22%, rgba(255, 54, 88, 0.24), transparent 68%),
+      linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 55%),
+      linear-gradient(220deg, rgba(9, 10, 14, 0.85), rgba(7, 9, 12, 0.4));
+    mix-blend-mode: screen;
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  .tadv-dial__frame {
+    position: absolute;
+    --tadv-dial-frame-padding-inline: clamp(18px, 3vw, 32px);
+    --tadv-dial-frame-padding-top: clamp(48px, 8vw, 92px);
+    --tadv-dial-frame-padding-bottom: clamp(18px, 3vw, 32px);
+    top: var(--tadv-dial-frame-padding-top);
+    right: var(--tadv-dial-frame-padding-inline);
+    bottom: var(--tadv-dial-frame-padding-bottom);
+    left: var(--tadv-dial-frame-padding-inline);
+    width: calc(100% - (var(--tadv-dial-frame-padding-inline) * 2));
+    height: calc(100% - (var(--tadv-dial-frame-padding-top) + var(--tadv-dial-frame-padding-bottom)));
+    z-index: 1;
+    fill: none;
+    pointer-events: none;
+  }
+
+  .tadv-dial__content {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    gap: clamp(32px, 6vw, 48px);
+  }
+
+  .tadv-dial__header {
+    max-width: 640px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .tadv-dial__eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .tadv-dial__headline {
+    font-size: clamp(2.15rem, 4vw, 2.95rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .tadv-dial__description {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    color: var(--tadv-text-secondary);
+    max-width: 520px;
+  }
+
+  .tadv-dial__gear-indicator {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    background: rgba(9, 11, 14, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.58);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 0.87, 0.36, 1),
+      background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .t-adv-speedometer.is-ready .tadv-dial__gear-indicator {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .t-adv-speedometer[data-gear]:not([data-gear=""]) .tadv-dial__gear-indicator {
+    background: rgba(255, 0, 50, 0.22);
+    border-color: rgba(255, 0, 50, 0.42);
+    color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 20px 42px rgba(255, 0, 50, 0.28);
+  }
+
+  .t-adv-speedometer[data-gear]:not([data-gear=""]) .tadv-dial__gear-value {
+    color: #ffffff;
+  }
+
+  .t-adv-speedometer.is-finished .tadv-dial__gear-indicator {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  .tadv-dial__gear-value {
+    min-width: 6ch;
+    text-align: center;
+  }
+
+  .tadv-benefits__list {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 4vw, 32px);
+    align-items: stretch;
+  }
+
+  @media (max-width: 980px) {
+    .tadv-benefits__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tadv-benefits__list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .tadv-advantage {
+      padding: clamp(20px, 6vw, 28px);
+    }
+
+    .tadv-advantage__title,
+    .tadv-advantage__description {
+      min-height: auto;
+    }
+  }
+
+  .tadv-advantage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: clamp(24px, 3.2vw, 34px);
+    border-radius: clamp(24px, 5vw, 40px);
+    background: linear-gradient(158deg, rgba(22, 24, 31, 0.92), rgba(8, 9, 13, 0.86));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    opacity: 0.32;
+    transform: translateY(24px) scale(0.96);
+    filter: saturate(0.6);
+    transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 0.87, 0.36, 1),
+      filter 0.5s ease, border-color 0.4s ease;
+  }
+
+  .tadv-advantage::before {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 0, 50, 0.22), transparent 68%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .tadv-advantage__badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 0, 50, 0.38);
+    background: rgba(255, 0, 50, 0.16);
+    color: rgba(255, 255, 255, 0.78);
+    transition: transform 0.5s ease, background 0.4s ease, border-color 0.4s ease;
+  }
+
+  .tadv-advantage__title {
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    line-height: 1.3;
+    color: var(--tadv-text-primary);
+    min-height: 3.2em;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .tadv-advantage__description {
+    color: var(--tadv-text-secondary);
+    font-size: clamp(0.98rem, 1.4vw, 1.1rem);
+    line-height: 1.58;
+    min-height: 5.2em;
+  }
+
+  .tadv-advantage__facts {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--tadv-text-tertiary);
+    font-size: 0.92rem;
+  }
+
+  .tadv-advantage__facts li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    align-items: start;
+    line-height: 1.5;
+  }
+
+  .tadv-advantage__facts li::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 0.35em;
+    background: var(--tadv-accent);
+    box-shadow: 0 0 12px rgba(255, 0, 50, 0.4);
+  }
+
+  .tadv-advantage--active {
+    opacity: 1;
+    transform: translateY(0) scale(1.03);
+    filter: saturate(1.05);
+    border-color: rgba(255, 0, 50, 0.38);
+    box-shadow: 0 24px 50px rgba(255, 0, 50, 0.25);
+  }
+
+  .tadv-advantage--active::before {
+    opacity: 1;
+  }
+
+  .tadv-advantage--active .tadv-advantage__badge {
+    transform: translateY(-4px) scale(1.08);
+    background: rgba(255, 0, 50, 0.28);
+    border-color: rgba(255, 0, 50, 0.6);
+  }
+
+  .tadv-advantage--complete {
+    opacity: 0.92;
+    transform: translateY(0) scale(1);
+    filter: saturate(0.95);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.35);
+  }
+
+  .t-adv-speedometer.no-js .tadv-advantage,
+  .t-adv-speedometer.no-js .tadv-advantage::before,
+  .t-adv-speedometer.no-js .tadv-advantage__badge,
+  .t-adv-speedometer.no-js .tadv-dial__progress-fill,
+  .t-adv-speedometer.no-js .tadv-dial__progress-glow,
+  .t-adv-speedometer.no-js .tadv-dial__corner,
+  .t-adv-speedometer.no-js .tadv-dial__pulse {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .t-adv-speedometer.no-js .tadv-advantage {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .t-adv-speedometer.no-js .tadv-dial__progress-fill,
+  .t-adv-speedometer.no-js .tadv-dial__progress-glow {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  .t-adv-speedometer.no-js .tadv-dial__gear-indicator {
+    display: none;
+  }
+
+  .tadv-dial__accent {
+    filter: drop-shadow(0 0 18px rgba(255, 0, 50, 0.4)) drop-shadow(0 0 58px rgba(255, 0, 50, 0.32));
+  }
+
+  .tadv-dial__mesh {
+    fill: url(#tadv-dial-grid);
+    mix-blend-mode: screen;
+    opacity: 0.74;
+  }
+
+  .tadv-dial__grid-bar {
+    fill: rgba(255, 0, 50, 0.2);
+  }
+
+  .tadv-dial__grid-bar--major {
+    opacity: 0.85;
+  }
+
+  .tadv-dial__grid-bar--minor {
+    opacity: 0.45;
+  }
+
+  .tadv-dial__pulse {
+    fill: none;
+    stroke: rgba(255, 0, 50, 0.5);
+    stroke-width: 3;
+    stroke-dasharray: 2.5 14;
+    stroke-linecap: round;
+    stroke-dashoffset: 6;
+    animation: tadv-dial-pulse 2.4s linear infinite;
+  }
+
+  .tadv-dial__outline {
+    fill: none;
+    stroke: url(#tadv-dial-outline-gradient);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.95;
+  }
+
+  .tadv-dial__inner {
+    fill: none;
+    stroke: url(#tadv-dial-inner-gradient);
+    stroke-width: 2;
+    opacity: 0.82;
+    stroke-dasharray: 14 10;
+    stroke-linecap: round;
+  }
+
+  .tadv-dial__corner-sparks {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .tadv-dial__corner {
+    stroke: rgba(255, 0, 50, 0.55);
+    stroke-width: 4;
+    stroke-dasharray: 18 22;
+    stroke-dashoffset: 14;
+    opacity: 0.7;
+    animation: tadv-dial-corner 3.2s ease-in-out infinite;
+  }
+
+  .tadv-dial__progress,
+  .tadv-dial__progress-track,
+  .tadv-dial__progress-fill,
+  .tadv-dial__progress-glow {
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .tadv-dial__progress-track {
+    stroke: rgba(255, 0, 50, 0.16);
+    stroke-width: 6;
+  }
+
+  .tadv-dial__progress-fill {
+    stroke: rgba(255, 0, 50, 0.68);
+    stroke-width: 6;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    opacity: 0;
+    filter: drop-shadow(0 0 24px var(--tadv-accent-glow));
+  }
+
+  .tadv-dial__progress-glow {
+    stroke: rgba(255, 0, 50, 0.32);
+    stroke-width: 12;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    opacity: 0;
+    filter: blur(2px);
+  }
+
+  .t-adv-speedometer.is-ready .tadv-dial__progress-fill,
+  .t-adv-speedometer.is-ready .tadv-dial__progress-glow {
+    opacity: 1;
+  }
+
+  .t-adv-speedometer.is-finished .tadv-dial__progress-fill {
+    stroke: var(--tadv-accent);
+  }
+
+  @keyframes tadv-dial-pulse {
+    from {
+      stroke-dashoffset: 6;
+    }
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+
+  @keyframes tadv-dial-corner {
+    0% {
+      stroke-dashoffset: 14;
+      opacity: 0.35;
+    }
+    45% {
+      opacity: 0.85;
+    }
+    100% {
+      stroke-dashoffset: -26;
+      opacity: 0.45;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .t-adv-speedometer *,
+    .t-adv-speedometer *::before,
+    .t-adv-speedometer *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .t-adv-speedometer.is-ready .tadv-dial__progress-fill,
+    .t-adv-speedometer.is-ready .tadv-dial__progress-glow {
+      opacity: 1;
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
+
+<div class="t-adv-speedometer no-js">
+  <main class="tadv-dashboard">
+    <section class="tadv-dial" aria-labelledby="benefits-title">
+      <div class="tadv-dial__atmosphere" aria-hidden="true"></div>
+      <svg class="tadv-dial__frame" viewBox="0 0 900 360" aria-hidden="true">
+        <defs>
+          <linearGradient id="tadv-dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff4d6c" />
+            <stop offset="42%" stop-color="#ff0032" />
+            <stop offset="100%" stop-color="#ff4d6c" />
+          </linearGradient>
+          <linearGradient id="tadv-dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
+            <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
+            <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
+          </linearGradient>
+          <radialGradient id="tadv-dial-glow" cx="50%" cy="50%" r="60%">
+            <stop offset="12%" stop-color="rgba(255, 45, 78, 0.55)" />
+            <stop offset="36%" stop-color="rgba(255, 0, 50, 0.42)" />
+            <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
+          </radialGradient>
+          <pattern id="tadv-dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
+            <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
+            <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
+            <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
+            <rect class="tadv-dial__grid-bar tadv-dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
+          </pattern>
+          <mask id="tadv-dial-ring-mask" maskUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="900" height="360" fill="black"></rect>
+            <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
+            <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
+          </mask>
+        </defs>
+        <g class="tadv-dial__progress">
+          <rect
+            class="tadv-dial__progress-track"
+            x="24"
+            y="32"
+            width="852"
+            height="296"
+            rx="110"
+            ry="110"
+            pathLength="100"
+          ></rect>
+          <rect
+            class="tadv-dial__progress-fill"
+            x="24"
+            y="32"
+            width="852"
+            height="296"
+            rx="110"
+            ry="110"
+            pathLength="100"
+          ></rect>
+          <rect
+            class="tadv-dial__progress-glow"
+            x="24"
+            y="32"
+            width="852"
+            height="296"
+            rx="110"
+            ry="110"
+            pathLength="100"
+          ></rect>
+        </g>
+        <g class="tadv-dial__accent">
+          <rect class="tadv-dial__mesh" x="0" y="0" width="900" height="360" mask="url(#tadv-dial-ring-mask)"></rect>
+          <rect
+            class="tadv-dial__pulse"
+            x="48"
+            y="56"
+            width="804"
+            height="248"
+            rx="76"
+            ry="76"
+            pathLength="100"
+          ></rect>
+          <rect
+            class="tadv-dial__outline"
+            x="42"
+            y="50"
+            width="816"
+            height="260"
+            rx="88"
+            ry="88"
+            pathLength="100"
+          ></rect>
+          <rect
+            class="tadv-dial__inner"
+            x="66"
+            y="74"
+            width="768"
+            height="212"
+            rx="64"
+            ry="64"
+            pathLength="100"
+          ></rect>
+          <g class="tadv-dial__corner-sparks">
+            <path class="tadv-dial__corner" d="M96 104h74"></path>
+            <path class="tadv-dial__corner" d="M96 104v74"></path>
+            <path class="tadv-dial__corner" d="M804 104h-74"></path>
+            <path class="tadv-dial__corner" d="M804 104v74"></path>
+            <path class="tadv-dial__corner" d="M96 256h74"></path>
+            <path class="tadv-dial__corner" d="M96 256v-74"></path>
+            <path class="tadv-dial__corner" d="M804 256h-74"></path>
+            <path class="tadv-dial__corner" d="M804 256v-74"></path>
+          </g>
+        </g>
+      </svg>
+      <div class="tadv-dial__content">
+        <header class="tadv-dial__header">
+          <p class="tadv-dial__eyebrow">Преимущества для оптовиков</p>
+          <h1 class="tadv-dial__headline" id="benefits-title">
+            Разгоняем поставки оригинальных автозапчастей из Японии
+          </h1>
+          <p class="tadv-dial__description">
+            Скорость нашего сервиса ощущается как переключение передач: с каждой ступенью вы получаете новую
+            выгоду для своего бизнеса.
+          </p>
+        </header>
+        <div class="tadv-dial__gear-indicator" aria-hidden="true">
+          <span class="tadv-dial__gear-label">Режим</span>
+          <span class="tadv-dial__gear-value">—</span>
+        </div>
+        <section class="tadv-benefits" aria-label="Ключевые преимущества">
+          <div class="tadv-benefits__list">
+            <article
+              class="tadv-advantage"
+              data-gear="JDM Direct"
+              data-progress="24"
+              data-duration="1200"
+              data-hold="1300"
+            >
+              <span class="tadv-advantage__badge">I</span>
+              <h2 class="tadv-advantage__title">Прямые закупки в Японии</h2>
+              <p class="tadv-advantage__description">
+                Собственные байеры в Нагое и Осаке отбирают партии на заводских складах и аукционах. Без перекупов
+                и переплат.
+              </p>
+              <ul class="tadv-advantage__facts">
+                <li>OEM-линейки Aisin, Denso, Akebono</li>
+                <li>Снижение закупочной цены до 28%</li>
+              </ul>
+            </article>
+            <article
+              class="tadv-advantage"
+              data-gear="Fast Pack"
+              data-progress="48"
+              data-duration="1000"
+              data-hold="1300"
+            >
+              <span class="tadv-advantage__badge">II</span>
+              <h2 class="tadv-advantage__title">Сборка заказа за 24 часа</h2>
+              <p class="tadv-advantage__description">
+                Консолидируем партии на собственном японском кросс-доке и отправляем еженедельные рейсы в РФ.
+              </p>
+              <ul class="tadv-advantage__facts">
+                <li>Фотоотчёт и контроль упаковки</li>
+                <li>Фиксированная ставка по килограмму</li>
+              </ul>
+            </article>
+            <article
+              class="tadv-advantage"
+              data-gear="QC Check"
+              data-progress="72"
+              data-duration="1100"
+              data-hold="1300"
+            >
+              <span class="tadv-advantage__badge">III</span>
+              <h2 class="tadv-advantage__title">Гарантия оригинальности</h2>
+              <p class="tadv-advantage__description">
+                Проверяем коды по VIN, сканируем маркировки, прикладываем сертификаты производителей в поставку.
+              </p>
+              <ul class="tadv-advantage__facts">
+                <li>Бесплатная проверка по каталогу</li>
+                <li>Страхование на полную стоимость</li>
+              </ul>
+            </article>
+            <article
+              class="tadv-advantage"
+              data-gear="Logistics+"
+              data-progress="100"
+              data-duration="1200"
+              data-hold="1500"
+            >
+              <span class="tadv-advantage__badge">IV</span>
+              <h2 class="tadv-advantage__title">Логистика под ключ</h2>
+              <p class="tadv-advantage__description">
+                Своя логистическая цепочка Владивосток — Москва. Выбирайте авиа или море, а мы занимаемся
+                растаможкой и доставкой.
+              </p>
+              <ul class="tadv-advantage__facts">
+                <li>Оформление и сертификация «под ключ»</li>
+                <li>Доставка по РФ за 3–7 дней</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const init = (root) => {
+        if (!root || root.dataset.tadvInitialized === "true") {
+          return;
+        }
+
+        const advantages = Array.from(root.querySelectorAll(".tadv-advantage"));
+        if (advantages.length === 0) {
+          return;
+        }
+
+        root.dataset.tadvInitialized = "true";
+        root.classList.remove("no-js");
+
+        const gearValue = root.querySelector(".tadv-dial__gear-value");
+        const progressFill = root.querySelector(".tadv-dial__progress-fill");
+        const progressGlow = root.querySelector(".tadv-dial__progress-glow");
+        let currentProgress = 0;
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const bootDelay = reduceMotion ? 0 : 240;
+        const betweenShift = reduceMotion ? 0 : 260;
+        const coolDown = reduceMotion ? 0 : 320;
+
+        if (gearValue) {
+          gearValue.textContent = "—";
+        }
+
+        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+        const animateRange = (from, to, duration, callback) => {
+          return new Promise((resolve) => {
+            const effectiveDuration = reduceMotion ? 0 : duration;
+            if (effectiveDuration === 0) {
+              callback(to);
+              resolve();
+              return;
+            }
+
+            const start = performance.now();
+            const tick = (now) => {
+              const progress = Math.min((now - start) / effectiveDuration, 1);
+              const eased = easeOutCubic(progress);
+              const value = from + (to - from) * eased;
+              callback(value);
+              if (progress < 1) {
+                requestAnimationFrame(tick);
+              } else {
+                callback(to);
+                resolve();
+              }
+            };
+
+            requestAnimationFrame(tick);
+          });
+        };
+
+        const startSequence = async () => {
+          root.classList.add("is-ready");
+          await wait(bootDelay);
+
+          for (const advantage of advantages) {
+            const targetProgress = Number(advantage.dataset.progress || currentProgress);
+            const duration = Number(advantage.dataset.duration || 1100);
+            const hold = Number(advantage.dataset.hold || 1200);
+            const gear = advantage.dataset.gear || "";
+
+            root.dataset.gear = gear;
+            if (gearValue) {
+              gearValue.textContent = gear || "—";
+            }
+
+            advantage.classList.add("tadv-advantage--active");
+
+            await animateRange(currentProgress, targetProgress, duration + 200, (value) => {
+              const normalized = Math.min(Math.max(value, 0), 100);
+              currentProgress = normalized;
+              const dash = 100 - normalized;
+              if (progressFill) {
+                progressFill.style.strokeDashoffset = dash;
+              }
+              if (progressGlow) {
+                progressGlow.style.strokeDashoffset = dash;
+              }
+            });
+
+            await wait(hold);
+            advantage.classList.remove("tadv-advantage--active");
+            advantage.classList.add("tadv-advantage--complete");
+            await wait(betweenShift);
+          }
+
+          await wait(coolDown);
+          root.dataset.gear = "";
+          if (gearValue) {
+            gearValue.textContent = "—";
+          }
+          root.classList.add("is-finished");
+        };
+
+        startSequence();
+      };
+
+      const script = document.currentScript;
+      const root = script ? script.closest(".t-adv-speedometer") : null;
+
+      const launch = () => {
+        if (root) {
+          init(root);
+        }
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", launch, { once: true });
+      } else {
+        launch();
+      }
+    })();
+  </script>
+</div>

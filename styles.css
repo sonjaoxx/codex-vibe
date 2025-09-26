@@ -1,55 +1,59 @@
-:root {
+.t-adv-speedometer {
   color-scheme: dark;
   font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --bg: #050608;
-  --panel-bg: #11141b;
-  --panel-inner: rgba(8, 10, 14, 0.82);
-  --panel-shadow: rgba(0, 0, 0, 0.58);
-  --accent: #ff0032;
-  --accent-strong: #ff294a;
-  --accent-soft: rgba(255, 0, 50, 0.55);
-  --accent-glow: rgba(255, 0, 50, 0.26);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.76);
-  --text-tertiary: rgba(255, 255, 255, 0.52);
-  --muted: rgba(255, 255, 255, 0.18);
+  --tadv-bg: #050608;
+  --tadv-panel-bg: #11141b;
+  --tadv-panel-inner: rgba(8, 10, 14, 0.82);
+  --tadv-panel-shadow: rgba(0, 0, 0, 0.58);
+  --tadv-accent: #ff0032;
+  --tadv-accent-strong: #ff294a;
+  --tadv-accent-soft: rgba(255, 0, 50, 0.55);
+  --tadv-accent-glow: rgba(255, 0, 50, 0.26);
+  --tadv-text-primary: #ffffff;
+  --tadv-text-secondary: rgba(255, 255, 255, 0.76);
+  --tadv-text-tertiary: rgba(255, 255, 255, 0.52);
+  --tadv-muted: rgba(255, 255, 255, 0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: clamp(28px, 6vw, 54px) 0;
+  background: radial-gradient(circle at 18% 28%, rgba(255, 0, 50, 0.2), transparent 54%),
+    radial-gradient(circle at 82% 8%, rgba(255, 0, 50, 0.16), transparent 58%),
+    linear-gradient(145deg, #07080c 0%, #020304 48%, #010203 100%);
+  color: var(--tadv-text-primary);
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
 }
 
-* {
+.t-adv-speedometer *,
+.t-adv-speedometer *::before,
+.t-adv-speedometer *::after {
   box-sizing: border-box;
+}
+
+.t-adv-speedometer * {
   margin: 0;
   padding: 0;
 }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at 18% 28%, rgba(255, 0, 50, 0.2), transparent 54%),
-    radial-gradient(circle at 82% 8%, rgba(255, 0, 50, 0.16), transparent 58%),
-    linear-gradient(145deg, #07080c 0%, #020304 48%, #010203 100%);
-  color: var(--text-primary);
-  letter-spacing: 0.01em;
-  -webkit-font-smoothing: antialiased;
-  padding: clamp(28px, 6vw, 54px) 0;
-}
-
-.dashboard {
+.tadv-dashboard {
   width: min(1180px, 95vw);
 }
 
-.dial {
+.tadv-dial {
   position: relative;
   padding: clamp(46px, 6.4vw, 82px) clamp(42px, 7vw, 96px);
   border-radius: clamp(52px, 12vw, 160px);
   background: linear-gradient(160deg, rgba(19, 22, 28, 0.92), rgba(4, 5, 7, 0.94));
-  box-shadow: 0 52px 120px var(--panel-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  box-shadow: 0 52px 120px var(--tadv-panel-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   overflow: hidden;
   isolation: isolate;
 }
 
-.dial__atmosphere {
+.tadv-dial__atmosphere {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 18% 52%, rgba(255, 0, 50, 0.32), transparent 62%),
@@ -61,55 +65,55 @@ body {
   z-index: 0;
 }
 
-.dial__frame {
+.tadv-dial__frame {
   position: absolute;
-  --dial-frame-padding-inline: clamp(18px, 3vw, 32px);
-  --dial-frame-padding-top: clamp(42px, 7vw, 84px);
-  --dial-frame-padding-bottom: clamp(18px, 3vw, 32px);
-  top: var(--dial-frame-padding-top);
-  right: var(--dial-frame-padding-inline);
-  bottom: var(--dial-frame-padding-bottom);
-  left: var(--dial-frame-padding-inline);
-  width: calc(100% - (var(--dial-frame-padding-inline) * 2));
-  height: calc(100% - (var(--dial-frame-padding-top) + var(--dial-frame-padding-bottom)));
+  --tadv-dial-frame-padding-inline: clamp(18px, 3vw, 32px);
+  --tadv-dial-frame-padding-top: clamp(48px, 8vw, 92px);
+  --tadv-dial-frame-padding-bottom: clamp(18px, 3vw, 32px);
+  top: var(--tadv-dial-frame-padding-top);
+  right: var(--tadv-dial-frame-padding-inline);
+  bottom: var(--tadv-dial-frame-padding-bottom);
+  left: var(--tadv-dial-frame-padding-inline);
+  width: calc(100% - (var(--tadv-dial-frame-padding-inline) * 2));
+  height: calc(100% - (var(--tadv-dial-frame-padding-top) + var(--tadv-dial-frame-padding-bottom)));
   z-index: 1;
   fill: none;
   pointer-events: none;
 }
 
-.dial__content {
+.tadv-dial__content {
   position: relative;
   z-index: 3;
   display: grid;
   gap: clamp(32px, 6vw, 48px);
 }
 
-.dial__header {
+.tadv-dial__header {
   max-width: 640px;
   display: grid;
   gap: 12px;
 }
 
-.dial__eyebrow {
+.tadv-dial__eyebrow {
   font-size: 0.85rem;
   letter-spacing: 0.38em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.45);
 }
 
-.dial__headline {
+.tadv-dial__headline {
   font-size: clamp(2.15rem, 4vw, 2.95rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
 }
 
-.dial__description {
+.tadv-dial__description {
   font-size: clamp(1rem, 1.6vw, 1.25rem);
-  color: var(--text-secondary);
+  color: var(--tadv-text-secondary);
   max-width: 520px;
 }
 
-.dial__gear-indicator {
+.tadv-dial__gear-indicator {
   justify-self: start;
   display: inline-flex;
   align-items: center;
@@ -129,33 +133,33 @@ body {
     background 0.3s ease, border-color 0.3s ease;
 }
 
-body.is-ready .dial__gear-indicator {
+.t-adv-speedometer.is-ready .tadv-dial__gear-indicator {
   opacity: 1;
   transform: translateY(0);
 }
 
-body[data-gear]:not([data-gear=""]) .dial__gear-indicator {
+.t-adv-speedometer[data-gear]:not([data-gear=""]) .tadv-dial__gear-indicator {
   background: rgba(255, 0, 50, 0.22);
   border-color: rgba(255, 0, 50, 0.42);
   color: rgba(255, 255, 255, 0.75);
   box-shadow: 0 20px 42px rgba(255, 0, 50, 0.28);
 }
 
-body[data-gear]:not([data-gear=""]) .dial__gear-value {
+.t-adv-speedometer[data-gear]:not([data-gear=""]) .tadv-dial__gear-value {
   color: #ffffff;
 }
 
-body.is-finished .dial__gear-indicator {
+.t-adv-speedometer.is-finished .tadv-dial__gear-indicator {
   opacity: 0;
   transform: translateY(-12px);
 }
 
-.dial__gear-value {
+.tadv-dial__gear-value {
   min-width: 6ch;
   text-align: center;
 }
 
-.benefits__list {
+.tadv-benefits__list {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -164,29 +168,29 @@ body.is-finished .dial__gear-indicator {
 }
 
 @media (max-width: 980px) {
-  .benefits__list {
+  .tadv-benefits__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 600px) {
-  .benefits__list {
+  .tadv-benefits__list {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 820px) {
-  .advantage {
+  .tadv-advantage {
     padding: clamp(20px, 6vw, 28px);
   }
 
-  .advantage__title,
-  .advantage__description {
+  .tadv-advantage__title,
+  .tadv-advantage__description {
     min-height: auto;
   }
 }
 
-.advantage {
+.tadv-advantage {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -203,7 +207,7 @@ body.is-finished .dial__gear-indicator {
     filter 0.5s ease, border-color 0.4s ease;
 }
 
-.advantage::before {
+.tadv-advantage::before {
   content: "";
   position: absolute;
   inset: 16px;
@@ -214,7 +218,7 @@ body.is-finished .dial__gear-indicator {
   pointer-events: none;
 }
 
-.advantage__badge {
+.tadv-advantage__badge {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
@@ -231,34 +235,34 @@ body.is-finished .dial__gear-indicator {
   transition: transform 0.5s ease, background 0.4s ease, border-color 0.4s ease;
 }
 
-.advantage__title {
+.tadv-advantage__title {
   font-size: clamp(1.15rem, 2vw, 1.35rem);
   line-height: 1.3;
-  color: var(--text-primary);
+  color: var(--tadv-text-primary);
   min-height: 3.2em;
   display: flex;
   align-items: flex-end;
 }
 
-.advantage__description {
-  color: var(--text-secondary);
+.tadv-advantage__description {
+  color: var(--tadv-text-secondary);
   font-size: clamp(0.98rem, 1.4vw, 1.1rem);
   line-height: 1.58;
   min-height: 5.2em;
 }
 
-.advantage__facts {
+.tadv-advantage__facts {
   list-style: none;
   display: grid;
   gap: 8px;
   margin-top: auto;
   padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-tertiary);
+  color: var(--tadv-text-tertiary);
   font-size: 0.92rem;
 }
 
-.advantage__facts li {
+.tadv-advantage__facts li {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 8px;
@@ -266,17 +270,17 @@ body.is-finished .dial__gear-indicator {
   line-height: 1.5;
 }
 
-.advantage__facts li::before {
+.tadv-advantage__facts li::before {
   content: "";
   width: 6px;
   height: 6px;
   border-radius: 50%;
   margin-top: 0.35em;
-  background: var(--accent);
+  background: var(--tadv-accent);
   box-shadow: 0 0 12px rgba(255, 0, 50, 0.4);
 }
 
-.advantage--active {
+.tadv-advantage--active {
   opacity: 1;
   transform: translateY(0) scale(1.03);
   filter: saturate(1.05);
@@ -284,137 +288,138 @@ body.is-finished .dial__gear-indicator {
   box-shadow: 0 24px 50px rgba(255, 0, 50, 0.25);
 }
 
-.advantage--active::before {
+.tadv-advantage--active::before {
   opacity: 1;
 }
 
-.advantage--active .advantage__badge {
+.tadv-advantage--active .tadv-advantage__badge {
   transform: translateY(-4px) scale(1.08);
   background: rgba(255, 0, 50, 0.28);
   border-color: rgba(255, 0, 50, 0.6);
 }
 
-.advantage--complete {
+.tadv-advantage--complete {
   opacity: 0.92;
   transform: translateY(0) scale(1);
   filter: saturate(0.95);
   box-shadow: 0 20px 42px rgba(0, 0, 0, 0.35);
 }
 
-body.no-js .advantage,
-body.no-js .advantage::before,
-body.no-js .advantage__badge,
-body.no-js .dial__progress-fill,
-body.no-js .dial__progress-glow,
-body.no-js .dial__corner,
-body.no-js .dial__pulse {
+.t-adv-speedometer.no-js .tadv-advantage,
+.t-adv-speedometer.no-js .tadv-advantage::before,
+.t-adv-speedometer.no-js .tadv-advantage__badge,
+.t-adv-speedometer.no-js .tadv-dial__progress-fill,
+.t-adv-speedometer.no-js .tadv-dial__progress-glow,
+.t-adv-speedometer.no-js .tadv-dial__corner,
+.t-adv-speedometer.no-js .tadv-dial__pulse {
   animation: none !important;
   transition: none !important;
 }
 
-body.no-js .advantage {
+.t-adv-speedometer.no-js .tadv-advantage {
   opacity: 1;
   transform: none;
   filter: none;
 }
 
-body.no-js .dial__progress-fill,
-body.no-js .dial__progress-glow {
+.t-adv-speedometer.no-js .tadv-dial__progress-fill,
+.t-adv-speedometer.no-js .tadv-dial__progress-glow {
   stroke-dashoffset: 0;
   opacity: 1;
 }
 
-body.no-js .dial__gear-indicator {
+.t-adv-speedometer.no-js .tadv-dial__gear-indicator {
   display: none;
 }
 
-.dial__accent {
+.tadv-dial__accent {
   filter: drop-shadow(0 0 18px rgba(255, 0, 50, 0.4)) drop-shadow(0 0 58px rgba(255, 0, 50, 0.32));
 }
 
-.dial__mesh {
-  fill: url(#dial-grid);
+.tadv-dial__mesh {
+  fill: url(#tadv-dial-grid);
   mix-blend-mode: screen;
   opacity: 0.74;
 }
 
-.dial__grid-bar {
+.tadv-dial__grid-bar {
   fill: rgba(255, 0, 50, 0.2);
 }
 
-.dial__grid-bar--major {
+.tadv-dial__grid-bar--major {
   opacity: 0.85;
 }
 
-.dial__grid-bar--minor {
+.tadv-dial__grid-bar--minor {
   opacity: 0.45;
 }
 
-.dial__pulse {
+.tadv-dial__pulse {
   fill: none;
   stroke: rgba(255, 0, 50, 0.5);
   stroke-width: 3;
   stroke-dasharray: 2.5 14;
   stroke-linecap: round;
   stroke-dashoffset: 6;
-  animation: dial-pulse 2.4s linear infinite;
+  animation: tadv-dial-pulse 2.4s linear infinite;
 }
 
-.dial__outline {
+.tadv-dial__outline {
   fill: none;
-  stroke: url(#dial-outline-gradient);
+  stroke: url(#tadv-dial-outline-gradient);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0.95;
 }
 
-.dial__inner {
+.tadv-dial__inner {
   fill: none;
-  stroke: url(#dial-inner-gradient);
+  stroke: url(#tadv-dial-inner-gradient);
   stroke-width: 2;
   opacity: 0.82;
   stroke-dasharray: 14 10;
   stroke-linecap: round;
 }
 
-.dial__corner-sparks {
+.tadv-dial__corner-sparks {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.dial__corner {
+.tadv-dial__corner {
   stroke: rgba(255, 0, 50, 0.55);
   stroke-width: 4;
   stroke-dasharray: 18 22;
   stroke-dashoffset: 14;
   opacity: 0.7;
-  animation: dial-corner 3.2s ease-in-out infinite;
+  animation: tadv-dial-corner 3.2s ease-in-out infinite;
 }
 
-.dial__progress-track,
-.dial__progress-fill,
-.dial__progress-glow {
+.tadv-dial__progress,
+.tadv-dial__progress-track,
+.tadv-dial__progress-fill,
+.tadv-dial__progress-glow {
   fill: none;
   stroke-linecap: round;
 }
 
-.dial__progress-track {
+.tadv-dial__progress-track {
   stroke: rgba(255, 0, 50, 0.16);
   stroke-width: 6;
 }
 
-.dial__progress-fill {
+.tadv-dial__progress-fill {
   stroke: rgba(255, 0, 50, 0.68);
   stroke-width: 6;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   opacity: 0;
-  filter: drop-shadow(0 0 24px var(--accent-glow));
+  filter: drop-shadow(0 0 24px var(--tadv-accent-glow));
 }
 
-.dial__progress-glow {
+.tadv-dial__progress-glow {
   stroke: rgba(255, 0, 50, 0.32);
   stroke-width: 12;
   stroke-dasharray: 100;
@@ -423,16 +428,16 @@ body.no-js .dial__gear-indicator {
   filter: blur(2px);
 }
 
-body.is-ready .dial__progress-fill,
-body.is-ready .dial__progress-glow {
+.t-adv-speedometer.is-ready .tadv-dial__progress-fill,
+.t-adv-speedometer.is-ready .tadv-dial__progress-glow {
   opacity: 1;
 }
 
-body.is-finished .dial__progress-fill {
-  stroke: var(--accent);
+.t-adv-speedometer.is-finished .tadv-dial__progress-fill {
+  stroke: var(--tadv-accent);
 }
 
-@keyframes dial-pulse {
+@keyframes tadv-dial-pulse {
   from {
     stroke-dashoffset: 6;
   }
@@ -441,7 +446,7 @@ body.is-finished .dial__progress-fill {
   }
 }
 
-@keyframes dial-corner {
+@keyframes tadv-dial-corner {
   0% {
     stroke-dashoffset: 14;
     opacity: 0.35;
@@ -456,17 +461,17 @@ body.is-finished .dial__progress-fill {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .t-adv-speedometer *,
+  .t-adv-speedometer *::before,
+  .t-adv-speedometer *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 
-  body.is-ready .dial__progress-fill,
-  body.is-ready .dial__progress-glow {
+  .t-adv-speedometer.is-ready .tadv-dial__progress-fill,
+  .t-adv-speedometer.is-ready .tadv-dial__progress-glow {
     opacity: 1;
     stroke-dashoffset: 0;
   }
