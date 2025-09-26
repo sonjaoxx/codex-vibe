@@ -3,239 +3,263 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Скорость подключения</title>
+    <title>Неоновый спидометр</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Manrope:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="no-js">
-    <main class="dashboard">
-      <div class="dial">
-        <svg class="dial__frame" viewBox="0 0 900 360" aria-hidden="true">
-          <defs>
-            <linearGradient id="dial-outline-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff4d6c" />
-              <stop offset="42%" stop-color="#ff0032" />
-              <stop offset="100%" stop-color="#ff4d6c" />
-            </linearGradient>
-            <linearGradient id="dial-inner-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="rgba(255, 0, 50, 0.45)" />
-              <stop offset="35%" stop-color="rgba(255, 0, 50, 0.3)" />
-              <stop offset="100%" stop-color="rgba(255, 0, 50, 0.05)" />
-            </linearGradient>
-            <pattern id="dial-grid" patternUnits="userSpaceOnUse" width="44" height="44">
-              <rect class="dial__grid-bar dial__grid-bar--major" x="0" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="10" y="0" width="2" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--major" x="22" y="0" width="3" height="44"></rect>
-              <rect class="dial__grid-bar dial__grid-bar--minor" x="32" y="0" width="2" height="44"></rect>
-            </pattern>
-            <mask id="dial-ring-mask" maskUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="900" height="360" fill="black"></rect>
-              <rect x="42" y="50" width="816" height="260" rx="88" ry="88" fill="white"></rect>
-              <rect x="74" y="82" width="752" height="196" rx="62" ry="62" fill="black"></rect>
-            </mask>
-          </defs>
-          <g class="dial__progress">
-            <rect
-              class="dial__progress-track"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__progress-fill"
-              x="24"
-              y="32"
-              width="852"
-              height="296"
-              rx="110"
-              ry="110"
-              pathLength="100"
-            ></rect>
-          </g>
-          <g class="dial__accent">
-            <rect class="dial__mesh" x="0" y="0" width="900" height="360" mask="url(#dial-ring-mask)"></rect>
-            <rect
-              class="dial__pulse"
-              x="48"
-              y="56"
-              width="804"
-              height="248"
-              rx="76"
-              ry="76"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__outline"
-              x="42"
-              y="50"
-              width="816"
-              height="260"
-              rx="88"
-              ry="88"
-              pathLength="100"
-            ></rect>
-            <rect
-              class="dial__inner"
-              x="66"
-              y="74"
-              width="768"
-              height="212"
-              rx="64"
-              ry="64"
-              pathLength="100"
-            ></rect>
-            <g class="dial__corner-sparks">
-              <path class="dial__corner" d="M96 104h74"></path>
-              <path class="dial__corner" d="M96 104v74"></path>
-              <path class="dial__corner" d="M804 104h-74"></path>
-              <path class="dial__corner" d="M804 104v74"></path>
-              <path class="dial__corner" d="M96 256h74"></path>
-              <path class="dial__corner" d="M96 256v-74"></path>
-              <path class="dial__corner" d="M804 256h-74"></path>
-              <path class="dial__corner" d="M804 256v-74"></path>
+  <body>
+    <canvas id="glow-canvas" aria-hidden="true"></canvas>
+    <main class="speedometer">
+      <section class="speedometer__panel" aria-labelledby="speed-title">
+        <header class="speedometer__header">
+          <span class="speedometer__chip">HyperDrive AI</span>
+          <h1 id="speed-title" class="speedometer__title">Кибер-спидометр</h1>
+          <p class="speedometer__subtitle">
+            Реактивный монитор скорости с неоновой дугой, стеклянной глубиной и живыми эффектами.
+          </p>
+        </header>
+        <div class="speedometer__display">
+          <svg
+            class="speedometer__svg"
+            viewBox="0 0 420 420"
+            role="img"
+            aria-labelledby="speed-title"
+          >
+            <defs>
+              <linearGradient id="speedometer-track" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f2f5ff" stop-opacity="0.12" />
+                <stop offset="45%" stop-color="#f4f7ff" stop-opacity="0.32" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.08" />
+              </linearGradient>
+              <linearGradient id="speedometer-progress" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff9a9e" />
+                <stop offset="38%" stop-color="#ff0037" />
+                <stop offset="68%" stop-color="#ff0730" />
+                <stop offset="100%" stop-color="#ff8f8f" />
+              </linearGradient>
+              <radialGradient id="speedometer-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(255, 255, 255, 0.9)" />
+                <stop offset="60%" stop-color="rgba(255, 0, 70, 0.55)" />
+                <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
+              </radialGradient>
+              <filter id="glow-filter" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="soft-shadow" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="rgba(0, 0, 0, 0.25)" />
+              </filter>
+              <linearGradient id="indicator-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffdde1" />
+                <stop offset="100%" stop-color="#ff0032" />
+              </linearGradient>
+            </defs>
+            <g class="speedometer__rings" filter="url(#soft-shadow)">
+              <circle cx="210" cy="210" r="186" fill="rgba(255, 255, 255, 0.06)" opacity="0.5"></circle>
+              <circle cx="210" cy="210" r="160" fill="rgba(255, 255, 255, 0.08)" opacity="0.6"></circle>
+              <circle cx="210" cy="210" r="120" fill="url(#speedometer-glow)" opacity="0.35"></circle>
             </g>
-          </g>
-        </svg>
-        <div class="dial__gear-indicator" aria-hidden="true">
-          <span class="dial__gear-label">Передача</span>
-          <span class="dial__gear-value">—</span>
+            <path
+              id="speedometer-arc-track"
+              class="speedometer__arc"
+              d="M80 320A170 170 0 0 1 340 320"
+              stroke="url(#speedometer-track)"
+              stroke-width="24"
+              stroke-linecap="round"
+              fill="none"
+              opacity="0.75"
+            ></path>
+            <path
+              id="speedometer-arc-progress"
+              class="speedometer__arc speedometer__arc--progress"
+              d="M80 320A170 170 0 0 1 340 320"
+              stroke="url(#speedometer-progress)"
+              stroke-width="28"
+              stroke-linecap="round"
+              fill="none"
+              filter="url(#glow-filter)"
+              data-role="progress"
+            ></path>
+            <path
+              id="speedometer-arc-glass"
+              d="M78 320A172 172 0 0 1 342 320"
+              stroke="rgba(255, 255, 255, 0.45)"
+              stroke-width="8"
+              stroke-linecap="round"
+              fill="none"
+              opacity="0.35"
+            ></path>
+            <g class="speedometer__ticks" stroke="rgba(25, 25, 30, 0.42)" stroke-width="2">
+              <g transform="translate(210 210)">
+                <!-- Major ticks -->
+                <g id="major-ticks" data-role="ticks"></g>
+              </g>
+            </g>
+            <g class="speedometer__needle" data-role="needle" transform="translate(210 210)">
+              <circle class="speedometer__needle-core" r="14" fill="rgba(255, 255, 255, 0.8)" />
+              <circle class="speedometer__needle-glow" r="32" fill="rgba(255, 0, 55, 0.22)" />
+              <polygon
+                points="0,-18 6,-6 70,-8 78,0 70,8 6,6 0,18 -8,6 -72,12 -80,0 -72,-12 -8,-6"
+                fill="url(#indicator-gradient)"
+                opacity="0.95"
+                filter="url(#glow-filter)"
+              ></polygon>
+            </g>
+            <circle cx="210" cy="210" r="102" fill="rgba(255, 255, 255, 0.12)" stroke="rgba(255, 255, 255, 0.25)" stroke-width="2"></circle>
+            <circle cx="210" cy="210" r="92" fill="rgba(255, 255, 255, 0.08)"></circle>
+            <text x="210" y="204" text-anchor="middle" class="speedometer__value" data-role="speed-value">0</text>
+            <text x="210" y="236" text-anchor="middle" class="speedometer__unit">км/ч</text>
+            <text x="210" y="280" text-anchor="middle" class="speedometer__status" data-role="status">Система готова</text>
+            <g class="speedometer__meta">
+              <text x="120" y="148" class="speedometer__meta-label">режим</text>
+              <text x="120" y="166" class="speedometer__meta-value" data-role="mode">SYNC</text>
+              <text x="300" y="148" class="speedometer__meta-label">турбо</text>
+              <text x="300" y="166" class="speedometer__meta-value" data-role="boost">0.0g</text>
+            </g>
+          </svg>
         </div>
-        <div class="metrics">
-          <div class="metric" data-gear="I" data-value="27.18" data-decimals="2" data-duration="1400">
-            <div class="metric__badge" aria-hidden="true">I</div>
-            <div class="metric__title">
-              Входящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="II" data-value="30.28" data-decimals="2" data-duration="1200">
-            <div class="metric__badge" aria-hidden="true">II</div>
-            <div class="metric__title">
-              Исходящая
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">Мбит/с</div>
-          </div>
-          <div class="metric" data-gear="III" data-value="32" data-decimals="0" data-duration="1500">
-            <div class="metric__badge" aria-hidden="true">III</div>
-            <div class="metric__title">
-              Задержка
-              <span class="metric__hint" aria-hidden="true">i</span>
-            </div>
-            <div class="metric__value">
-              <span class="metric__value-number">0</span>
-            </div>
-            <div class="metric__unit">мс</div>
-          </div>
-        </div>
-      </div>
+      </section>
     </main>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const body = document.body;
-        body.classList.remove('no-js');
-        const metrics = Array.from(document.querySelectorAll('.metric'));
-        const gearValue = document.querySelector('.dial__gear-value');
-        if (gearValue) {
-          gearValue.textContent = '—';
-        }
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const bootDelay = reduceMotion ? 0 : 240;
-        const betweenShift = reduceMotion ? 0 : 260;
-        const coolDown = reduceMotion ? 0 : 320;
-        if (!metrics.length) {
-          body.classList.add('is-ready');
-          return;
-        }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js" integrity="sha512-MyH7Q/b5i6ub5wHCfi3CXRDobaWHmA6/nvDPONKOfFUK79l3zuxM59kMAoRnzhwOTCQKtZ3e/TISBg8ailqXFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-9G0mKCNt2uQ6Xo8XOSY67ymNEzbGDbVS9/6IKxhpcJn/abNqxabWWMwBLT/gRghOAqxCLv7saEh1PQuIrAjf/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module">
+      const canvas = document.getElementById('glow-canvas');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
-        const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-        const animateValue = (element, target, decimals, duration) => {
-          return new Promise((resolve) => {
-            const effectiveDuration = reduceMotion ? 0 : duration;
-            const start = performance.now();
-            const startValue = 0;
-
-            const format = (value) => {
-              if (decimals > 0) {
-                return value.toFixed(decimals);
-              }
-              return Math.round(value).toString();
-            };
-
-            if (effectiveDuration === 0) {
-              element.textContent = format(target);
-              resolve();
-              return;
-            }
-
-            const update = (now) => {
-              const progress = Math.min((now - start) / effectiveDuration, 1);
-              const eased = easeOutCubic(progress);
-              const current = startValue + (target - startValue) * eased;
-              element.textContent = format(current);
-
-              if (progress < 1) {
-                requestAnimationFrame(update);
-              } else {
-                element.textContent = format(target);
-                resolve();
-              }
-            };
-
-            requestAnimationFrame(update);
-          });
-        };
-
-        const startSequence = async () => {
-          body.classList.add('is-ready');
-          await wait(bootDelay);
-
-          for (const metric of metrics) {
-            const valueEl = metric.querySelector('.metric__value-number');
-            const target = Number(metric.dataset.value);
-            const decimals = Number(metric.dataset.decimals || 0);
-            const duration = Number(metric.dataset.duration || 1200);
-            const gear = metric.dataset.gear || '';
-
-            body.dataset.gear = gear;
-            if (gearValue) {
-              gearValue.textContent = gear || '—';
-            }
-            metric.classList.add('metric--active');
-            await animateValue(valueEl, target, decimals, duration);
-            metric.classList.remove('metric--active');
-            metric.classList.add('metric--complete');
-            await wait(betweenShift);
-          }
-
-          await wait(coolDown);
-          body.dataset.gear = '';
-          if (gearValue) {
-            gearValue.textContent = '—';
-          }
-          body.classList.add('is-finished');
-        };
-
-        startSequence();
+      const ringGeometry = new THREE.TorusGeometry(2.6, 0.12, 32, 220);
+      const ringMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff1744,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
       });
+      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+      scene.add(ring);
+
+      const haloGeometry = new THREE.TorusGeometry(2.6, 0.32, 16, 120);
+      const haloMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff99aa,
+        transparent: true,
+        opacity: 0.18,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      const halo = new THREE.Mesh(haloGeometry, haloMaterial);
+      scene.add(halo);
+
+      camera.position.set(0, 0, 6);
+      const animateBackground = () => {
+        ring.rotation.x += 0.002;
+        ring.rotation.y += 0.0016;
+        halo.rotation.x -= 0.0012;
+        halo.rotation.y += 0.0014;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animateBackground);
+      };
+      animateBackground();
+
+      const speedPath = document.querySelector('[data-role="progress"]');
+      const needle = document.querySelector('[data-role="needle"]');
+      const speedValue = document.querySelector('[data-role="speed-value"]');
+      const status = document.querySelector('[data-role="status"]');
+      const modeValue = document.querySelector('[data-role="mode"]');
+      const boostValue = document.querySelector('[data-role="boost"]');
+      const ticksGroup = document.querySelector('[data-role="ticks"]');
+
+      const maxSpeed = 240;
+      const arcLength = speedPath.getTotalLength();
+      speedPath.style.strokeDasharray = arcLength.toString();
+      speedPath.style.strokeDashoffset = arcLength.toString();
+
+      const createTicks = () => {
+        const majorTickCount = 7;
+        const startAngle = -210; // degrees
+        const endAngle = 30;
+        for (let i = 0; i < majorTickCount; i += 1) {
+          const angle = THREE.MathUtils.degToRad(startAngle + (i / (majorTickCount - 1)) * (endAngle - startAngle));
+          const inner = new THREE.Vector2(Math.cos(angle) * 140, Math.sin(angle) * 140);
+          const outer = new THREE.Vector2(Math.cos(angle) * 170, Math.sin(angle) * 170);
+          const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          tick.setAttribute('x1', inner.x.toFixed(2));
+          tick.setAttribute('y1', inner.y.toFixed(2));
+          tick.setAttribute('x2', outer.x.toFixed(2));
+          tick.setAttribute('y2', outer.y.toFixed(2));
+          tick.setAttribute('stroke-width', i % 2 === 0 ? '3.4' : '2.2');
+          tick.setAttribute('stroke', i % 2 === 0 ? 'rgba(15, 15, 22, 0.66)' : 'rgba(20, 20, 30, 0.45)');
+          tick.setAttribute('opacity', i % 2 === 0 ? '0.9' : '0.7');
+          ticksGroup.appendChild(tick);
+        }
+      };
+      createTicks();
+
+      const neonPulse = gsap.timeline({ repeat: -1, defaults: { ease: 'sine.inOut' } });
+      neonPulse
+        .to('[data-role="progress"]', { strokeWidth: 32, duration: 1.6, yoyo: true, repeat: 1 }, 0)
+        .to(
+          '.speedometer__needle-glow',
+          { scale: 1.14, transformOrigin: '50% 50%', opacity: 0.42, duration: 1.2, yoyo: true, repeat: 1 },
+          0
+        );
+
+      const speedObj = { value: 0 };
+
+      const updateSpeed = () => {
+        const progress = speedObj.value / maxSpeed;
+        const clamped = Math.min(Math.max(progress, 0), 1);
+        const dashOffset = arcLength - arcLength * clamped;
+        speedPath.style.strokeDashoffset = dashOffset.toString();
+        const rotation = gsap.utils.mapRange(0, 1, -210, 30, clamped);
+        gsap.set(needle, { rotation, transformOrigin: '50% 50%' });
+        speedValue.textContent = Math.round(speedObj.value).toString().padStart(3, '0');
+        boostValue.textContent = `${(0.1 + clamped * 1.9).toFixed(2)}g`;
+      };
+
+      const master = gsap.timeline({ repeat: -1, repeatDelay: 1.5 });
+      master
+        .set(status, { textContent: 'Инициализация', opacity: 0.65 })
+        .set(modeValue, { textContent: 'SYNC' })
+        .to(speedObj, { value: 90, duration: 1.6, ease: 'power2.out', onUpdate: updateSpeed })
+        .to(status, { textContent: 'Разгон', duration: 0.2 }, '<')
+        .to(modeValue, { textContent: 'BOOST' }, '<0.6')
+        .to(speedObj, { value: maxSpeed, duration: 2.8, ease: 'power3.inOut', onUpdate: updateSpeed })
+        .to(status, { textContent: 'Критический пик', duration: 0.2 }, '-=1')
+        .to('.speedometer__panel', { '--glow-intensity': 0.85, duration: 0.6, ease: 'sine.in' }, '-=1.6')
+        .to(speedObj, { value: 128, duration: 2.4, ease: 'power3.out', onUpdate: updateSpeed })
+        .to(status, { textContent: 'Стабилизация', duration: 0.2 }, '-=1.6')
+        .to(modeValue, { textContent: 'SYNC' }, '-=1.2')
+        .to('.speedometer__panel', { '--glow-intensity': 0.25, duration: 1.2, ease: 'sine.out' }, '-=1.2')
+        .to(speedObj, { value: 0, duration: 1.6, ease: 'expo.out', onUpdate: updateSpeed })
+        .to(status, { textContent: 'Реинициализация', duration: 0.2 }, '-=1');
+
+      gsap.to('.speedometer__panel', {
+        '--glow-intensity': 0.32,
+        duration: 1.4,
+        ease: 'power2.out',
+        yoyo: true,
+        repeat: -1,
+      });
+
+      const resize = () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      };
+      window.addEventListener('resize', resize);
+
+      updateSpeed();
     </script>
   </body>
 </html>

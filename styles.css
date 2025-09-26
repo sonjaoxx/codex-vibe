@@ -1,18 +1,19 @@
 :root {
-  color-scheme: dark;
-  font-family: "Manrope", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --bg: #101214;
-  --panel-bg: #14161a;
-  --panel-shadow: rgba(0, 0, 0, 0.55);
-  --panel-inner: #0d0e10;
-  --panel-stroke: rgba(255, 255, 255, 0.06);
-  --accent: #ff0032;
-  --accent-strong: #ff2247;
-  --accent-soft: rgba(255, 0, 50, 0.55);
-  --accent-glow: rgba(255, 0, 50, 0.32);
-  --text-primary: #ffffff;
-  --text-secondary: #c5c8ce;
-  --text-tertiary: rgba(255, 255, 255, 0.64);
+  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color-scheme: light;
+  --bg-start: #f4f7fb;
+  --bg-end: #dfe4f5;
+  --panel-surface: rgba(255, 255, 255, 0.58);
+  --panel-outline: rgba(255, 255, 255, 0.9);
+  --panel-highlight: rgba(255, 255, 255, 0.45);
+  --panel-shadow: rgba(70, 80, 120, 0.28);
+  --text-primary: #161827;
+  --text-secondary: rgba(22, 24, 39, 0.7);
+  --text-tertiary: rgba(22, 24, 39, 0.48);
+  --accent-strong: #ff0032;
+  --accent-soft: rgba(255, 0, 70, 0.28);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-blur: 24px;
 }
 
 * {
@@ -21,442 +22,210 @@
   padding: 0;
 }
 
+html,
 body {
-  min-height: 100vh;
+  min-height: 100%;
+}
+
+body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 20% 20%, #181a1f 0%, #08090b 65%, #040506 100%);
+  background: radial-gradient(circle at 10% 20%, #ffffff 0%, var(--bg-start) 42%, var(--bg-end) 100%);
   color: var(--text-primary);
-  letter-spacing: 0.01em;
-  -webkit-font-smoothing: antialiased;
-}
-
-.dashboard {
-  width: min(940px, 94vw);
-}
-
-.dial {
+  overflow: hidden;
+  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
-  background: linear-gradient(145deg, var(--panel-bg), #0a0c0f 70%);
-  padding: clamp(36px, 5.5vw, 64px) clamp(28px, 6vw, 72px);
-  border-radius: clamp(50px, 12vw, 170px);
-  box-shadow: 0 40px 90px var(--panel-shadow), inset 0 0 0 1px var(--panel-stroke);
+}
+
+#glow-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.speedometer {
+  position: relative;
+  z-index: 1;
+  width: min(640px, 90vw);
+}
+
+.speedometer__panel {
+  position: relative;
+  padding: clamp(28px, 5.6vw, 46px);
+  border-radius: clamp(28px, 6vw, 44px);
+  background: var(--panel-surface);
+  border: 1px solid color-mix(in srgb, var(--panel-outline) 62%, transparent);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  box-shadow: 0 32px 90px var(--panel-shadow), inset 0 1px 0 var(--panel-outline), inset 0 -1px 0 rgba(255, 255, 255, 0.45);
   overflow: hidden;
   isolation: isolate;
+  transition: box-shadow 0.6s ease, border 0.6s ease;
+  --glow-intensity: 0.25;
 }
 
-.dial::before {
-  content: "";
+.speedometer__panel::before {
+  content: '';
   position: absolute;
-  inset: clamp(18px, 2.6vw, 34px);
-  border-radius: clamp(38px, 10vw, 130px);
-  background: radial-gradient(ellipse at 60% 20%, rgba(255, 0, 50, 0.12), transparent 70%),
-    radial-gradient(ellipse at 30% 80%, rgba(255, 0, 50, 0.1), transparent 70%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.5));
-  z-index: 0;
-  opacity: 0.85;
-}
-
-.dial::after {
-  content: "";
-  position: absolute;
-  inset: clamp(32px, 5vw, 56px);
-  border-radius: clamp(30px, 9vw, 120px);
-  background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.04), transparent 65%),
-    radial-gradient(circle at 50% 80%, rgba(255, 0, 50, 0.12), transparent 65%);
-  z-index: 0;
-  opacity: 0.75;
-}
-
-.dial__frame {
-  position: absolute;
-  inset: clamp(12px, 2.2vw, 28px);
-  width: calc(100% - 2 * clamp(12px, 2.2vw, 28px));
-  height: calc(100% - 2 * clamp(12px, 2.2vw, 28px));
-  z-index: 1;
-  fill: none;
+  inset: 18px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  opacity: 0.55;
   pointer-events: none;
 }
 
-.dial__gear-indicator {
+.speedometer__panel::after {
+  content: '';
   position: absolute;
-  top: clamp(36px, 6vw, 82px);
-  left: 50%;
-  transform: translate(-50%, -10px);
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 20px;
-  border-radius: 999px;
-  background: rgba(10, 11, 14, 0.72);
-  border: 1px solid rgba(255, 0, 50, 0.28);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-  font-size: 0.78rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  z-index: 3;
-  opacity: 0;
-  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 0.87, 0.36, 1),
-    background 0.3s ease, border-color 0.3s ease;
+  inset: -20%;
+  background: radial-gradient(circle at 60% 25%, rgba(255, 255, 255, 0.45), transparent 58%),
+    radial-gradient(circle at 20% 80%, rgba(255, 0, 50, calc(var(--glow-intensity) * 0.4)), transparent 62%);
+  opacity: calc(0.35 + var(--glow-intensity) * 0.35);
+  filter: blur(82px);
+  pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
-.dial__gear-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.42em;
-  color: rgba(255, 255, 255, 0.38);
-}
-
-.dial__gear-value {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.65);
-  min-width: 2ch;
+.speedometer__header {
   text-align: center;
-}
-
-body.is-ready .dial__gear-indicator {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-body[data-gear]:not([data-gear=""]) .dial__gear-indicator {
-  background: rgba(255, 0, 50, 0.18);
-  border-color: rgba(255, 0, 50, 0.45);
-  box-shadow: 0 18px 44px rgba(255, 0, 50, 0.24);
-  color: rgba(255, 255, 255, 0.72);
-}
-
-body[data-gear]:not([data-gear=""]) .dial__gear-value {
-  color: #ffffff;
-}
-
-body.is-finished .dial__gear-indicator {
-  opacity: 0;
-  transform: translate(-50%, -12px);
-}
-
-.dial__accent {
-  filter: drop-shadow(0 0 14px rgba(255, 0, 50, 0.45)) drop-shadow(0 0 44px rgba(255, 0, 50, 0.35));
-}
-
-.dial__mesh {
-  fill: url(#dial-grid);
-  mix-blend-mode: screen;
-  opacity: 0.82;
-}
-
-.dial__grid-bar {
-  fill: rgba(255, 0, 50, 0.22);
-}
-
-.dial__grid-bar--major {
-  opacity: 0.85;
-}
-
-.dial__grid-bar--minor {
-  opacity: 0.55;
-}
-
-.dial__pulse {
-  fill: none;
-  stroke: rgba(255, 0, 50, 0.55);
-  stroke-width: 3;
-  stroke-dasharray: 2.5 14;
-  stroke-linecap: round;
-  stroke-dashoffset: 6;
-  animation: dial-pulse 2.4s linear infinite;
-}
-
-.dial__outline {
-  fill: none;
-  stroke: url(#dial-outline-gradient);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.95;
-}
-
-.dial__inner {
-  fill: none;
-  stroke: url(#dial-inner-gradient);
-  stroke-width: 2;
-  opacity: 0.8;
-  stroke-dasharray: 14 10;
-  stroke-linecap: round;
-}
-
-.dial__corner-sparks {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.dial__corner {
-  stroke: rgba(255, 0, 50, 0.55);
-  stroke-width: 4;
-  stroke-dasharray: 18 22;
-  stroke-dashoffset: 14;
-  opacity: 0.75;
-  animation: dial-corner 3.2s ease-in-out infinite;
-}
-
-.dial__progress-track,
-.dial__progress-fill {
-  fill: none;
-  stroke-width: 6;
-  stroke-linecap: round;
-}
-
-.dial__progress-track {
-  stroke: rgba(255, 0, 50, 0.18);
-}
-
-.dial__progress-fill {
-  stroke: rgba(255, 0, 50, 0.65);
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  opacity: 0;
-  filter: drop-shadow(0 0 20px var(--accent-glow));
-}
-
-body.is-ready .dial__progress-fill {
-  opacity: 1;
-  animation: dial-progress 3.4s cubic-bezier(0.21, 0.85, 0.32, 1) forwards;
-}
-
-body.is-finished .dial__progress-fill {
-  stroke: var(--accent);
-}
-
-.metrics {
+  margin-bottom: clamp(18px, 4vw, 32px);
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 4vw, 46px);
-  padding: clamp(48px, 7vw, 72px) clamp(30px, 6vw, 68px) clamp(36px, 6vw, 60px);
 }
 
-.metrics::before {
-  content: "";
-  position: absolute;
-  inset: clamp(24px, 4vw, 40px) clamp(12px, 3vw, 30px);
-  border-radius: clamp(26px, 6vw, 60px);
-  background: linear-gradient(145deg, rgba(255, 0, 50, 0.12), rgba(10, 11, 14, 0.8));
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  filter: blur(0.5px);
-  opacity: 0.6;
-  z-index: -1;
-}
-
-.metric {
-  position: relative;
-  display: grid;
-  justify-items: center;
-  gap: clamp(10px, 2vw, 18px);
-  padding: clamp(20px, 3vw, 28px) clamp(16px, 3vw, 24px) clamp(28px, 4vw, 34px);
-  border-radius: clamp(24px, 5vw, 42px);
-  background: linear-gradient(160deg, rgba(20, 22, 26, 0.85), rgba(7, 8, 10, 0.7));
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-  opacity: 0.25;
-  transform: translateY(24px) scale(0.96);
-  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.22, 0.87, 0.36, 1),
-    filter 0.6s ease;
-  font-variant-numeric: tabular-nums;
-}
-
-.metric::before {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border-radius: inherit;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 0, 50, 0.16), transparent 65%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.metric__badge {
+.speedometer__chip {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 4px 12px;
+  gap: 6px;
+  padding: 6px 12px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.65), rgba(255, 0, 50, 0.18));
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: rgba(22, 24, 39, 0.75);
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.speedometer__title {
+  margin-top: 14px;
+  font-family: 'Orbitron', 'Manrope', sans-serif;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.speedometer__subtitle {
+  margin-top: 12px;
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  color: var(--text-secondary);
+  max-width: 420px;
+  margin-inline: auto;
+  line-height: 1.5;
+}
+
+.speedometer__display {
+  position: relative;
+  padding: clamp(18px, 4vw, 28px);
+  border-radius: clamp(22px, 4vw, 32px);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.5));
+  box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.6), inset 0 -1px 10px rgba(22, 24, 39, 0.12);
+}
+
+.speedometer__display::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.speedometer__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.speedometer__arc--progress {
+  stroke-linejoin: round;
+  opacity: 0.92;
+}
+
+.speedometer__value {
+  font-family: 'Orbitron', 'Manrope', sans-serif;
+  font-size: clamp(3.4rem, 10vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  fill: rgba(22, 24, 39, 0.92);
+}
+
+.speedometer__unit {
+  font-family: 'Orbitron', 'Manrope', sans-serif;
+  font-size: clamp(0.95rem, 2.4vw, 1.1rem);
+  letter-spacing: 0.58em;
+  fill: rgba(22, 24, 39, 0.52);
+  text-transform: uppercase;
+}
+
+.speedometer__status {
+  font-size: clamp(0.82rem, 2.2vw, 0.98rem);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  fill: rgba(255, 0, 50, 0.75);
+}
+
+.speedometer__meta-label {
+  font-size: 0.65rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  background: rgba(255, 0, 50, 0.18);
-  border: 1px solid rgba(255, 0, 50, 0.36);
-  color: rgba(255, 255, 255, 0.78);
-  transition: transform 0.5s ease, background 0.4s ease, border-color 0.4s ease;
+  fill: rgba(22, 24, 39, 0.45);
 }
 
-.metric__title {
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
-  color: var(--text-secondary);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  letter-spacing: 0.03em;
-}
-
-.metric__hint {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.metric__value {
-  font-size: clamp(2.6rem, 6vw, 3.8rem);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--text-primary);
-  text-shadow: 0 0 18px rgba(255, 0, 50, 0.35);
-  transition: color 0.45s ease;
-}
-
-.metric__value-number {
-  display: inline-block;
-  min-width: 5ch;
-  text-align: center;
-}
-
-.metric__unit {
-  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-  color: var(--text-tertiary);
+.speedometer__meta-value {
+  font-family: 'Orbitron', 'Manrope', sans-serif;
+  font-size: 0.98rem;
+  letter-spacing: 0.38em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  fill: rgba(22, 24, 39, 0.72);
 }
 
-.metric--active {
-  opacity: 1;
-  transform: translateY(0) scale(1.02);
-  filter: drop-shadow(0 20px 40px rgba(255, 0, 50, 0.38));
+.speedometer__ticks line {
+  transform-origin: center;
 }
 
-.metric--active::before {
-  opacity: 1;
+.speedometer__needle-core {
+  stroke: rgba(255, 255, 255, 0.8);
+  stroke-width: 1;
 }
 
-.metric--active .metric__badge {
-  transform: translateY(-4px) scale(1.08);
-  background: rgba(255, 0, 50, 0.32);
-  border-color: rgba(255, 0, 50, 0.65);
+.speedometer__needle-glow {
+  transform-origin: 50% 50%;
+  filter: blur(0.4px);
 }
 
-.metric--active .metric__title {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.metric--complete {
-  opacity: 0.92;
-  transform: translateY(0) scale(1);
-  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.35));
-}
-
-.metric--complete .metric__value {
-  color: #ffffff;
-}
-
-.metric--complete .metric__badge {
-  background: rgba(255, 0, 50, 0.24);
-  border-color: rgba(255, 0, 50, 0.45);
-}
-
-body.no-js .metric,
-body.no-js .metric::before,
-body.no-js .metric__badge,
-body.no-js .dial__progress-fill,
-body.no-js .dial__corner,
-body.no-js .dial__pulse {
-  animation: none;
-  transition: none;
-}
-
-body.no-js .metric {
-  opacity: 1;
-  transform: none;
-}
-
-body.no-js .dial__progress-fill {
-  opacity: 1;
-  stroke-dashoffset: 0;
-}
-
-body.no-js .dial__gear-indicator {
-  display: none;
-}
-
-@media (max-width: 840px) {
-  .metrics {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    padding: clamp(40px, 6vw, 64px) clamp(18px, 5vw, 44px) clamp(28px, 6vw, 54px);
+@media (max-width: 520px) {
+  body {
+    padding: 36px 0;
   }
 
-  .metrics::before {
-    inset: clamp(18px, 4vw, 34px) clamp(12px, 3vw, 28px);
-  }
-}
-
-@media (max-width: 580px) {
-  .metrics {
-    grid-template-columns: 1fr;
-    gap: 28px;
+  .speedometer__panel {
+    padding: 24px;
   }
 
-  .metric {
-    padding: clamp(24px, 6vw, 34px);
+  .speedometer__subtitle {
+    letter-spacing: 0.08em;
   }
-}
 
-@keyframes dial-pulse {
-  from {
-    stroke-dashoffset: 6;
-  }
-  to {
-    stroke-dashoffset: -20;
-  }
-}
-
-@keyframes dial-corner {
-  0% {
-    stroke-dashoffset: 14;
-    opacity: 0.35;
-  }
-  45% {
-    opacity: 0.85;
-  }
-  100% {
-    stroke-dashoffset: -26;
-    opacity: 0.45;
-  }
-}
-
-@keyframes dial-progress {
-  0% {
-    stroke-dashoffset: 100;
-    opacity: 0;
-  }
-  12% {
-    opacity: 1;
-  }
-  38% {
-    stroke-dashoffset: 68;
-  }
-  68% {
-    stroke-dashoffset: 28;
-  }
-  100% {
-    stroke-dashoffset: 0;
+  .speedometer__display {
+    padding: 16px;
   }
 }
 
@@ -468,10 +237,5 @@ body.no-js .dial__gear-indicator {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  body.is-ready .dial__progress-fill {
-    stroke-dashoffset: 0;
-    opacity: 1;
   }
 }
