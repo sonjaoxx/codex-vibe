@@ -192,21 +192,12 @@
     },
   };
 
-  window.speedometerControls = controls;
-
-  if (prefersReduced) {
-    if (ticks.length) {
-      gsap.set(ticks, { opacity: 1, scaleY: 1 });
-    }
-    controls.setArcProgress(0.65, { immediate: true, color: '#ff0032', width: 3, opacity: 1 });
-    controls.setGlowProgress(0.65, { immediate: true, color: '#ff0032', width: 28, opacity: 0.55 });
-    controls.setNeedle(30, { immediate: true });
-    controls.setValue(96, { updateMax: true });
-    return;
-  }
-
   const intro = () => {
-    const master = gsap.timeline({ defaults: { ease: 'power2.out' }, delay: 0.2 });
+    const master = gsap.timeline({
+      defaults: { ease: 'power2.out' },
+      delay: 0.2,
+      paused: true,
+    });
     master.add(controls.setNeedle(-120, { immediate: true }));
     master.add(controls.setArcProgress(0, { immediate: true }), 0);
     master.add(controls.setGlowProgress(0, { immediate: true, opacity: 0.25, width: 20 }), 0);
@@ -239,5 +230,42 @@
     return master;
   };
 
-  intro();
+  let introTimeline;
+
+  const playIntro = () => {
+    if (prefersReduced) {
+      return gsap.timeline();
+    }
+    if (!introTimeline) {
+      introTimeline = intro();
+    }
+    introTimeline.restart(true);
+    return introTimeline;
+  };
+
+  controls.playIntro = playIntro;
+  window.speedometerControls = controls;
+
+  if (prefersReduced) {
+    if (ticks.length) {
+      gsap.set(ticks, { opacity: 1, scaleY: 1 });
+    }
+    controls.setArcProgress(0.65, { immediate: true, color: '#ff0032', width: 3, opacity: 1 });
+    controls.setGlowProgress(0.65, { immediate: true, color: '#ff0032', width: 28, opacity: 0.55 });
+    controls.setNeedle(30, { immediate: true });
+    controls.setValue(96, { updateMax: true });
+    return;
+  }
+
+  const scheduleIntro = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(playIntro);
+    });
+  };
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    scheduleIntro();
+  } else {
+    window.addEventListener('DOMContentLoaded', scheduleIntro, { once: true });
+  }
 })();
